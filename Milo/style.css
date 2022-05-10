@@ -1,0 +1,11 @@
+.content {
+  padding : 20px;
+}
+
+#labyrinthe tr {
+    height: 30px;
+}
+
+#labyrinthe td {
+    width: 30px;
+}
