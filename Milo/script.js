@@ -2,16 +2,16 @@
 
 let maze = [
    [0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0],
-   [0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0],
+   [0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0],
    [0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0],
    [0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0],
    [0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0],
    [1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0],
-   [0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0],
-   [0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0],
    [0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+   [0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+   [0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0],
    [0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0],
-   [0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0],
+   [0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0],
    [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 3],
 ]
 
@@ -29,6 +29,7 @@ const WALL = 1
 const PLAYER = 2
 const EXIT = 3
 const TELEPORT = 10
+const PASSED = 11
 const EXIT_READY = 6
 const DIAMOND = 4
 const DIAMOND_COUNT = 12
@@ -71,13 +72,7 @@ function createBoard(){
 }
 
 function renderMaze(){
-   if (bag < DIAMOND_COUNT) {
-      document.querySelector('.info').textContent = 'collect all the gems'
-   } else {
-      maze[ROWS - 1][COLS - 1] = EXIT_READY
-      document.querySelector('.info').textContent = 'go to the teleport'
-   }
-
+   var remainder = 0
    for (let row = 0; row < ROWS; row++) {
       for (let col = 0; col < COLS; col++) {
          let itemClass = ''
@@ -86,33 +81,45 @@ function renderMaze(){
                itemClass = 'player'; break
             case WALL:
                itemClass = 'wall'; break
+            case PASSED:
+               itemClass = 'passed'; break
             case EXIT:
                itemClass = 'exit'; break
             case EXIT_READY:
-               itemClass = 'exit show'; break
-            case DIAMOND:
-               itemClass = 'diamond'; break
+               itemClass = 'end'; break
+            // case DIAMOND:
+            //    itemClass = 'diamond'; break
             default:
                itemClass = 'empty'
+               remainder += 1
          }
          const id = `#id-${col}-${row}`
          document.querySelector(id).className = `block ${itemClass}`
       }
    }
-   const id = `#id-${player[1]}-${player[0]}`
-   if (!(bag === DIAMOND_COUNT && player[1] === COLS - 1 && player[0] === ROWS - 1)) {
-      document.querySelector(id).className = 'player'
+   console.log(remainder)
+
+   if (remainder > 0) {
+      document.querySelector('.info').textContent = 'Passez sur toutes les cases !'
+   } else {
+      maze[ROWS - 1][COLS - 1] = EXIT_READY
+      maze[ROWS - 1][COLS - 1].itemClass = 'end' // ne marche pas ?
+      document.querySelector('.info').textContent = "Bravo ! Go sur l'arrivé"
    }
-   if (!(player[1] === COLS - 1 && player[0] === ROWS - 1)) {
-      document.querySelector(id).className = 'player'
+
+   const id = `#id-${player[1]}-${player[0]}`
+   // if (!(bag === DIAMOND_COUNT && player[1] === COLS - 1 && player[0] === ROWS - 1)) {
+   //    document.querySelector(id).className = 'block player'
+   // }
+   if (!(remainder === 0 && player[1] === COLS - 1 && player[0] === ROWS - 1)) {
+      document.querySelector(id).className = 'block player'
    }
    else {
       document.querySelector(id).className = 'block player bye'
       document.querySelector('.info').textContent = 'bye!'
    }
-
-
-   document.querySelector('.diamond-count').textContent = `${bag} / ${DIAMOND_COUNT}`
+   // document.querySelector('.diamond-count').textContent = `${bag} / ${DIAMOND_COUNT}`
+   // renderMaze()
 }
 
 window.onkeydown = (event) => {
@@ -130,23 +137,26 @@ window.onkeydown = (event) => {
    }
 
    if (direction !== 0) {
-      changePlayerPos(player[1],player[0],direction)
+      changePlayerPos(player[1],player[0],player[1],player[0],direction)
       // changePlayerPos(direction)
    }
 }
 
 
 //Version non anime qui marche TROP BIEN
-function changePlayerPos(x, y, direction){
+function changePlayerPos(oldX, oldY, x, y, direction){
    
    let dy = 0
    let dx = 0
 
-   if (maze[y][x] === DIAMOND) {
-      maze[y][x] = EMPTY
-      bag++
+   // if (maze[y][x] === DIAMOND) {
+   //    maze[y][x] = EMPTY
+   //    bag++
+   // }
+   if (maze[y][x] !== (EXIT || EXIT_READY)) {
+      maze[y][x] = PASSED
    }
-   
+
    // console.log(x, y, dx, dy, direction)
    switch (direction) {
       case UP:
@@ -168,35 +178,50 @@ function changePlayerPos(x, y, direction){
    y = y + dy
    player[y, x]
    // console.log(x, y, direction)
-
    if(x >= 0 && x < COLS && y >= 0 && y < ROWS && maze[y][x] !== WALL){
       // setTimeout(function() {changePlayerPos(x, y, direction);}, 90);
-      changePlayerPos(x, y, direction);
+      changePlayerPos(oldX, oldY, x, y, direction);
    }
-   
    else{
       switch (direction) {
          case UP:       
             y = y + 1
+            obj = document.getElementsByClassName("player")[0]
+            console.log(obj)
+            obj.style.transform = "translateY(-"+(35*(oldY-y))+"px)";
+            obj.style.transition = "500ms ease-in-out";
             break;
          case RIGHT:
             x = x - 1
+            obj = document.getElementsByClassName("player")[0]
+            console.log(obj)
+            obj.style.transform = "translateX("+(-35*(oldX-x))+"px)";
+            obj.style.transition = "500ms ease-in-out";
             break;
          case LEFT:
             x = x + 1
+            obj = document.getElementsByClassName("player")[0]
+            console.log(obj)
+            obj.style.transform = "translateX(-"+(35*(oldX-x))+"px)";
+            obj.style.transition = "500ms ease-in-out";
             break;
          case DOWN:
             y = y - 1
+            obj = document.getElementsByClassName("player")[0]
+            console.log(obj)
+            obj.style.transform = "translateY("+(-35*(oldY-y))+"px)";
+            obj.style.transition = "500ms ease-in-out";
             break;
       }
       // console.log(x,y)
       player = [y, x]
-      renderMaze()
+      // renderMaze()
+      setTimeout(function() {renderMaze();}, 500);
    }
 }
 
 
-// //Version non anime qui marche mais moyen
+// //Version non animé qui marche mais moyen
 // const changePlayerPos = (direction) => {
 //    let [dy, dx] = [0, 0];
 //    let x = 0
