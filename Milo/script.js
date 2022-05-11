@@ -10,7 +10,7 @@ let maze = [
    [0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0],
    [0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0],
    [0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
-   [0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1],
+   [0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0],
    [0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0],
    [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 3],
 ]
@@ -28,6 +28,7 @@ const EMPTY = 0
 const WALL = 1
 const PLAYER = 2
 const EXIT = 3
+const TELEPORT = 10
 const EXIT_READY = 6
 const DIAMOND = 4
 const DIAMOND_COUNT = 12
@@ -43,7 +44,7 @@ window.onload = () => {
    renderMaze()
 }
 
-const generateDiamond = () => {
+function generateDiamond(){
    let count = 0
 
    do {
@@ -59,7 +60,7 @@ const generateDiamond = () => {
    } while (count !== DIAMOND_COUNT)
 }
 
-const createBoard = () => {
+function createBoard(){
    for (let row = 0; row < ROWS; row++) {
       for (let col = 0; col < COLS; col++) {
          const block = document.createElement('div')
@@ -69,7 +70,7 @@ const createBoard = () => {
    }
 }
 
-const renderMaze = () => {
+function renderMaze(){
    if (bag < DIAMOND_COUNT) {
       document.querySelector('.info').textContent = 'collect all the gems'
    } else {
@@ -85,8 +86,6 @@ const renderMaze = () => {
                itemClass = 'player'; break
             case WALL:
                itemClass = 'wall'; break
-            case PLAYER:
-               itemClass = 'human'; break
             case EXIT:
                itemClass = 'exit'; break
             case EXIT_READY:
@@ -97,13 +96,15 @@ const renderMaze = () => {
                itemClass = 'empty'
          }
          const id = `#id-${col}-${row}`
-
          document.querySelector(id).className = `block ${itemClass}`
       }
    }
    const id = `#id-${player[1]}-${player[0]}`
    if (!(bag === DIAMOND_COUNT && player[1] === COLS - 1 && player[0] === ROWS - 1)) {
-      document.querySelector(id).className = 'block player'
+      document.querySelector(id).className = 'player'
+   }
+   if (!(player[1] === COLS - 1 && player[0] === ROWS - 1)) {
+      document.querySelector(id).className = 'player'
    }
    else {
       document.querySelector(id).className = 'block player bye'
@@ -119,7 +120,7 @@ window.onkeydown = (event) => {
       case DOWN:
          direction = DOWN; break
       case UP:
-         direction = UP; break;
+         direction = UP; break
       case LEFT:
          direction = LEFT; break
       case RIGHT:
@@ -129,12 +130,214 @@ window.onkeydown = (event) => {
    }
 
    if (direction !== 0) {
-      changePlayerPos(direction)
+      changePlayerPos(player[1],player[0],direction)
+      // changePlayerPos(direction)
    }
 }
 
 
+//Version non anime qui marche TROP BIEN
+function changePlayerPos(x, y, direction){
+   
+   let dy = 0
+   let dx = 0
 
+   if (maze[y][x] === DIAMOND) {
+      maze[y][x] = EMPTY
+      bag++
+   }
+   
+   // console.log(x, y, dx, dy, direction)
+   switch (direction) {
+      case UP:
+            dy -= 1;
+         break;
+      case RIGHT:
+            dx += 1;
+         break;
+      case LEFT:
+            dx -= 1;
+         break;
+      case DOWN:
+            dy += 1;
+         break;
+      default:
+         return state
+   }
+   x = x + dx
+   y = y + dy
+   player[y, x]
+   // console.log(x, y, direction)
+
+   if(x >= 0 && x < COLS && y >= 0 && y < ROWS && maze[y][x] !== WALL){
+      // setTimeout(function() {changePlayerPos(x, y, direction);}, 90);
+      changePlayerPos(x, y, direction);
+   }
+   
+   else{
+      switch (direction) {
+         case UP:       
+            y = y + 1
+            break;
+         case RIGHT:
+            x = x - 1
+            break;
+         case LEFT:
+            x = x + 1
+            break;
+         case DOWN:
+            y = y - 1
+            break;
+      }
+      // console.log(x,y)
+      player = [y, x]
+      renderMaze()
+   }
+}
+
+
+// //Version non anime qui marche mais moyen
+// const changePlayerPos = (direction) => {
+//    let [dy, dx] = [0, 0];
+//    let x = 0
+//    let y = 0
+//    switch (direction) {
+//       case UP:
+//          while(x >= 0 && x < COLS && y >= 0 && y < ROWS &&maze[y][x] !== WALL){
+//             dy -= 1; 
+//             x = player[1] + dx
+//             y = player[0] + dy         
+//          }
+//          y = player[0] + (dy+1)
+//          break;
+//       case RIGHT:
+//          while(x >= 0 && x < COLS && y >= 0 && y < ROWS &&maze[y][x] !== WALL){
+//             dx += 1; 
+//             x = player[1] + dx
+//             y = player[0] + dy
+//          }
+//          x = player[1] + (dx-1)
+//          break;
+//       case LEFT:
+//          while(x >= 0 && x < COLS && y >= 0 && y < ROWS &&maze[y][x] !== WALL){
+//             dx -= 1; 
+//             x = player[1] + dx
+//             y = player[0] + dy
+//          }
+//          x = player[1] + (dx+1)
+//          break;
+//       case DOWN:
+//          while(x >= 0 && x < COLS && y >= 0 && y < ROWS &&maze[y][x] !== WALL){
+//             dy += 1
+//             x = player[1] + dx
+//             y = player[0] + dy
+//          }
+//          y = player[0] + (dy-1)
+//          break;
+//       default:
+//          return state
+//    }
+//    player = [y, x]
+
+//    if (maze[y][x] === DIAMOND) {
+//       maze[y][x] = EMPTY
+//       bag++
+//    }
+//    renderMaze()
+// }
+
+
+// // Version animé qui marche pas <3
+// const changePlayerPos = (direction) => {
+//    let [dy, dx] = [0, 0];
+//    let x = 0
+//    let y = 0
+
+//    let px = player[1]
+//    let py = player[0]
+//    // console.log(px,py)
+
+//    let obj;
+//    switch (direction) {
+//       case UP:
+//          while(x >= 0 && x < COLS && y >= 0 && y < ROWS &&maze[y][x] !== WALL){
+//             dy -= 1; 
+//             x = player[1] + dx
+//             y = player[0] + dy
+//          }
+//          y = player[0] + (dy+1)
+
+//          obj = document.getElementById("id-"+px+"-"+py+"");
+//          console.log(obj)
+//          console.log(obj.className === "player" )
+//          // if ("player" in obj.classList){
+//             obj.style.transform = "translateY("+(35*(dy+1))+"px)";
+//             obj.style.transition = "330ms ease-in-out";
+//          // }
+//          break;
+
+
+//       case RIGHT:
+//          while(x >= 0 && x < COLS && y >= 0 && y < ROWS &&maze[y][x] !== WALL){
+//             dx += 1; 
+//             x = player[1] + dx
+//             y = player[0] + dy
+//          }
+//          x = player[1] + (dx-1)
+
+//          obj = document.getElementById("id-"+px+"-"+py+"");
+//          console.log(obj)
+//          console.log(obj.className === "player" )
+//          if ("player" in obj.classList){
+//             obj.style.transform = "translateX("+(35*(dx-1))+"px)";
+//             obj.style.transition = "330ms ease-in-out";
+//          }
+//          break;
+
+
+//       case LEFT:
+//          while(x >= 0 && x < COLS && y >= 0 && y < ROWS &&maze[y][x] !== WALL){
+//             dx -= 1; 
+//             x = player[1] + dx
+//             y = player[0] + dy
+//          }
+//          x = player[1] + (dx+1)
+
+//          obj = document.getElementById("id-"+px+"-"+py+"");
+//          console.log(obj)
+//          console.log(obj.className === "player" )
+//          if ("player" in obj.classList){
+//             obj.style.transform = "translateX("+(35*(dx+1))+"px)";
+//             obj.style.transition = "330ms ease-in-out";
+//          }
+//          break;
+
+
+//       case DOWN:
+//          while(x >= 0 && x < COLS && y >= 0 && y < ROWS &&maze[y][x] !== WALL){
+//             dy += 1
+//             x = player[1] + dx
+//             y = player[0] + dy
+//          }
+//          y = player[0] + (dy-1)
+
+//          obj = document.getElementById("id-"+px+"-"+py+"");
+//          console.log(obj)
+//          console.log(obj.className === "player" )
+//          if ("player" in obj.classList){
+//             obj.style.transform = "translateY("+(35*(dy-1))+"px)";
+//             obj.style.transition = "330ms ease-in-out";
+//          // }
+//          break;
+//       default:
+//          return state
+//    }
+//    player = [y, x]
+//    renderMaze()
+// }
+
+
+// //Version mouvement 1 par 1
 // const changePlayerPos = (direction) => {
 //    let [dy, dx] = [0, 0];
 //    switch (direction) {
@@ -149,7 +352,6 @@ window.onkeydown = (event) => {
 //       default:
 //          return state
 //    }
-
 //    const x = player[1] + dx
 //    const y = player[0] + dy
 
@@ -161,60 +363,6 @@ window.onkeydown = (event) => {
 //          maze[y][x] = EMPTY
 //          bag++
 //       }
-
 //       renderMaze()
 //    }
-
 // }
-
-const changePlayerPos = (direction) => {
-   let [dy, dx] = [0, 0];
-   let x = 0
-   let y = 0
-
-   switch (direction) {
-      case UP:
-         while(x >= 0 && x < COLS && y >= 0 && y < ROWS &&maze[y][x] !== WALL){
-            dy -= 1; 
-            x = player[1] + dx
-            y = player[0] + dy
-            
-         }
-         y = player[0] + (dy+1)
-         break;
-      case RIGHT:
-         while(x >= 0 && x < COLS && y >= 0 && y < ROWS &&maze[y][x] !== WALL){
-            dx += 1; 
-            x = player[1] + dx
-            y = player[0] + dy
-         }
-         x = player[1] + (dx-1)
-         break;
-      case LEFT:
-         while(x >= 0 && x < COLS && y >= 0 && y < ROWS &&maze[y][x] !== WALL){
-            dx -= 1; 
-            x = player[1] + dx
-            y = player[0] + dy
-         }
-         x = player[1] + (dx+1)
-         break;
-      case DOWN:
-         while(x >= 0 && x < COLS && y >= 0 && y < ROWS &&maze[y][x] !== WALL){
-            dy += 1
-            x = player[1] + dx
-            y = player[0] + dy
-         }
-         y = player[0] + (dy-1)
-         break;
-      default:
-         return state
-   }
-
-   player = [y, x]
-
-   if (maze[y][x] === DIAMOND) {
-      maze[y][x] = EMPTY
-      bag++
-   }
-   renderMaze()
-}
