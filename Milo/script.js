@@ -73,6 +73,7 @@ function createBoard(){
 
 function renderMaze(){
    var remainder = 0
+
    for (let row = 0; row < ROWS; row++) {
       for (let col = 0; col < COLS; col++) {
          let itemClass = ''
@@ -92,9 +93,15 @@ function renderMaze(){
             default:
                itemClass = 'empty'
                remainder += 1
+            
          }
          const id = `#id-${col}-${row}`
-         document.querySelector(id).className = `block ${itemClass}`
+         // document.getElementById(id).style.transform = ""
+         // document.getElementById(id).style.transition = ""
+         if (itemClass != "player"){
+            document.querySelector(id).className = `block ${itemClass}`
+         }
+
       }
    }
    console.log(remainder)
@@ -104,7 +111,7 @@ function renderMaze(){
    } else {
       maze[ROWS - 1][COLS - 1] = EXIT_READY
       maze[ROWS - 1][COLS - 1].itemClass = 'end' // ne marche pas ?
-      document.querySelector('.info').textContent = "Bravo ! Go sur l'arrivé"
+      document.querySelector('.info').textContent = "Bravo ! Go sur l'arrivée"
    }
 
    const id = `#id-${player[1]}-${player[0]}`
@@ -112,14 +119,14 @@ function renderMaze(){
    //    document.querySelector(id).className = 'block player'
    // }
    if (!(remainder === 0 && player[1] === COLS - 1 && player[0] === ROWS - 1)) {
-      document.querySelector(id).className = 'block player'
+      document.querySelector(id).className = 'player'
+      document.querySelector('.score').textContent = `Encore `+remainder+' case(s) !'
    }
    else {
-      document.querySelector(id).className = 'block player bye'
+      document.querySelector('.score').textContent = 'Vous avez toutes les cases !';
+      document.querySelector(id).className = 'player bye'
       document.querySelector('.info').textContent = 'bye!'
    }
-   // document.querySelector('.diamond-count').textContent = `${bag} / ${DIAMOND_COUNT}`
-   // renderMaze()
 }
 
 window.onkeydown = (event) => {
@@ -187,28 +194,28 @@ function changePlayerPos(oldX, oldY, x, y, direction){
          case UP:       
             y = y + 1
             obj = document.getElementsByClassName("player")[0]
-            console.log(obj)
+            // console.log(obj)
             obj.style.transform = "translateY(-"+(35*(oldY-y))+"px)";
             obj.style.transition = "500ms ease-in-out";
             break;
          case RIGHT:
             x = x - 1
             obj = document.getElementsByClassName("player")[0]
-            console.log(obj)
+            // console.log(obj)
             obj.style.transform = "translateX("+(-35*(oldX-x))+"px)";
             obj.style.transition = "500ms ease-in-out";
             break;
          case LEFT:
             x = x + 1
             obj = document.getElementsByClassName("player")[0]
-            console.log(obj)
+            // console.log(obj)
             obj.style.transform = "translateX(-"+(35*(oldX-x))+"px)";
             obj.style.transition = "500ms ease-in-out";
             break;
          case DOWN:
             y = y - 1
             obj = document.getElementsByClassName("player")[0]
-            console.log(obj)
+            // console.log(obj)
             obj.style.transform = "translateY("+(-35*(oldY-y))+"px)";
             obj.style.transition = "500ms ease-in-out";
             break;
@@ -217,6 +224,7 @@ function changePlayerPos(oldX, oldY, x, y, direction){
       player = [y, x]
       // renderMaze()
       setTimeout(function() {renderMaze();}, 500);
+
    }
 }
 

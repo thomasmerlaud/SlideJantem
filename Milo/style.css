@@ -81,12 +81,12 @@ body {
     z-index: 999;
 }
 
-.header .diamond {
+.header .score {
     background-color: transparent;
     float: right;
 }
 
-.diamond-count,
+.score,
 .footer {
     color: #cbdbfc;
     line-height: 35px;
@@ -94,7 +94,7 @@ body {
     font-family: Sans;
 }
 
-.diamond-count {
+.score {
     float: right;
 }
 
