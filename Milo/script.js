@@ -169,28 +169,47 @@ window.onkeydown = (event) => {
 
 const changePlayerPos = (direction) => {
    let [dy, dx] = [0, 0];
+   let x = 0
+   let y = 0
+
    switch (direction) {
       case UP:
          while(x >= 0 && x < COLS && y >= 0 && y < ROWS &&maze[y][x] !== WALL){
-            dy -= -1; 
-         }break;
+            dy -= 1; 
+            x = player[1] + dx
+            y = player[0] + dy
+            
+         }
+         y = player[0] + (dy+1)
+         break;
       case RIGHT:
          while(x >= 0 && x < COLS && y >= 0 && y < ROWS &&maze[y][x] !== WALL){
             dx += 1; 
-         }break;
+            x = player[1] + dx
+            y = player[0] + dy
+         }
+         x = player[1] + (dx-1)
+         break;
       case LEFT:
          while(x >= 0 && x < COLS && y >= 0 && y < ROWS &&maze[y][x] !== WALL){
-            dx -= -1; 
-         }break;
+            dx -= 1; 
+            x = player[1] + dx
+            y = player[0] + dy
+         }
+         x = player[1] + (dx+1)
+         break;
       case DOWN:
          while(x >= 0 && x < COLS && y >= 0 && y < ROWS &&maze[y][x] !== WALL){
-            dy += 1; 
-         }break;
+            dy += 1
+            x = player[1] + dx
+            y = player[0] + dy
+         }
+         y = player[0] + (dy-1)
+         break;
       default:
          return state
    }
-   const x = player[1] + dx
-   const y = player[0] + dy
+
    player = [y, x]
 
    if (maze[y][x] === DIAMOND) {
