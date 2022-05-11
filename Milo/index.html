@@ -7,44 +7,19 @@
     <script src="script.js"></script>
   </head>
   <body>
-
-    <section class="container-fluid content">
-        <div class="row">
-            <div class="col-md-6">
-            <p>Je vous invite à cliquer sur le labyrinthe pour m'aider à sortir. Utilisez les touches du clavier ci dessous. Mais attention il me faut obtenir les 3 compétences avant de sortir !</p>
-                <div class="text-center">
-                    <p>(Z) haut</p>
-                    <p>(Q) gauche (D) droite</p>
-                    <p>(S) bas</p>
-                    
-                </div>
-                <p class="bold">- Compétences requises pour sortir :</p>
-                <form>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" id="htmlLogo">html / css
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" id="jsLogo">JavaScript
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" id="phpLogo">php
-                        </label>
-                    </div>
-                </form>
-                <div class="success text-center"></div>
-            <p class="errors alert-danger text-center"></p>
-            </div>
-
-            <div class="col-md-6">
-                <table id="labyrinthe">
-                </table>
-            </div>
-        </div>
-    </section>
+      
+    <div class="frame">
+      <div class="header">
+          <div class="help">Keys: ← → ↑ ↓</div>
+          <div class="diamond-count"></div>
+          <div class="block diamond"></div>
+      </div>
+      <div class="board"></div>
+      <div class="footer">
+          <div class="info"></div>
+      </div>
+  </div>
+  <div class="help">https://codepen.io/ludmila-tretyakova/pen/yrNPMQ</div>
+ 
 </body>
 </html>

@@ -1,196 +1,201 @@
-window.addEventListener("load", function() {
-  // Class permettant de creer un labyrinthe;
-  var Map = {
-    init: function(grid, pos, skills) {
-      this.grid = [
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        ["in", 0, 0, 0, 0, 0, 1, 2, 0, 1],
-        [1, 1, 1, 0, 1, 0, 1, 1, 0, 1],
-        [1, 0, 0, 0, 1, 0, 0, 0, 0, 1],
-        [1, 0, 1, 0, 1, 1, 1, 1, 1, 1],
-        [1, 0, 1, 1, 1, 1, 0, 0, 4, 1],
-        [1, 0, 3, 1, 0, 0, 0, 1, 1, 1],
-        [1, 0, 1, 1, 0, 1, 0, 1, 1, 1],
-        [1, 0, 0, 0, 0, 1, 0, 0, 0, "out"],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-      ];
+// Code JS du lab : à rendre dynaimque avec connexion BDD pour la map
 
-      this.pos = [1, 1];
+let maze = [
+   [0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0],
+   [0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0],
+   [0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0],
+   [0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0],
+   [0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0],
+   [1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0],
+   [0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0],
+   [0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0],
+   [0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+   [0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1],
+   [0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0],
+   [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 3],
+]
 
-      this.skills = 0;
-    },
+const ROWS = 12
+const COLS = 12
 
-    /*
-    function display : afficher le labyrinthe
-        Pour chaque row de Map
-            creer une row
-                Pour chaque element d'une row
-                    ajouter un <td> a la row en fonction du symbole
-            Ajouter chaque row a Labyrinthe
-    */
-    display: function() {
-      for (var y = 0; y < this.grid.length; y++) {
-        var row = "<tr>";
 
-        for (var x = 0; x < this.grid[y].length; x++) {
-          if (this.grid[y][x] === 1) {
-            row += '<td bgcolor="black"></td>';
-          } else if (this.grid[y][x] === 2) {
-            row +=
-              '<td><img class="img-circle" src="http://www.jf-developpeur-web.fr/img/html-laby.png" alt="0 "></td>';
-          } else if (this.grid[y][x] === 3) {
-            row +=
-              '<td><img class="img-circle" src="http://www.jf-developpeur-web.fr/img/js-laby.png" alt="1"></td>';
-          } else if (this.grid[y][x] === 4) {
-            row +=
-              '<td><img class="img-circle" src="http://www.jf-developpeur-web.fr/img/php-laby.png" alt="2"></td>';
-          } else if (x === this.pos[0] && y === this.pos[1]) {
-            row +=
-              '<td><img class="img-circle" src="http://www.jf-developpeur-web.fr/img/avatar-laby.jpg" alt="*"></td>';
-          } else if (this.grid[y][x] === "in") {
-            row +=
-              '<td><i class="fa fa-minus-circle" aria-hidden="true"></i></td>';
-          } else if (this.grid[y][x] === "out") {
-            row +=
-              '<td><i class="fa fa-long-arrow-right" aria-hidden="true"></i></td>';
-          } else {
-            row += "<td></td>";
-          }
-        }
-        document
-          .getElementById("labyrinthe")
-          .insertAdjacentHTML("beforeEnd", row);
+
+
+let player = [0, 0]
+let bag = 0
+
+const EMPTY = 0
+const WALL = 1
+const PLAYER = 2
+const EXIT = 3
+const EXIT_READY = 6
+const DIAMOND = 4
+const DIAMOND_COUNT = 12
+
+const DOWN = 40
+const UP = 38
+const LEFT = 37
+const RIGHT = 39
+
+window.onload = () => {
+   generateDiamond()
+   createBoard()
+   renderMaze()
+}
+
+const generateDiamond = () => {
+   let count = 0
+
+   do {
+      let row = Math.floor(Math.random() * ROWS)
+      let col = Math.floor(Math.random() * COLS)
+      if (maze[row][col] === EMPTY &&
+         row !== 0 && col !== 0 &&
+         row !== ROWS - 1 && col !== COLS - 1) {
+         maze[row][col] = DIAMOND
+         count++
       }
-    },
 
-    /*
-    function check: verifier le deplacement
-        si on est en dehors du labyrinthe, deplacement impossible
-        si this.grid[x][y] === 1 on rencontre un mur
-        si this.grid[x][y] === 'out' on a gagné
-    */
-    check: function(x, y) {
-      if (
-        x < 0 ||
-        y < 0 ||
-        x > this.grid[0].length - 1 ||
-        y > this.grid.length - 1
-      ) {
-        $(function() {
-          $(".errors")
-            .html("Déplacement impossible !")
-            .fadeOut(2000, function() {
-              $(this)
-                .html("")
-                .fadeIn();
-            });
-        });
+   } while (count !== DIAMOND_COUNT)
+}
 
-        return [this.pos[0], this.pos[1]];
-      } else if (this.grid[y][x] === 1) {
-        $(function() {
-          $(".errors")
-            .html("Il y a un mur !")
-            .fadeOut(2000, function() {
-              $(this)
-                .html("")
-                .fadeIn();
-            });
-        });
-        return [this.pos[0], this.pos[1]];
-      } else if (this.grid[y][x] === "out") {
-        if (this.skills === 3) {
-          $(function() {
-            $(".success")
-              .html('<p class="alert-success">Bravo c\'est gagné !</p>')
-              .fadeIn(2000);
-          });
-          return [-1, -1];
-        } else {
-          $(function() {
-            $(".errors")
-              .html("Il vous manque des compétences !")
-              .fadeOut(2000, function() {
-                $(this)
-                  .html("")
-                  .fadeIn();
-              });
-          });
-
-          return [this.pos[0], this.pos[1]];
-        }
-      } else if (this.grid[y][x] === 2) {
-        $(function() {
-          $("#htmlLogo").prop("checked", true);
-        });
-        this.grid[y][x] = 0;
-        this.skills += 1;
-        return [x, y];
-      } else if (this.grid[y][x] === 3) {
-        $(function() {
-          $("#jsLogo").prop("checked", true);
-        });
-        this.grid[y][x] = 0;
-        this.skills += 1;
-        return [x, y];
-      } else if (this.grid[y][x] === 4) {
-        $(function() {
-          $("#phpLogo").prop("checked", true);
-        });
-        this.grid[y][x] = 0;
-        this.skills += 1;
-        return [x, y];
-      } else {
-        return [x, y];
+const createBoard = () => {
+   for (let row = 0; row < ROWS; row++) {
+      for (let col = 0; col < COLS; col++) {
+         const block = document.createElement('div')
+         block.id = `id-${col}-${row}`
+         document.querySelector(".board").appendChild(block);
       }
-    }
-  };
+   }
+}
 
-  /*
-function listenToKeyboard: fonction appliqué a l'ecoute du clavier
-    on modifie les coordonnées apres verification
-    on actualise le labyrinthe
-*/
-  function listenToKeyboard(e) {
-    var key = e.keyCode;
-    var move;
-    switch (key) {
-      case 68:
-        move = labyrinthe.check(labyrinthe.pos[0] + 1, labyrinthe.pos[1]);
-        labyrinthe.pos[0] = move[0];
-        labyrinthe.pos[1] = move[1];
-        document.getElementById("labyrinthe").innerHTML = "";
-        labyrinthe.display();
-        break;
-      case 81:
-        move = labyrinthe.check(labyrinthe.pos[0] - 1, labyrinthe.pos[1]);
-        labyrinthe.pos[0] = move[0];
-        labyrinthe.pos[1] = move[1];
-        document.getElementById("labyrinthe").innerHTML = "";
-        labyrinthe.display();
-        break;
-      case 83:
-        move = labyrinthe.check(labyrinthe.pos[0], labyrinthe.pos[1] + 1);
-        labyrinthe.pos[0] = move[0];
-        labyrinthe.pos[1] = move[1];
-        document.getElementById("labyrinthe").innerHTML = "";
-        labyrinthe.display();
-        break;
-      case 90:
-        move = labyrinthe.check(labyrinthe.pos[0], labyrinthe.pos[1] - 1);
-        labyrinthe.pos[0] = move[0];
-        labyrinthe.pos[1] = move[1];
-        document.getElementById("labyrinthe").innerHTML = "";
-        labyrinthe.display();
-        break;
+const renderMaze = () => {
+   if (bag < DIAMOND_COUNT) {
+      document.querySelector('.info').textContent = 'collect all the gems'
+   } else {
+      maze[ROWS - 1][COLS - 1] = EXIT_READY
+      document.querySelector('.info').textContent = 'go to the teleport'
+   }
+
+   for (let row = 0; row < ROWS; row++) {
+      for (let col = 0; col < COLS; col++) {
+         let itemClass = ''
+         switch (maze[row][col]) {
+            case PLAYER:
+               itemClass = 'player'; break
+            case WALL:
+               itemClass = 'wall'; break
+            case PLAYER:
+               itemClass = 'human'; break
+            case EXIT:
+               itemClass = 'exit'; break
+            case EXIT_READY:
+               itemClass = 'exit show'; break
+            case DIAMOND:
+               itemClass = 'diamond'; break
+            default:
+               itemClass = 'empty'
+         }
+         const id = `#id-${col}-${row}`
+
+         document.querySelector(id).className = `block ${itemClass}`
+      }
+   }
+   const id = `#id-${player[1]}-${player[0]}`
+   if (!(bag === DIAMOND_COUNT && player[1] === COLS - 1 && player[0] === ROWS - 1)) {
+      document.querySelector(id).className = 'block player'
+   }
+   else {
+      document.querySelector(id).className = 'block player bye'
+      document.querySelector('.info').textContent = 'bye!'
+   }
+
+
+   document.querySelector('.diamond-count').textContent = `${bag} / ${DIAMOND_COUNT}`
+}
+
+window.onkeydown = (event) => {
+   switch (event.keyCode) {
+      case DOWN:
+         direction = DOWN; break
+      case UP:
+         direction = UP; break;
+      case LEFT:
+         direction = LEFT; break
+      case RIGHT:
+         direction = RIGHT; break
       default:
-        console.log("touche inconnue");
-    }
-  }
+         direction = 0
+   }
 
-  var labyrinthe = Object.create(Map);
-  labyrinthe.init();
-  labyrinthe.display();
+   if (direction !== 0) {
+      changePlayerPos(direction)
+   }
+}
 
-  document.addEventListener("keydown", listenToKeyboard);
-});
+
+
+// const changePlayerPos = (direction) => {
+//    let [dy, dx] = [0, 0];
+//    switch (direction) {
+//       case UP:
+//          dy = -1; break;
+//       case RIGHT:
+//          dx = 1; break;
+//       case LEFT:
+//          dx = -1; break;
+//       case DOWN:
+//          dy = 1; break;
+//       default:
+//          return state
+//    }
+
+//    const x = player[1] + dx
+//    const y = player[0] + dy
+
+//    if (x >= 0 && x < COLS && y >= 0 && y < ROWS &&
+//       maze[y][x] !== WALL) {
+//       player = [y, x]
+
+//       if (maze[y][x] === DIAMOND) {
+//          maze[y][x] = EMPTY
+//          bag++
+//       }
+
+//       renderMaze()
+//    }
+
+// }
+
+const changePlayerPos = (direction) => {
+   let [dy, dx] = [0, 0];
+   switch (direction) {
+      case UP:
+         while(x >= 0 && x < COLS && y >= 0 && y < ROWS &&maze[y][x] !== WALL){
+            dy -= -1; 
+         }break;
+      case RIGHT:
+         while(x >= 0 && x < COLS && y >= 0 && y < ROWS &&maze[y][x] !== WALL){
+            dx += 1; 
+         }break;
+      case LEFT:
+         while(x >= 0 && x < COLS && y >= 0 && y < ROWS &&maze[y][x] !== WALL){
+            dx -= -1; 
+         }break;
+      case DOWN:
+         while(x >= 0 && x < COLS && y >= 0 && y < ROWS &&maze[y][x] !== WALL){
+            dy += 1; 
+         }break;
+      default:
+         return state
+   }
+   const x = player[1] + dx
+   const y = player[0] + dy
+   player = [y, x]
+
+   if (maze[y][x] === DIAMOND) {
+      maze[y][x] = EMPTY
+      bag++
+   }
+   renderMaze()
+}
