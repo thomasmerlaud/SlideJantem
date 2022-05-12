@@ -1,4 +1,24 @@
-// Code JS du lab : à rendre dynaimque avec connexion BDD pour la map
+// //fonction pour récup les données dans le map.json
+// function readTextFile(file, callback) {
+//    var rawFile = new XMLHttpRequest();
+//    rawFile.overrideMimeType("application/json");
+//    rawFile.open("GET", file, true);
+//    rawFile.onreadystatechange = function() {
+//        if (rawFile.readyState === 4 && rawFile.status == "200") {
+//            callback(rawFile.responseText);
+//        }
+//    }
+//    rawFile.send(null);
+// }
+// var data = 0;
+// readTextFile("map.json", function(text){
+//    var data = JSON.parse(text);
+//    console.log(data.map);
+// });
+
+// console.log(data)
+// let maze = data.map
+
 
 let maze = [
    [0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 10],
@@ -15,9 +35,10 @@ let maze = [
    [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 3],
 ]
 
+
+
 const ROWS = 12
 const COLS = 12
-
 
 
 
@@ -40,6 +61,7 @@ const LEFT = 37
 const RIGHT = 39
 
 const timesleep  = 350
+let ready = 0
 
 // A FAIRE : detecter position des Teleporteurs AUTOMATIQUEMENT
 let TPpos1 = [3,0]
@@ -47,26 +69,26 @@ let TPpos2 = [0,11]
 let tp = 0
 
 window.onload = () => {
-   generateDiamond()
+   // generateDiamond()
    createBoard()
    renderMaze()
 }
 
-function generateDiamond(){
-   let count = 0
+// function generateDiamond(){
+//    let count = 0
 
-   do {
-      let row = Math.floor(Math.random() * ROWS)
-      let col = Math.floor(Math.random() * COLS)
-      if (maze[row][col] === EMPTY &&
-         row !== 0 && col !== 0 &&
-         row !== ROWS - 1 && col !== COLS - 1) {
-         maze[row][col] = DIAMOND
-         count++
-      }
+//    do {
+//       let row = Math.floor(Math.random() * ROWS)
+//       let col = Math.floor(Math.random() * COLS)
+//       if (maze[row][col] === EMPTY &&
+//          row !== 0 && col !== 0 &&
+//          row !== ROWS - 1 && col !== COLS - 1) {
+//          maze[row][col] = DIAMOND
+//          count++
+//       }
 
-   } while (count !== DIAMOND_COUNT)
-}
+//    } while (count !== DIAMOND_COUNT)
+// }
 
 function createBoard(){
    for (let row = 0; row < ROWS; row++) {
@@ -146,6 +168,7 @@ function renderMaze(){
       document.querySelector(id).className = 'player bye'
       document.querySelector('.info').textContent = 'bye!'
    }
+   ready = 1;
 }
 
 window.onkeydown = (event) => {
@@ -162,7 +185,7 @@ window.onkeydown = (event) => {
          direction = 0
    }
 
-   if (direction !== 0) {
+   if (direction !== 0 && ready === 1) {
       changePlayerPos(player[1],player[0],player[1],player[0],direction)
       // changePlayerPos(direction)
    }
@@ -171,7 +194,7 @@ window.onkeydown = (event) => {
 
 //Version anime qui marche TROP BIEN
 function changePlayerPos(oldX, oldY, x, y, direction){
-   
+   ready = 0
    let dy = 0
    let dx = 0
    // Gestion des changements de background SAUF exit, exitready et teleporteur
@@ -240,8 +263,8 @@ function changePlayerPos(oldX, oldY, x, y, direction){
             x = TPpos2[1]
             player[y, x]
             tp = 1
-            console.log("oui")
-            maze[y][x] = PLAYER
+            // console.log("oui")
+            // maze[y][x] = PLAYER
             setTimeout(function() {renderMaze();}, timesleep);
             setTimeout(function() {changePlayerPos(TPpos2[1],TPpos2[0],TPpos2[1],TPpos2[0],direction);}, timesleep);
          }
@@ -250,9 +273,8 @@ function changePlayerPos(oldX, oldY, x, y, direction){
             x = TPpos1[1]
             player[y, x]
             tp = 1
-            console.log("stiti")
-            
-            maze[y][x] = PLAYER
+            // console.log("stiti")
+            // maze[y][x] = PLAYER
             setTimeout(function() {renderMaze();}, timesleep);
             setTimeout(function() {changePlayerPos(TPpos1[1],TPpos1[0],TPpos1[1],TPpos1[0],direction);}, timesleep);
          }
@@ -299,6 +321,9 @@ function changePlayerPos(oldX, oldY, x, y, direction){
       }
    }
 }
+
+
+
 
 
 // //Version non animé qui marche mais moyen
