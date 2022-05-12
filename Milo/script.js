@@ -1,45 +1,31 @@
-// //fonction pour récup les données dans le map.json
-// function readTextFile(file, callback) {
-//    var rawFile = new XMLHttpRequest();
-//    rawFile.overrideMimeType("application/json");
-//    rawFile.open("GET", file, true);
-//    rawFile.onreadystatechange = function() {
-//        if (rawFile.readyState === 4 && rawFile.status == "200") {
-//            callback(rawFile.responseText);
-//        }
-//    }
-//    rawFile.send(null);
-// }
-// var data = 0;
-// readTextFile("map.json", function(text){
-//    var data = JSON.parse(text);
-//    console.log(data.map);
-// });
-
-// console.log(data)
-// let maze = data.map
+//fonction pour récup les données dans le map.json
+var request = new XMLHttpRequest();
+request.open("GET", "map.json", false);
+request.send(null)
+var json = JSON.parse(request.responseText);
+// console.log(json)
 
 
-let maze = [
-   [0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 10],
-   [0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0],
-   [0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0],
-   [10, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0],
-   [0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0],
-   [1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0],
-   [0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
-   [0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
-   [0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0],
-   [0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0],
-   [0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0],
-   [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 3],
-]
+// let maze = [
+//    [0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 10],
+//    [0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0],
+//    [0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0],
+//    [10, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0],
+//    [0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0],
+//    [1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0],
+//    [0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+//    [0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+//    [0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+//    [0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0],
+//    [0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0],
+//    [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 3],
+// ]
 
 
-
-const ROWS = 12
-const COLS = 12
-
+// chargement de la map depuis le json
+let maze = json.map
+const ROWS = json.SizeY
+const COLS = json.SizeX
 
 
 let player = [0, 0]
