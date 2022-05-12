@@ -1,10 +1,10 @@
 // Code JS du lab : à rendre dynaimque avec connexion BDD pour la map
 
 let maze = [
-   [0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0],
+   [0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 10],
    [0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0],
    [0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0],
-   [0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0],
+   [10, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0],
    [0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0],
    [1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0],
    [0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
@@ -38,6 +38,13 @@ const DOWN = 40
 const UP = 38
 const LEFT = 37
 const RIGHT = 39
+
+const timesleep  = 350
+
+// A FAIRE : detecter position des Teleporteurs AUTOMATIQUEMENT
+let TPpos1 = [3,0]
+let TPpos2 = [0,11]
+let tp = 0
 
 window.onload = () => {
    generateDiamond()
@@ -73,44 +80,49 @@ function createBoard(){
 
 function renderMaze(){
    var remainder = 0
-
+   tp = 0
    for (let row = 0; row < ROWS; row++) {
       for (let col = 0; col < COLS; col++) {
          let itemClass = ''
+         if( (row === TPpos1[0] && col === TPpos1[1]) || ( row === TPpos2[0] && col === TPpos2[1])){
+            maze[row][col] = TELEPORT
+         }
          switch (maze[row][col]) {
             case PLAYER:
-               itemClass = 'player'; break
+               itemClass = 'player passed'; break
             case WALL:
                itemClass = 'wall'; break
             case PASSED:
                itemClass = 'passed'; break
+            case TELEPORT:
+               itemClass = 'teleport'; break
             case EXIT:
                itemClass = 'exit'; break
             case EXIT_READY:
                itemClass = 'end'; break
-            // case DIAMOND:
-            //    itemClass = 'diamond'; break
             default:
                itemClass = 'empty'
                remainder += 1
             
          }
          const id = `#id-${col}-${row}`
-         // document.getElementById(id).style.transform = ""
-         // document.getElementById(id).style.transition = ""
+         obj = document.getElementById("id-"+col+"-"+row+"")
+         // console.log(obj)
+         obj.removeAttribute('style')
+
          if (itemClass != "player"){
             document.querySelector(id).className = `block ${itemClass}`
          }
 
       }
    }
-   console.log(remainder)
+   // console.log(remainder)
 
    if (remainder > 0) {
       document.querySelector('.info').textContent = 'Passez sur toutes les cases !'
    } else {
       maze[ROWS - 1][COLS - 1] = EXIT_READY
-      maze[ROWS - 1][COLS - 1].itemClass = 'end' // ne marche pas ?
+      // ne marche pas ?
       document.querySelector('.info').textContent = "Bravo ! Go sur l'arrivée"
    }
 
@@ -118,12 +130,19 @@ function renderMaze(){
    // if (!(bag === DIAMOND_COUNT && player[1] === COLS - 1 && player[0] === ROWS - 1)) {
    //    document.querySelector(id).className = 'block player'
    // }
-   if (!(remainder === 0 && player[1] === COLS - 1 && player[0] === ROWS - 1)) {
+
+   if (remainder === 0 && !(player[1] === COLS - 1 && player[0] === ROWS - 1)){
+      document.querySelector(id).className = 'player'
+      document.querySelector('.score').textContent = 'Vous avez toutes les cases !';
+   }
+
+   else if (!(remainder === 0 && player[1] === COLS - 1 && player[0] === ROWS - 1)) {
       document.querySelector(id).className = 'player'
       document.querySelector('.score').textContent = `Encore `+remainder+' case(s) !'
    }
+
    else {
-      document.querySelector('.score').textContent = 'Vous avez toutes les cases !';
+      document.querySelector('.score').textContent = 'Félicitation !';
       document.querySelector(id).className = 'player bye'
       document.querySelector('.info').textContent = 'bye!'
    }
@@ -150,17 +169,13 @@ window.onkeydown = (event) => {
 }
 
 
-//Version non anime qui marche TROP BIEN
+//Version anime qui marche TROP BIEN
 function changePlayerPos(oldX, oldY, x, y, direction){
    
    let dy = 0
    let dx = 0
-
-   // if (maze[y][x] === DIAMOND) {
-   //    maze[y][x] = EMPTY
-   //    bag++
-   // }
-   if (maze[y][x] !== (EXIT || EXIT_READY)) {
+   // Gestion des changements de background SAUF exit, exitready et teleporteur
+   if ((maze[y][x] !== EXIT ) && (maze[y][x] !== EXIT_READY) && (maze[y][x] !== TELEPORT)) {
       maze[y][x] = PASSED
    }
 
@@ -184,47 +199,104 @@ function changePlayerPos(oldX, oldY, x, y, direction){
    x = x + dx
    y = y + dy
    player[y, x]
+   // console.log(maze[y][x]);
+
    // console.log(x, y, direction)
-   if(x >= 0 && x < COLS && y >= 0 && y < ROWS && maze[y][x] !== WALL){
-      // setTimeout(function() {changePlayerPos(x, y, direction);}, 90);
+   if(x >= 0 && x < COLS && y >= 0 && y < ROWS && maze[y][x] !== WALL && maze[y][x] !== TELEPORT){
       changePlayerPos(oldX, oldY, x, y, direction);
    }
    else{
-      switch (direction) {
-         case UP:       
-            y = y + 1
-            obj = document.getElementsByClassName("player")[0]
-            // console.log(obj)
-            obj.style.transform = "translateY(-"+(35*(oldY-y))+"px)";
-            obj.style.transition = "500ms ease-in-out";
-            break;
-         case RIGHT:
-            x = x - 1
-            obj = document.getElementsByClassName("player")[0]
-            // console.log(obj)
-            obj.style.transform = "translateX("+(-35*(oldX-x))+"px)";
-            obj.style.transition = "500ms ease-in-out";
-            break;
-         case LEFT:
-            x = x + 1
-            obj = document.getElementsByClassName("player")[0]
-            // console.log(obj)
-            obj.style.transform = "translateX(-"+(35*(oldX-x))+"px)";
-            obj.style.transition = "500ms ease-in-out";
-            break;
-         case DOWN:
-            y = y - 1
-            obj = document.getElementsByClassName("player")[0]
-            // console.log(obj)
-            obj.style.transform = "translateY("+(-35*(oldY-y))+"px)";
-            obj.style.transition = "500ms ease-in-out";
-            break;
-      }
-      // console.log(x,y)
-      player = [y, x]
-      // renderMaze()
-      setTimeout(function() {renderMaze();}, 500);
+      if (x >= 0 && x < COLS && y >= 0 && y < ROWS && maze[y][x] === TELEPORT){
+         switch (direction) {
+            case UP:
+               obj = document.getElementsByClassName("player")[0]
+               // console.log(obj)
+               obj.style.transform = "translateY(-"+(35*(oldY-y))+"px)";
+               obj.style.transition = ""+timesleep+"ms ease-in-out";
+               break;
+            case RIGHT:
+               obj = document.getElementsByClassName("player")[0]
+               // console.log(obj)
+               obj.style.transform = "translateX("+(-35*(oldX-x))+"px)";
+               obj.style.transition = ""+timesleep+"ms ease-in-out";
+               break;
+            case LEFT:
+               obj = document.getElementsByClassName("player")[0]
+               // console.log(obj)
+               obj.style.transform = "translateX(-"+(35*(oldX-x))+"px)";
+               obj.style.transition = ""+timesleep+"ms ease-in-out";
+               break;
+            case DOWN:
+               obj = document.getElementsByClassName("player")[0]
+               // console.log(obj)
+               obj.style.transform = "translateY("+(-35*(oldY-y))+"px)";
+               obj.style.transition = ""+timesleep+"ms ease-in-out";
+               break;
+         }
+         // console.log(x,y)
 
+         if (y === TPpos1[0] && x === TPpos1[1] && tp !== 1){
+            y = TPpos2[0]
+            x = TPpos2[1]
+            player[y, x]
+            tp = 1
+            console.log("oui")
+            maze[y][x] = PLAYER
+            setTimeout(function() {renderMaze();}, timesleep);
+            setTimeout(function() {changePlayerPos(TPpos2[1],TPpos2[0],TPpos2[1],TPpos2[0],direction);}, timesleep);
+         }
+         if (y === TPpos2[0] && x === TPpos2[1] && tp !== 1){
+            y = TPpos1[0]
+            x = TPpos1[1]
+            player[y, x]
+            tp = 1
+            console.log("stiti")
+            
+            maze[y][x] = PLAYER
+            setTimeout(function() {renderMaze();}, timesleep);
+            setTimeout(function() {changePlayerPos(TPpos1[1],TPpos1[0],TPpos1[1],TPpos1[0],direction);}, timesleep);
+         }
+         // else{
+         //    player = [y, x]
+         //    console.log("OUI")
+         //    setTimeout(function() {renderMaze();}, timesleep);
+         // }
+      }
+      else{
+         switch (direction) {
+            case UP:       
+               y = y + 1
+               obj = document.getElementsByClassName("player")[0]
+               // console.log(obj)
+               obj.style.transform = "translateY(-"+(35*(oldY-y))+"px)";
+               obj.style.transition = ""+timesleep+"ms ease-in-out";
+               break;
+            case RIGHT:
+               x = x - 1
+               obj = document.getElementsByClassName("player")[0]
+               // console.log(obj)
+               obj.style.transform = "translateX("+(-35*(oldX-x))+"px)";
+               obj.style.transition = ""+timesleep+"ms ease-in-out";
+               break;
+            case LEFT:
+               x = x + 1
+               obj = document.getElementsByClassName("player")[0]
+               // console.log(obj)
+               obj.style.transform = "translateX(-"+(35*(oldX-x))+"px)";
+               obj.style.transition = ""+timesleep+"ms ease-in-out";
+               break;
+            case DOWN:
+               y = y - 1
+               obj = document.getElementsByClassName("player")[0]
+               // console.log(obj)
+               obj.style.transform = "translateY("+(-35*(oldY-y))+"px)";
+               obj.style.transition = ""+timesleep+"ms ease-in-out";
+               break;
+         }
+         // console.log(x,y)
+         player = [y, x]
+         setTimeout(function() {renderMaze();}, timesleep);
+      }
    }
 }
 
