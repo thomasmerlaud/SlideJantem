@@ -207,7 +207,10 @@ function changePlayerPos(oldX, oldY, x, y, direction){
    let dy = 0
    let dx = 0
    // Gestion des changements de background SAUF exit, exitready et teleporteur
-   if ((maze[y][x] !== EXIT ) && (maze[y][x] !== EXIT_READY) && (maze[y][x] !== TELEPORT)) {
+   // if ((maze[y][x] !== EXIT ) && (maze[y][x] !== EXIT_READY) && (maze[y][x] !== TELEPORT)) {
+   //    maze[y][x] = PASSED
+   // }   
+   if ((maze[y][x] !== TELEPORT)) {
       maze[y][x] = PASSED
    }
 
