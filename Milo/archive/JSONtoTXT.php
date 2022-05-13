@@ -7,7 +7,7 @@
 
 
 // ouverture du fichier JSON
-$map_json = file_get_contents('map/2/map.json');
+$map_json = file_get_contents('map1.json');
 $decoded_json = json_decode($map_json, false);
 $map = $decoded_json->map;
 $sizeX = $decoded_json->SizeX;
@@ -18,7 +18,7 @@ $sizeY = sprintf("%02d", $sizeY);
 
 
 # Chemin vers fichier texte
-$file ="map/2/map.txt";
+$file ="../map/1/map.txt";
 # Ouverture en mode écriture
 $fileopen=(fopen("$file",'a'));
 # suppression du contenu précédant

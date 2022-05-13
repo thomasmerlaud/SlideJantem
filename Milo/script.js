@@ -1,31 +1,12 @@
-//fonction pour récup les données dans le map.json
-var request = new XMLHttpRequest();
-request.open("GET", "map/1/map.json", false);
-request.send(null)
-var json = JSON.parse(request.responseText);
-// console.log(json)
-
-// chargement de la map depuis le json
-let maze = json.map
-const ROWS = json.SizeY
-const COLS = json.SizeX
-
-
-document.documentElement.style
-    .setProperty('--map-size', ROWS);
-
-let player = [0, 0]
 let bag = 0
 
 const EMPTY = 0
 const WALL = 1
-const PLAYER = 2
-const EXIT = 3
-const TELEPORT = 4
-const PASSED = 11
-const EXIT_READY = 6
-const DIAMOND = 111
-const DIAMOND_COUNT = 112
+const PLAYER = 3
+const TELEPORT = 2
+const PASSED = 4
+// const EXIT = 8
+// const EXIT_READY = 9
 
 const DOWN = 40
 const UP = 38
@@ -34,11 +15,64 @@ const RIGHT = 39
 
 const timesleep  = 350
 let ready = 0
-
-// A FAIRE : detecter position des Teleporteurs AUTOMATIQUEMENT
-let TPpos1 = [3,0]
-let TPpos2 = [0,11]
 let tp = 0
+var nbtp = 0;
+var dim = 0;
+
+//fonction pour récup les données dans le map.json
+var request = new XMLHttpRequest();
+request.open("GET", "map/3/map.txt", false);
+request.send(null)
+var file = request.responseText
+
+// Scrap des données du TXT
+// Division des résultats en SixeX SizeY et map
+const arrayfile = Array.from(String(file), Number);
+
+const SizeX = arrayfile.splice(0, 2);
+const SizeY = arrayfile.splice(0, 2);
+for( i=0; i < SizeX.length; i++){
+  dim*=10;
+  dim+=SizeX[i];
+}
+// console.log(dim)
+
+var arr = arrayfile 
+interval = dim
+map = [];
+while (arr.length >= interval) {
+   map.unshift(arr.splice(-interval, interval));
+}
+map.unshift(arr);
+map.shift();
+// console.log(map);
+
+
+// chargement de la map
+let maze = map
+const ROWS = dim
+const COLS = dim
+
+// modif css pour la taille du jeu
+document.documentElement.style.setProperty('--map-size', ROWS);
+
+// placement du joueur et téléporteur dans la map
+for (let row = 0; row < ROWS; row++) {
+   for (let col = 0; col < COLS; col++) {
+      if (maze[row][col] == PLAYER){
+         player = [row, col]
+      }
+      if (maze[row][col] == TELEPORT){
+         if (nbtp === 0){
+            var TPpos1 = [row,col];
+            nbtp++;
+         }
+         else{
+            var TPpos2 = [row,col];
+         }
+      }
+   }
+}
 
 window.onload = () => {
    // generateDiamond()
@@ -90,10 +124,10 @@ function renderMaze(){
                itemClass = 'passed'; break
             case TELEPORT:
                itemClass = 'teleport'; break
-            case EXIT:
-               itemClass = 'exit'; break
-            case EXIT_READY:
-               itemClass = 'end'; break
+            // case EXIT:
+            //    itemClass = 'exit'; break
+            // case EXIT_READY:
+            //    itemClass = 'end'; break
             default:
                itemClass = 'empty'
                remainder += 1
@@ -296,178 +330,3 @@ function changePlayerPos(oldX, oldY, x, y, direction){
       }
    }
 }
-
-
-
-
-
-// //Version non animé qui marche mais moyen
-// const changePlayerPos = (direction) => {
-//    let [dy, dx] = [0, 0];
-//    let x = 0
-//    let y = 0
-//    switch (direction) {
-//       case UP:
-//          while(x >= 0 && x < COLS && y >= 0 && y < ROWS &&maze[y][x] !== WALL){
-//             dy -= 1; 
-//             x = player[1] + dx
-//             y = player[0] + dy         
-//          }
-//          y = player[0] + (dy+1)
-//          break;
-//       case RIGHT:
-//          while(x >= 0 && x < COLS && y >= 0 && y < ROWS &&maze[y][x] !== WALL){
-//             dx += 1; 
-//             x = player[1] + dx
-//             y = player[0] + dy
-//          }
-//          x = player[1] + (dx-1)
-//          break;
-//       case LEFT:
-//          while(x >= 0 && x < COLS && y >= 0 && y < ROWS &&maze[y][x] !== WALL){
-//             dx -= 1; 
-//             x = player[1] + dx
-//             y = player[0] + dy
-//          }
-//          x = player[1] + (dx+1)
-//          break;
-//       case DOWN:
-//          while(x >= 0 && x < COLS && y >= 0 && y < ROWS &&maze[y][x] !== WALL){
-//             dy += 1
-//             x = player[1] + dx
-//             y = player[0] + dy
-//          }
-//          y = player[0] + (dy-1)
-//          break;
-//       default:
-//          return state
-//    }
-//    player = [y, x]
-
-//    if (maze[y][x] === DIAMOND) {
-//       maze[y][x] = EMPTY
-//       bag++
-//    }
-//    renderMaze()
-// }
-
-
-// // Version animé qui marche pas <3
-// const changePlayerPos = (direction) => {
-//    let [dy, dx] = [0, 0];
-//    let x = 0
-//    let y = 0
-
-//    let px = player[1]
-//    let py = player[0]
-//    // console.log(px,py)
-
-//    let obj;
-//    switch (direction) {
-//       case UP:
-//          while(x >= 0 && x < COLS && y >= 0 && y < ROWS &&maze[y][x] !== WALL){
-//             dy -= 1; 
-//             x = player[1] + dx
-//             y = player[0] + dy
-//          }
-//          y = player[0] + (dy+1)
-
-//          obj = document.getElementById("id-"+px+"-"+py+"");
-//          console.log(obj)
-//          console.log(obj.className === "player" )
-//          // if ("player" in obj.classList){
-//             obj.style.transform = "translateY("+(35*(dy+1))+"px)";
-//             obj.style.transition = "330ms ease-in-out";
-//          // }
-//          break;
-
-
-//       case RIGHT:
-//          while(x >= 0 && x < COLS && y >= 0 && y < ROWS &&maze[y][x] !== WALL){
-//             dx += 1; 
-//             x = player[1] + dx
-//             y = player[0] + dy
-//          }
-//          x = player[1] + (dx-1)
-
-//          obj = document.getElementById("id-"+px+"-"+py+"");
-//          console.log(obj)
-//          console.log(obj.className === "player" )
-//          if ("player" in obj.classList){
-//             obj.style.transform = "translateX("+(35*(dx-1))+"px)";
-//             obj.style.transition = "330ms ease-in-out";
-//          }
-//          break;
-
-
-//       case LEFT:
-//          while(x >= 0 && x < COLS && y >= 0 && y < ROWS &&maze[y][x] !== WALL){
-//             dx -= 1; 
-//             x = player[1] + dx
-//             y = player[0] + dy
-//          }
-//          x = player[1] + (dx+1)
-
-//          obj = document.getElementById("id-"+px+"-"+py+"");
-//          console.log(obj)
-//          console.log(obj.className === "player" )
-//          if ("player" in obj.classList){
-//             obj.style.transform = "translateX("+(35*(dx+1))+"px)";
-//             obj.style.transition = "330ms ease-in-out";
-//          }
-//          break;
-
-
-//       case DOWN:
-//          while(x >= 0 && x < COLS && y >= 0 && y < ROWS &&maze[y][x] !== WALL){
-//             dy += 1
-//             x = player[1] + dx
-//             y = player[0] + dy
-//          }
-//          y = player[0] + (dy-1)
-
-//          obj = document.getElementById("id-"+px+"-"+py+"");
-//          console.log(obj)
-//          console.log(obj.className === "player" )
-//          if ("player" in obj.classList){
-//             obj.style.transform = "translateY("+(35*(dy-1))+"px)";
-//             obj.style.transition = "330ms ease-in-out";
-//          // }
-//          break;
-//       default:
-//          return state
-//    }
-//    player = [y, x]
-//    renderMaze()
-// }
-
-
-// //Version mouvement 1 par 1
-// const changePlayerPos = (direction) => {
-//    let [dy, dx] = [0, 0];
-//    switch (direction) {
-//       case UP:
-//          dy = -1; break;
-//       case RIGHT:
-//          dx = 1; break;
-//       case LEFT:
-//          dx = -1; break;
-//       case DOWN:
-//          dy = 1; break;
-//       default:
-//          return state
-//    }
-//    const x = player[1] + dx
-//    const y = player[0] + dy
-
-//    if (x >= 0 && x < COLS && y >= 0 && y < ROWS &&
-//       maze[y][x] !== WALL) {
-//       player = [y, x]
-
-//       if (maze[y][x] === DIAMOND) {
-//          maze[y][x] = EMPTY
-//          bag++
-//       }
-//       renderMaze()
-//    }
-// }
