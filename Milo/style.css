@@ -11,22 +11,21 @@ body {
     margin-left: calc(-6 * var(--block-size));
     margin-top: calc(-7 * var(--block-size));
     height: calc(14 * var(--block-size));
-    width: calc(12 * var(--block-size));
+    width: calc(8 * var(--block-size));
     position: absolute;
     display: grid;
-    grid-template-rows: var(--block-size) calc(12 * var(--block-size)) var(--block-size);
+    grid-template-rows: var(--block-size) calc(var(--map-size) * var(--block-size)) var(--block-size);
 }
 
 .board {
-    height: calc(12 * var(--block-size));
-    width: calc(12 * var(--block-size));
+    height: calc(var(--map-size) * var(--block-size));
+    width: calc(var(--map-size) * var(--block-size));
     background: #5fcde4;
     border-radius: 8px;
     display: grid;
-    grid-template-columns: repeat(12, var(--block-size));
-    grid-template-rows: repeat(12, var(--block-size));
+    grid-template-columns: repeat(var(--map-size), var(--block-size));
+    grid-template-rows: repeat(var(--map-size), var(--block-size));
     position: relative;
-    
 }
 
 .block {

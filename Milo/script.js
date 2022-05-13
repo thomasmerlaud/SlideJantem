@@ -1,32 +1,18 @@
 //fonction pour récup les données dans le map.json
 var request = new XMLHttpRequest();
-request.open("GET", "map.json", false);
+request.open("GET", "map/1/map.json", false);
 request.send(null)
 var json = JSON.parse(request.responseText);
 // console.log(json)
-
-
-// let maze = [
-//    [0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 10],
-//    [0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0],
-//    [0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0],
-//    [10, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0],
-//    [0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0],
-//    [1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0],
-//    [0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
-//    [0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
-//    [0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0],
-//    [0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0],
-//    [0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0],
-//    [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 3],
-// ]
-
 
 // chargement de la map depuis le json
 let maze = json.map
 const ROWS = json.SizeY
 const COLS = json.SizeX
 
+
+document.documentElement.style
+    .setProperty('--map-size', ROWS);
 
 let player = [0, 0]
 let bag = 0
@@ -35,11 +21,11 @@ const EMPTY = 0
 const WALL = 1
 const PLAYER = 2
 const EXIT = 3
-const TELEPORT = 10
+const TELEPORT = 4
 const PASSED = 11
 const EXIT_READY = 6
-const DIAMOND = 4
-const DIAMOND_COUNT = 12
+const DIAMOND = 111
+const DIAMOND_COUNT = 112
 
 const DOWN = 40
 const UP = 38
@@ -125,35 +111,38 @@ function renderMaze(){
       }
    }
    // console.log(remainder)
-
+   
+   const id = `#id-${player[1]}-${player[0]}`
    if (remainder > 0) {
+      document.querySelector(id).className = 'player'
+      document.querySelector('.score').textContent = `Encore `+remainder+' case(s) !'
       document.querySelector('.info').textContent = 'Passez sur toutes les cases !'
    } else {
-      maze[ROWS - 1][COLS - 1] = EXIT_READY
-      // ne marche pas ?
-      document.querySelector('.info').textContent = "Bravo ! Go sur l'arrivée"
+      // Fin du jeu
+      document.querySelector('.score').textContent =  `Fini !`
+      document.querySelector('.info').textContent = "Bravo ! Niveau suivant"
    }
 
-   const id = `#id-${player[1]}-${player[0]}`
+
    // if (!(bag === DIAMOND_COUNT && player[1] === COLS - 1 && player[0] === ROWS - 1)) {
    //    document.querySelector(id).className = 'block player'
    // }
 
-   if (remainder === 0 && !(player[1] === COLS - 1 && player[0] === ROWS - 1)){
-      document.querySelector(id).className = 'player'
-      document.querySelector('.score').textContent = 'Vous avez toutes les cases !';
-   }
+   // if (remainder === 0 && !(player[1] === COLS - 1 && player[0] === ROWS - 1)){
+   //    document.querySelector(id).className = 'player'
+   //    document.querySelector('.score').textContent = 'Vous avez toutes les cases !';
+   // }
 
-   else if (!(remainder === 0 && player[1] === COLS - 1 && player[0] === ROWS - 1)) {
-      document.querySelector(id).className = 'player'
-      document.querySelector('.score').textContent = `Encore `+remainder+' case(s) !'
-   }
+   // else if (!(remainder === 0 && player[1] === COLS - 1 && player[0] === ROWS - 1)) {
+   //    document.querySelector(id).className = 'player'
+   //    document.querySelector('.score').textContent = `Encore `+remainder+' case(s) !'
+   // }
 
-   else {
-      document.querySelector('.score').textContent = 'Félicitation !';
-      document.querySelector(id).className = 'player bye'
-      document.querySelector('.info').textContent = 'bye!'
-   }
+   // else {
+   //    document.querySelector('.score').textContent = 'Félicitation !';
+   //    document.querySelector(id).className = 'player bye'
+   //    document.querySelector('.info').textContent = 'bye!'
+   // }
    ready = 1;
 }
 
