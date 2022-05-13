@@ -13,7 +13,7 @@ const UP = 38
 const LEFT = 37
 const RIGHT = 39
 
-const timesleep  = 350
+const timesleep  = 200
 let ready = 0
 let tp = 0
 var nbtp = 0;
@@ -21,7 +21,7 @@ var dim = 0;
 
 //fonction pour récup les données dans le map.json
 var request = new XMLHttpRequest();
-request.open("GET", "map/3/map.txt", false);
+request.open("GET", "map/1/map.txt", false);
 request.send(null)
 var file = request.responseText
 
@@ -271,24 +271,20 @@ function changePlayerPos(oldX, oldY, x, y, direction){
          // console.log(x,y)
 
          if (y === TPpos1[0] && x === TPpos1[1] && tp !== 1){
-            y = TPpos2[0]
-            x = TPpos2[1]
-            player[y, x]
-            tp = 1
-            // console.log("oui")
-            // maze[y][x] = PLAYER
+            y = TPpos2[0];
+            x = TPpos2[1];
+            player = [TPpos2[0], TPpos2[1]];
+            tp = 1;
             setTimeout(function() {renderMaze();}, timesleep);
-            setTimeout(function() {changePlayerPos(TPpos2[1],TPpos2[0],TPpos2[1],TPpos2[0],direction);}, timesleep);
+            setTimeout(function() {changePlayerPos(x,y,x,y,direction)}, 1.1*timesleep);
          }
          if (y === TPpos2[0] && x === TPpos2[1] && tp !== 1){
-            y = TPpos1[0]
-            x = TPpos1[1]
-            player[y, x]
-            tp = 1
-            // console.log("stiti")
-            // maze[y][x] = PLAYER
+            y = TPpos1[0];
+            x = TPpos1[1];
+            player = [TPpos1[0], TPpos1[1]];
+            tp = 1;
             setTimeout(function() {renderMaze();}, timesleep);
-            setTimeout(function() {changePlayerPos(TPpos1[1],TPpos1[0],TPpos1[1],TPpos1[0],direction);}, timesleep);
+            setTimeout(function() {changePlayerPos(x,y,x,y,direction)}, 1.1*timesleep);
          }
          // else{
          //    player = [y, x]

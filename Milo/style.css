@@ -31,12 +31,13 @@ body {
 .block {
     width: var(--block-size);
     height: var(--block-size);
-    border-radius: 8px;
+    /* border-radius: 8px; */
     position: relative;
 }
 
 .empty {
     background: #cbdbfc;
+    border-radius: 8px;
 }
 
 .wall {
@@ -45,8 +46,8 @@ body {
 }
 
 .passed {
-    background-color: green;
-    opacity: 0.2;
+    background-color: yellow;
+    opacity: 0.4;
     box-sizing: border-box;
 }
 
