@@ -22,7 +22,7 @@ var coups = 0;
 
 //fonction pour récup les données dans le map.txt
 var request = new XMLHttpRequest();
-request.open("GET", "map/3/map.txt", false);
+request.open("GET", "map/1/map.txt", false);
 // request.open("GET", "backend/map.txt", false);
 request.send(null)
 var file = request.responseText
