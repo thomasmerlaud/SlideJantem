@@ -6,7 +6,14 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-      
+    <?php
+      if($_GET['result'] == 1){
+        echo "<p style='color:white;'>Possible en ".$_GET['count']." coups.</php>";
+      }
+      else{
+        echo "<p style='color:white;'>Map impossible</php>";
+      }
+    ?>
     <div class="frame">
       <div class="header">
           <div class="help">Keys: ← → ↑ ↓</div>
@@ -19,7 +26,6 @@
   </div>
   <!-- <div class="help">https://codepen.io/ludmila-tretyakova/pen/yrNPMQ</div> -->
  
-
 </body>
 <script src="script.js"></script>
 </html>

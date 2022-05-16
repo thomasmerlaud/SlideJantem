@@ -18,10 +18,12 @@ let ready = 0
 let tp = 0
 var nbtp = 0;
 var dim = 0;
+var coups = 0;
 
-//fonction pour récup les données dans le map.json
+//fonction pour récup les données dans le map.txt
 var request = new XMLHttpRequest();
-request.open("GET", "map/1/map.txt", false);
+request.open("GET", "map/3/map.txt", false);
+// request.open("GET", "backend/map.txt", false);
 request.send(null)
 var file = request.responseText
 
@@ -149,11 +151,11 @@ function renderMaze(){
    const id = `#id-${player[1]}-${player[0]}`
    if (remainder > 0) {
       document.querySelector(id).className = 'player'
-      document.querySelector('.score').textContent = `Encore `+remainder+' case(s) !'
+      document.querySelector('.score').textContent = coups+` coups. Encore `+remainder+' case(s) !'
       document.querySelector('.info').textContent = 'Passez sur toutes les cases !'
    } else {
       // Fin du jeu
-      document.querySelector('.score').textContent =  `Fini !`
+      document.querySelector('.score').textContent =  `Fini en `+coups+' coups !'
       document.querySelector('.info').textContent = "Bravo ! Niveau suivant"
    }
 
@@ -195,6 +197,7 @@ window.onkeydown = (event) => {
    }
 
    if (direction !== 0 && ready === 1) {
+      coups += 1;
       changePlayerPos(player[1],player[0],player[1],player[0],direction)
       // changePlayerPos(direction)
    }
