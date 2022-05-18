@@ -1,5 +1,8 @@
-let bag = 0
+const urlp = new URLSearchParams(window.location.search);
+const nbmap = decodeURIComponent(urlp.get('map'));
 
+// variable globales:
+let bag = 0
 const EMPTY = 0
 const WALL = 1
 const PLAYER = 3
@@ -22,7 +25,7 @@ var coups = 0;
 
 //fonction pour récup les données dans le map.txt
 var request = new XMLHttpRequest();
-request.open("GET", "map/1/map.txt", false);
+request.open("GET", "map/"+nbmap+"/map.txt", false);
 // request.open("GET", "backend/map.txt", false);
 request.send(null)
 var file = request.responseText
