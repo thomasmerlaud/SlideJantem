@@ -13,7 +13,7 @@ const UP = 38
 const LEFT = 37
 const RIGHT = 39
 
-const timesleep  = 200
+const timesleep = 200
 let ready = 0
 let tp = 0
 var nbtp = 0;
@@ -33,13 +33,13 @@ const arrayfile = Array.from(String(file), Number);
 
 const SizeX = arrayfile.splice(0, 2);
 const SizeY = arrayfile.splice(0, 2);
-for( i=0; i < SizeX.length; i++){
-  dim*=10;
-  dim+=SizeX[i];
+for (i = 0; i < SizeX.length; i++) {
+   dim *= 10;
+   dim += SizeX[i];
 }
 // console.log(dim)
 
-var arr = arrayfile 
+var arr = arrayfile
 interval = dim
 map = [];
 while (arr.length >= interval) {
@@ -51,9 +51,17 @@ map.shift();
 
 
 // chargement de la map
-let maze = map
 const ROWS = dim
 const COLS = dim
+maze = [];
+for (var i = 0; i < map.length; i++)
+   maze[i] = map[i].slice();
+
+previousmaze = [];
+for (var i = 0; i < map.length; i++)
+   previousmaze[i] = map[i].slice();
+console.log(maze)
+
 
 // modif css pour la taille du jeu
 document.documentElement.style.setProperty('--map-size', ROWS);
@@ -61,16 +69,18 @@ document.documentElement.style.setProperty('--map-size', ROWS);
 // placement du joueur et téléporteur dans la map
 for (let row = 0; row < ROWS; row++) {
    for (let col = 0; col < COLS; col++) {
-      if (maze[row][col] == PLAYER){
+      if (maze[row][col] == PLAYER) {
          player = [row, col]
+         oldplayer = [row, col]
+         resetplayer = [row, col]
       }
-      if (maze[row][col] == TELEPORT){
-         if (nbtp === 0){
-            var TPpos1 = [row,col];
+      if (maze[row][col] == TELEPORT) {
+         if (nbtp === 0) {
+            var TPpos1 = [row, col];
             nbtp++;
          }
-         else{
-            var TPpos2 = [row,col];
+         else {
+            var TPpos2 = [row, col];
          }
       }
    }
@@ -98,7 +108,31 @@ window.onload = () => {
 //    } while (count !== DIAMOND_COUNT)
 // }
 
-function createBoard(){
+
+function lastplay() {
+   if(LP != 1){
+      // console.log(previousmaze)
+      for (var i = 0; i < maze.length; i++)
+         maze[i] = previousmaze[i].slice();
+      player[0] = oldplayer[0];
+      player[1] = oldplayer[1];
+      coups -= 1;
+      LP = 1;
+   }
+   return renderMaze();
+}
+function reset() {
+   // console.log(map)
+   for (var i = 0; i < maze.length; i++)
+      maze[i] = map[i].slice();
+   player[0] = resetplayer[0];
+   player[1] = resetplayer[1];
+   coups = 0;
+   return renderMaze();
+}
+
+
+function createBoard() {
    for (let row = 0; row < ROWS; row++) {
       for (let col = 0; col < COLS; col++) {
          const block = document.createElement('div')
@@ -108,13 +142,13 @@ function createBoard(){
    }
 }
 
-function renderMaze(){
+function renderMaze() {
    var remainder = 0
    tp = 0
    for (let row = 0; row < ROWS; row++) {
       for (let col = 0; col < COLS; col++) {
          let itemClass = ''
-         if( (row === TPpos1[0] && col === TPpos1[1]) || ( row === TPpos2[0] && col === TPpos2[1])){
+         if ((row === TPpos1[0] && col === TPpos1[1]) || (row === TPpos2[0] && col === TPpos2[1])) {
             maze[row][col] = TELEPORT
          }
          switch (maze[row][col]) {
@@ -133,29 +167,29 @@ function renderMaze(){
             default:
                itemClass = 'empty'
                remainder += 1
-            
+
          }
          const id = `#id-${col}-${row}`
-         obj = document.getElementById("id-"+col+"-"+row+"")
+         obj = document.getElementById("id-" + col + "-" + row + "")
          // console.log(obj)
          obj.removeAttribute('style')
 
-         if (itemClass != "player"){
+         if (itemClass != "player") {
             document.querySelector(id).className = `block ${itemClass}`
          }
 
       }
    }
    // console.log(remainder)
-   
+
    const id = `#id-${player[1]}-${player[0]}`
    if (remainder > 0) {
       document.querySelector(id).className = 'player'
-      document.querySelector('.score').textContent = coups+` coups. Encore `+remainder+' case(s) !'
+      document.querySelector('.score').textContent = coups + ` move(s). Remaining ` + remainder + ' cell(s) !'
       document.querySelector('.info').textContent = 'Passez sur toutes les cases !'
    } else {
       // Fin du jeu
-      document.querySelector('.score').textContent =  `Fini en `+coups+' coups !'
+      document.querySelector('.score').textContent = `Well done ! Finish in ` + coups + ' moves !'
       document.querySelector('.info').textContent = "Bravo ! Niveau suivant"
    }
 
@@ -198,14 +232,21 @@ window.onkeydown = (event) => {
 
    if (direction !== 0 && ready === 1) {
       coups += 1;
-      changePlayerPos(player[1],player[0],player[1],player[0],direction)
+      
+      for (var i = 0; i < maze.length; i++)
+         previousmaze[i] = maze[i].slice();
+      oldplayer[0] = player[0]
+      oldplayer[1] = player[1]
+      LP = 0;
+      changePlayerPos(player[1], player[0], player[1], player[0], direction)
+
       // changePlayerPos(direction)
    }
 }
 
 
 //Version anime qui marche TROP BIEN
-function changePlayerPos(oldX, oldY, x, y, direction){
+function changePlayerPos(oldX, oldY, x, y, direction) {
    ready = 0
    let dy = 0
    let dx = 0
@@ -220,16 +261,16 @@ function changePlayerPos(oldX, oldY, x, y, direction){
    // console.log(x, y, dx, dy, direction)
    switch (direction) {
       case UP:
-            dy -= 1;
+         dy -= 1;
          break;
       case RIGHT:
-            dx += 1;
+         dx += 1;
          break;
       case LEFT:
-            dx -= 1;
+         dx -= 1;
          break;
       case DOWN:
-            dy += 1;
+         dy += 1;
          break;
       default:
          return state
@@ -240,54 +281,54 @@ function changePlayerPos(oldX, oldY, x, y, direction){
    // console.log(maze[y][x]);
 
    // console.log(x, y, direction)
-   if(x >= 0 && x < COLS && y >= 0 && y < ROWS && maze[y][x] !== WALL && maze[y][x] !== TELEPORT){
+   if (x >= 0 && x < COLS && y >= 0 && y < ROWS && maze[y][x] !== WALL && maze[y][x] !== TELEPORT) {
       changePlayerPos(oldX, oldY, x, y, direction);
    }
-   else{
-      if (x >= 0 && x < COLS && y >= 0 && y < ROWS && maze[y][x] === TELEPORT){
+   else {
+      if (x >= 0 && x < COLS && y >= 0 && y < ROWS && maze[y][x] === TELEPORT) {
          switch (direction) {
             case UP:
                obj = document.getElementsByClassName("player")[0]
                // console.log(obj)
-               obj.style.transform = "translateY(-"+(35*(oldY-y))+"px)";
-               obj.style.transition = ""+timesleep+"ms ease-in-out";
+               obj.style.transform = "translateY(-" + (35 * (oldY - y)) + "px)";
+               obj.style.transition = "" + timesleep + "ms ease-in-out";
                break;
             case RIGHT:
                obj = document.getElementsByClassName("player")[0]
                // console.log(obj)
-               obj.style.transform = "translateX("+(-35*(oldX-x))+"px)";
-               obj.style.transition = ""+timesleep+"ms ease-in-out";
+               obj.style.transform = "translateX(" + (-35 * (oldX - x)) + "px)";
+               obj.style.transition = "" + timesleep + "ms ease-in-out";
                break;
             case LEFT:
                obj = document.getElementsByClassName("player")[0]
                // console.log(obj)
-               obj.style.transform = "translateX(-"+(35*(oldX-x))+"px)";
-               obj.style.transition = ""+timesleep+"ms ease-in-out";
+               obj.style.transform = "translateX(-" + (35 * (oldX - x)) + "px)";
+               obj.style.transition = "" + timesleep + "ms ease-in-out";
                break;
             case DOWN:
                obj = document.getElementsByClassName("player")[0]
                // console.log(obj)
-               obj.style.transform = "translateY("+(-35*(oldY-y))+"px)";
-               obj.style.transition = ""+timesleep+"ms ease-in-out";
+               obj.style.transform = "translateY(" + (-35 * (oldY - y)) + "px)";
+               obj.style.transition = "" + timesleep + "ms ease-in-out";
                break;
          }
          // console.log(x,y)
 
-         if (y === TPpos1[0] && x === TPpos1[1] && tp !== 1){
+         if (y === TPpos1[0] && x === TPpos1[1] && tp !== 1) {
             y = TPpos2[0];
             x = TPpos2[1];
             player = [TPpos2[0], TPpos2[1]];
             tp = 1;
-            setTimeout(function() {renderMaze();}, timesleep);
-            setTimeout(function() {changePlayerPos(x,y,x,y,direction)}, 1.1*timesleep);
+            setTimeout(function () { renderMaze(); }, timesleep);
+            setTimeout(function () { changePlayerPos(x, y, x, y, direction) }, 1.1 * timesleep);
          }
-         if (y === TPpos2[0] && x === TPpos2[1] && tp !== 1){
+         if (y === TPpos2[0] && x === TPpos2[1] && tp !== 1) {
             y = TPpos1[0];
             x = TPpos1[1];
             player = [TPpos1[0], TPpos1[1]];
             tp = 1;
-            setTimeout(function() {renderMaze();}, timesleep);
-            setTimeout(function() {changePlayerPos(x,y,x,y,direction)}, 1.1*timesleep);
+            setTimeout(function () { renderMaze(); }, timesleep);
+            setTimeout(function () { changePlayerPos(x, y, x, y, direction) }, 1.1 * timesleep);
          }
          // else{
          //    player = [y, x]
@@ -295,40 +336,40 @@ function changePlayerPos(oldX, oldY, x, y, direction){
          //    setTimeout(function() {renderMaze();}, timesleep);
          // }
       }
-      else{
+      else {
          switch (direction) {
-            case UP:       
+            case UP:
                y = y + 1
                obj = document.getElementsByClassName("player")[0]
                // console.log(obj)
-               obj.style.transform = "translateY(-"+(35*(oldY-y))+"px)";
-               obj.style.transition = ""+timesleep+"ms ease-in-out";
+               obj.style.transform = "translateY(-" + (35 * (oldY - y)) + "px)";
+               obj.style.transition = "" + timesleep + "ms ease-in-out";
                break;
             case RIGHT:
                x = x - 1
                obj = document.getElementsByClassName("player")[0]
                // console.log(obj)
-               obj.style.transform = "translateX("+(-35*(oldX-x))+"px)";
-               obj.style.transition = ""+timesleep+"ms ease-in-out";
+               obj.style.transform = "translateX(" + (-35 * (oldX - x)) + "px)";
+               obj.style.transition = "" + timesleep + "ms ease-in-out";
                break;
             case LEFT:
                x = x + 1
                obj = document.getElementsByClassName("player")[0]
                // console.log(obj)
-               obj.style.transform = "translateX(-"+(35*(oldX-x))+"px)";
-               obj.style.transition = ""+timesleep+"ms ease-in-out";
+               obj.style.transform = "translateX(-" + (35 * (oldX - x)) + "px)";
+               obj.style.transition = "" + timesleep + "ms ease-in-out";
                break;
             case DOWN:
                y = y - 1
                obj = document.getElementsByClassName("player")[0]
                // console.log(obj)
-               obj.style.transform = "translateY("+(-35*(oldY-y))+"px)";
-               obj.style.transition = ""+timesleep+"ms ease-in-out";
+               obj.style.transform = "translateY(" + (-35 * (oldY - y)) + "px)";
+               obj.style.transition = "" + timesleep + "ms ease-in-out";
                break;
          }
          // console.log(x,y)
          player = [y, x]
-         setTimeout(function() {renderMaze();}, timesleep);
+         setTimeout(function () { renderMaze(); }, timesleep);
       }
    }
 }
