@@ -1,14 +1,15 @@
 <?php
 	
 	
-	if(isset($_GET["array"])){
+	if(isset($_GET["array"]) && isset($_GET["nbFichiers"])){
 		$array = $_GET["array"];
+		$nbFichiers = $_GET["nbFichiers"];
 		$newarray = str_replace(",","",$array);
 		//echo $array;
 		$map = explode("|", $newarray); 
 		print_r ($map);
 		# Chemin vers fichier texte
-		$file ="manual.txt";
+		$file ="manualmaps/map$nbFichiers.txt";
 		# Ouverture en mode écriture
 		$fileopen=(fopen("$file",'a'));
 		# suppression du contenu précédant

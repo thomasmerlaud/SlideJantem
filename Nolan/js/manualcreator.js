@@ -153,9 +153,21 @@ function verifCreator (e){
 
 }  
 
+//fonction pour récup les données du php
+var reeq = new XMLHttpRequest();
+reeq.onload = function() {
+    var truc = this.responseText;
+}
+reeq.open("GET", "php/countfiles.php", false);
+
+reeq.send(null);
+
+var nbFichiers = reeq.responseText-1;
+
 //Convertie la grille de décors en numéro
 //Fonction Fini
 function convertNumberCrea(){
+
 
         var tabN = Array(dim);
 
@@ -183,13 +195,13 @@ function convertNumberCrea(){
 					tabN[i][j] = 0;
 				}
             }
-			//console.log(tabN[i]);
         }
-		console.log(tabN);
+
 		var request = new XMLHttpRequest();
-		console.log("php/manual.php?array="+tabN.join('|'));
-		//window.location.assign("php/manual.php?array="+tabN.join('|'));
-		request.open("GET", "php/manual.php?array="+tabN.join('|'), false);
+        
+		//console.log("php/manual.php?array="+tabN.join('|')+"&nbFichiers="+nbFichiers);
+		//window.location.assign("php/manual.php?array="+tabN.join('|')+"&nbFichiers="+nbFichiers);
+		request.open("GET", "php/manual.php?array="+tabN.join('|')+"&nbFichiers="+nbFichiers, false);
 		request.send(null)
         return tabN;
 		
@@ -266,7 +278,7 @@ function Try(){
 function Save(){
 	
 	convertNumberCrea();
-	
+	nbFichiers+=1;
     if (cBon == 1){
         gamew.className = 'win';
     
