@@ -233,6 +233,7 @@ function renderMaze() {
    ready = 1;
 }
 
+
 window.onkeydown = (event) => {
    switch (event.keyCode) {
       case DOWN:

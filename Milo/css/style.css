@@ -64,7 +64,7 @@ body {
 .frame {
     /* width: calc(8 * var(--block-size)); */
     height: calc(14 * var(--block-size));
-    display: inline-grid;
+    /* display: inline-grid; */
     grid-row-start: 2;
     grid-row-end: 4;
 
