@@ -450,13 +450,13 @@ function Save(){
     }
 }
 function auto(e){
-	 // console.log('Fonction auto faite');
+	console.log('Fonction auto faite');
 	 
-	// var request = new XMLHttpRequest();
-    // request.open("GET", "php/auto.php?dim="+dim, false);
-    // request.send(null)
-	// numberToCREATION();
-	randomtab();
+	var request = new XMLHttpRequest();
+    request.open("GET", "php/auto.php?dim="+dim, false);
+    request.send(null)
+	numberToCREATION();
+	//randomtab();
 }
 
 //JEu
