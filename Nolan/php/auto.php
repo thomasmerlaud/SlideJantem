@@ -1,18 +1,11 @@
 <?php
 
-if(isset($_GET["dim"])){
+if( isset($_GET["dim"]) && isset($_GET["nbFichiers"]) ){
 		
 	$dim = $_GET['dim'];
-	$nbFichiers = -2;
-    $repertoire = opendir("../automaps/");
-
-    while ($fichier = readdir($repertoire))
-    {
-        $nbFichiers += 1;
-    }
-
-	
+	$nbFichiers = $_GET['nbFichiers'];
 	exec ( "CreatorAuto.exe $dim $nbFichiers" ,$output);
 }
 
 ?>
+
