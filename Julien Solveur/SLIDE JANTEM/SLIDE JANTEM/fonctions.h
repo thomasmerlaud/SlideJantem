@@ -29,11 +29,34 @@ void affichertab(int (*tab)[8], unsigned hauteur, unsigned largeur)
 	}
 }
 
+
+bool sud = false;
+bool est = false;
+bool ouest = false;
+bool nord = false;
 void deplacement(int (*tab)[8], int direction, int posX, int posY) {
 	if (direction == 1) { // SUD
 		while (tab[posX + 1][posY] != 1) {
 			if (tab[posX][posY] != 2) {
-				tab[posX][posY] = 4;
+				if (tab[posX][posY] != 2) {
+					if (sud == true) {
+						tab[posX][posY] = 2;
+						sud = false;
+					}
+					else if (est == true) {
+						tab[posX][posY] = 2;
+						est = false;
+					}
+					else if (ouest == true) {
+						tab[posX][posY] = 2;
+						ouest = false;
+					}
+					else if (nord == true) {
+						tab[posX][posY] = 2;
+						nord = false;
+					}
+					else { tab[posX][posY] = 4; }
+				}
 			}
 			posX = posX + 1;
 			if (tab[posX][posY] == 2) {
@@ -50,6 +73,10 @@ void deplacement(int (*tab)[8], int direction, int posX, int posY) {
 			if (tab[posX][posY] != 2) {
 				tab[posX][posY] = 3;
 			}
+			else if (tab[posX][posY] == 2 && tab[posX + 1][posY] == 1) {
+				tab[posX][posY] = 3;
+				sud = true;
+			}
 			else {
 				tab[posX+1][posY] = 3;
 			}
@@ -58,7 +85,23 @@ void deplacement(int (*tab)[8], int direction, int posX, int posY) {
 	if (direction == 2) { // EST
 		while (tab[posX][posY+1] != 1) {
 			if (tab[posX][posY] != 2) {
-				tab[posX][posY] = 4;
+				if (sud == true) {
+					tab[posX][posY] = 2;
+					sud = false;
+				}
+				else if (est == true) {
+					tab[posX][posY] = 2;
+					est = false;
+				}
+				else if (ouest == true) {
+					tab[posX][posY] = 2;
+					ouest = false;
+				}
+				else if (nord == true) {
+					tab[posX][posY] = 2;
+					nord = false;
+				}
+				else { tab[posX][posY] = 4; }
 			}
 			posY = posY + 1;
 			if (tab[posX][posY] == 2) {
@@ -75,6 +118,10 @@ void deplacement(int (*tab)[8], int direction, int posX, int posY) {
 			if (tab[posX][posY] != 2) {
 				tab[posX][posY] = 3;
 			}
+			else if (tab[posX][posY] == 2 && tab[posX][posY + 1] == 1) {
+				tab[posX][posY] = 3;
+				est = true;
+			}
 			else {
 				tab[posX][posY+1] = 3;
 			}
@@ -84,7 +131,25 @@ void deplacement(int (*tab)[8], int direction, int posX, int posY) {
 		while (tab[posX][posY - 1] != 1) {
 			bool trouve = false;
 			if (tab[posX][posY] != 2) {
-				tab[posX][posY] = 4;
+				if (tab[posX][posY] != 2) {
+					if (sud == true) {
+						tab[posX][posY] = 2;
+						sud = false;
+					}
+					else if (est == true) {
+						tab[posX][posY] = 2;
+						est = false;
+					}
+					else if (ouest == true) {
+						tab[posX][posY] = 2;
+						ouest = false;
+					}
+					else if (nord == true) {
+						tab[posX][posY] = 2;
+						nord = false;
+					}
+					else { tab[posX][posY] = 4; }
+				}
 			}
 			posY = posY - 1;
 			if (tab[posX][posY] == 2) {
@@ -102,6 +167,10 @@ void deplacement(int (*tab)[8], int direction, int posX, int posY) {
 			if (tab[posX][posY] != 2) {
 				tab[posX][posY] = 3;
 			}
+			else if (tab[posX][posY] == 2 && tab[posX][posY - 1] == 1) {
+				tab[posX][posY] = 3;
+				ouest = true;
+			}
 			else {
 				tab[posX][posY - 1] = 3;
 			}
@@ -111,7 +180,25 @@ void deplacement(int (*tab)[8], int direction, int posX, int posY) {
 		bool trouve = false;
 		while (tab[posX - 1][posY] != 1) {
 			if (tab[posX][posY] != 2) {
-				tab[posX][posY] = 4;
+				if (tab[posX][posY] != 2) {
+					if (sud == true) {
+						tab[posX][posY] = 2;
+						sud = false;
+					}
+					else if (est == true) {
+						tab[posX][posY] = 2;
+						est = false;
+					}
+					else if (ouest == true) {
+						tab[posX][posY] = 2;
+						ouest = false;
+					}
+					else if (nord == true) {
+						tab[posX][posY] = 2;
+						nord = false;
+					}
+					else { tab[posX][posY] = 4; }
+				}
 			}
 			posX = posX - 1;
 			if (tab[posX][posY] == 2) {
@@ -128,6 +215,10 @@ void deplacement(int (*tab)[8], int direction, int posX, int posY) {
 			}
 			if (tab[posX][posY] != 2) {
 				tab[posX][posY] = 3;
+			}
+			else if (tab[posX][posY] == 2 && tab[posX - 1][posY] == 1) {
+				tab[posX][posY] = 3;
+				nord = true;
 			}
 			else {
 				tab[posX - 1][posY] = 3;
@@ -286,9 +377,10 @@ void solveurbrut(int (* tab)[8], unsigned longueur, unsigned largeur) {
 			}
 			direction = Ladirection(tab, tab[posX - 1][posY], tab[posX][posY + 1], tab[posX + 1][posY], tab[posX][posY - 1]);
 			deplacement(tab, direction, posX, posY);
-			affichertab(tab, 8, 8);
+			/*affichertab(tab, 8, 8);
 			printf("%d", direction);
 			printf("\n");
+			*/
 			compteur2 = 0;
 			for (unsigned i = 0; i < longueur; i++) {
 				for (unsigned j = 0; j < largeur; j++) {
@@ -960,6 +1052,7 @@ int Ladirection11(int(*tab)[11], int nord, int est, int sud, int ouest) {
 	if (ouest == 1) {
 		pOuest = true;
 	}
+	/*
 	if (pNord == true && pEst == true && pSud == true) {
 		direction = 3;
 	}
@@ -971,7 +1064,7 @@ int Ladirection11(int(*tab)[11], int nord, int est, int sud, int ouest) {
 	}
 	if (pOuest == true && pEst == true && pSud == true) {
 		direction = 0;
-	}
+	}*/
 	if (pNord == true && pEst == true) {
 		choix = rand() % 2;
 		if (choix == 0) {
@@ -1024,7 +1117,6 @@ int Ladirection11(int(*tab)[11], int nord, int est, int sud, int ouest) {
 	else {
 		direction = rand() % 4;
 	}
-
 	return direction;
 }
 
@@ -1056,7 +1148,7 @@ void solv11(int(*tab)[11], unsigned longueur, unsigned largeur) {
 		}
 		direction = Ladirection11(tab, tab[posX - 1][posY], tab[posX][posY + 1], tab[posX + 1][posY], tab[posX][posY - 1]);
 		dep11(tab, direction, posX, posY);
-		/*affichertab(tab, 8, 8);
+		/*affichertab11(tab, 11, 11);
 		printf("%d", direction);
 		printf("\n");
 		*/

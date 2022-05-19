@@ -54,7 +54,7 @@ int main() {
 						 1,1,1,2,0,0,0,1,
 						 1,1,1,1,1,1,1,1, };
 	*/
-	printf("Longeur : %d", lon);
+	// printf("Longeur : %d", lon);
 	int taille = 8;
 	int compteur = 0;
 
@@ -67,7 +67,6 @@ int main() {
 				test2[i][j] = temp;
 			}
 		}
-		affichertab(test2, 8, 8);
 		solveurbrut(test2, 8, 8);
 	}
 	if (lon == 9) {
@@ -81,6 +80,28 @@ int main() {
 		}
 		solv9(test2, 9, 9);
 	}
+	if (lon == 10) {
+		int test2[10][10];
+		for (int i = 0; i < lon; i++) {
+			for (int j = 0; j < lar; j++) {
+				c = fgetc(lire);
+				int temp = c - 48;
+				test2[i][j] = temp;
+			}
+		}
+		solv10(test2, 10, 10);
+	}
+	if (lon == 11) {
+		int test2[11][11];
+		for (int i = 0; i < lon; i++) {
+			for (int j = 0; j < lar; j++) {
+				c = fgetc(lire);
+				int temp = c - 48;
+				test2[i][j] = temp;
+			}
+		}
+		solv11(test2, 11, 11);
+	}
 	if (lon == 12) {
 		int test2[12][12];
 		for (int i = 0; i < 12; i++) {
@@ -90,8 +111,18 @@ int main() {
 				test2[i][j] = temp;
 			}
 		}
-		affichertab12(test2, 12, 12);
 		av12(test2, 12, 12);
+	}
+	if (lon == 13) {
+		int test2[13][13];
+		for (int i = 0; i < lon; i++) {
+			for (int j = 0; j < lar; j++) {
+				c = fgetc(lire);
+				int temp = c - 48;
+				test2[i][j] = temp;
+			}
+		}
+		solv13(test2, 13, 13);
 	}
 
 	//printf("\n%d", );
