@@ -2,9 +2,18 @@ body {
     margin: 0;
     padding: 0;
     background: #00272f;
-    background-image: url("../img/lennart-butz-idea5anim.gif");
-    background-size: 100%;
+    background: url("../img/CascadesR1.gif.1eaaee456988bcc039343b0cc3c47ab6.gif") no-repeat center center fixed;
+    background-size: cover;
     --backgound-shadow: #4d1123;
+    --fond: #92b9bc;
+    border-radius: 10px;
+
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
 }
 
 .frame {
@@ -21,28 +30,28 @@ body {
 }
 
 .score{
-    position: relative;
-    width: auto;
-    padding: 7px;
+    place-items:  center;
+    grid-column: 1;
+    grid-row: 2;
+    
+    display: inline-grid;
     color: #FFF;
-    display: inline-block;
     text-decoration: none;
     font-family: 'Rubik One', sans-serif;
-    /* border: solid 1px #b070ff; */
-    background: #fc937a;
+    background: var(--fond);
     text-align: center;
     font-size: 17px;
     box-shadow: 4px 4px 0px var(--backgound-shadow), 5px 5px 0px white;
-    left: 18.2%;
-    top: 250px;
     border-radius: 5px;
+    width: 20%;
+
 }
 
 .frame .footer .info{
     font-family: 'Rubik One', sans-serif;
     text-align: center;
     font-size: 15px;
-    color: #fc937a;
+    color: var(--fond);
     position: relative;
     margin-top: 20px;
     background-color: #4d11234e;
@@ -71,16 +80,22 @@ body {
 
 .empty {
     background: #cbdbfc;
-    border-radius: 8px;
+    background-image: url("../img/road.png");
+    /* background-image: url("../img/saol.png"); */
+    background-size: 100%;
+    /* border-radius: 8px; */
 }
 
 .wall {
-    background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pjxzdmcgdmlld0JveD0iMCAwIDMyIDMyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjx0aXRsZS8+PGcgZGF0YS1uYW1lPSIxNS1XYWxsIiBpZD0iXzE1LVdhbGwiPjxwYXRoIGQ9Ik0yOSwwSDNBMywzLDAsMCwwLDAsM1YyOWEzLDMsMCwwLDAsMywzSDI5YTMsMywwLDAsMCwzLTNWM0EzLDMsMCwwLDAsMjksMFpNMiwzQTEsMSwwLDAsMSwzLDJIMTVWN0gyWk0yMiw5djZIMTBWOVpNMiw5SDh2NkgyWm0wLDhIMTV2NkgyWk04LDMwSDNhMSwxLDAsMCwxLTEtMVYyNUg4Wm0xNCwwSDEwVjI1SDIyWm04LTFhMSwxLDAsMCwxLTEsMUgyNFYyNWg2Wm0wLTZIMTdWMTdIMzBabTAtOEgyNFY5aDZabTAtOEgxN1YySDI5YTEsMSwwLDAsMSwxLDFaIi8+PC9nPjwvc3ZnPg==');
+    /* background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pjxzdmcgdmlld0JveD0iMCAwIDMyIDMyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjx0aXRsZS8+PGcgZGF0YS1uYW1lPSIxNS1XYWxsIiBpZD0iXzE1LVdhbGwiPjxwYXRoIGQ9Ik0yOSwwSDNBMywzLDAsMCwwLDAsM1YyOWEzLDMsMCwwLDAsMywzSDI5YTMsMywwLDAsMCwzLTNWM0EzLDMsMCwwLDAsMjksMFpNMiwzQTEsMSwwLDAsMSwzLDJIMTVWN0gyWk0yMiw5djZIMTBWOVpNMiw5SDh2NkgyWm0wLDhIMTV2NkgyWk04LDMwSDNhMSwxLDAsMCwxLTEtMVYyNUg4Wm0xNCwwSDEwVjI1SDIyWm04LTFhMSwxLDAsMCwxLTEsMUgyNFYyNWg2Wm0wLTZIMTdWMTdIMzBabTAtOEgyNFY5aDZabTAtOEgxN1YySDI5YTEsMSwwLDAsMSwxLDFaIi8+PC9nPjwvc3ZnPg=='); */
+    /* background-image: url("../img/bat.png"); */
+    background-image: url("../img/budsh.jpg");
+    background-size: 100%;
     box-sizing: border-box;
 }
 
 .passed {
-    background-color: #fc937a;
+    background-color: var(--fond);
     opacity: 0.9;
     box-sizing: border-box;
 }
@@ -177,25 +192,41 @@ body {
 }
 
 
+.button{
+    display: inline-grid;
+    grid-column: 3;
+    grid-row: 2/4;
+    
+}
 
 .push_button{
-    
-    position: relative;
-    width: 12%;
+    /* float: right; */
+    width: 40%;
+    height: 30%;
     color: #FFF;
-    display: inline-block;
     text-decoration: none;
     font-family: 'Rubik One', sans-serif;
     /* border: solid 1px #b070ff; */
-    background: #fc937a;
+    background: var(--fond);
     text-align: center;
-    font-size: 19px;
+    font-size: 25px;
     transition: all 0.1s;
     box-shadow: 4px 4px 0px var(--backgound-shadow), 5px 5px 0px white;
-    left: 37.5%;
-    margin-top: 5.2%;
-    margin-right: 8px;
     border-radius: 5px;
+    place-items:  center;
+}
+
+.push_button.restart{
+    display: inline-grid;
+    grid-column: 1;
+    grid-row: 2;
+    /* left: 10%; */
+}
+.push_button.cancel{
+    display: inline-grid;
+    grid-column: 1;
+    grid-row: 3;
+    /* left: 10%; */
 }
 
 .push_button:hover {

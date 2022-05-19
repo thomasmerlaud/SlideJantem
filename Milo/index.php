@@ -18,8 +18,8 @@
       }
     ?>
     <div class="button">  
-        <div class="push_button" onClick="reset();"> Restart </div>
-        <div class="push_button" onClick="lastplay();"> Cancel</div>
+        <div class="push_button restart" onClick="reset();"> Restart </div>
+        <div class="push_button cancel" onClick="lastplay();"> Cancel</div>
     </div>
     <div class="score"></div>
     <div class="frame">
