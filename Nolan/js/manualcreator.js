@@ -143,13 +143,28 @@ function main(){
 
 function verifCreator (e){
 	
+    var request = new XMLHttpRequest();
+    request.open("GET", "php/verif.php", false);
+    request.send(null)
+    var file = request.responseText
+
+    file = file.split(" ")
+    var result = file[0]
+    var count = file[1]
+
+    if (result==0){
+        valid1= true;
+    }
+    else{
+        valid1=false;
+    }
 		
-        if (gameo.classList.contains('over')){
-        
-            gameo.removeChild(texte);
-            gameo.className='';
-        }
-        over();
+    if (gameo.classList.contains('over')){
+    
+        gameo.removeChild(texte);
+        gameo.className='';
+    }
+    over();
 
 }  
 
