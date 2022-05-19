@@ -1,8 +1,11 @@
 <?php
 
-if(isset($_GET["dim"])){
+if( isset($_GET["dim"]) && isset($_GET["nbFichiers"]) ){
 		
 	$dim = $_GET['dim'];
-	exec ( "CreatorAuto.exe $dim $dim" ,$output);
+	$nbFichiers = $_GET['nbFichiers'];
+	exec ( "CreatorAuto.exe $dim $nbFichiers" ,$output);
 }
+
 ?>
+

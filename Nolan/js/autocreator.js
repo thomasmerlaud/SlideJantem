@@ -193,11 +193,15 @@ function convertNumberCrea(){
 }
 //Convertie le tableau en créa
 //Fonction Fini
+
+var nb;
+var nbFichiers = 0;
+
 function numberToCREATION(){
-	
+
 		//fonction pour récup les données dans le map.json
 		var request = new XMLHttpRequest();
-		request.open("GET", "php/map.txt", false);
+		request.open("GET", "php/automaps/map"+nbFichiers+".txt", false);
 		request.send(null)
 		var file = request.responseText
 
@@ -430,6 +434,7 @@ function Try(){
 function Save(){
 	
 	convertNumberCrea();
+    nbFichiers+=1;
 	
     if (cBon == 1){
         gamew.className = 'win';
@@ -450,13 +455,13 @@ function Save(){
     }
 }
 function auto(e){
-	 // console.log('Fonction auto faite');
+	console.log('Fonction auto faite');
 	 
-	// var request = new XMLHttpRequest();
-    // request.open("GET", "php/auto.php?dim="+dim, false);
-    // request.send(null)
-	// numberToCREATION();
-	randomtab();
+	var request = new XMLHttpRequest();
+    request.open("GET", "php/auto.php?dim="+dim+"&nbFichiers="+nbFichiers, false);
+    request.send(null)
+	numberToCREATION();
+	//randomtab();
 }
 
 //JEu
