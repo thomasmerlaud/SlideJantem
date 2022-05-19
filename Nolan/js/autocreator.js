@@ -143,20 +143,6 @@ function main(){
 //Fonction Fini//
 
 
-function verifCreator (e){
-	
-		
-        if (gameo.classList.contains('over')){
-        
-            gameo.removeChild(texte);
-            gameo.className='';
-        }
-        over();
-
-
-
-
-}  
 
 //Convertie la grille de décors en numéro
 //Fonction Fini
@@ -371,6 +357,7 @@ function randomtab(e){
 		
 }
 
+
 //Sert a reset
 //Fonction Fini//
 
@@ -469,7 +456,21 @@ function auto(e){
 	var request = new XMLHttpRequest();
     request.open("GET", "php/auto.php?dim="+dim+"&nbFichiers="+nbFichiers, false);
     request.send(null)
-	numberToCREATION();
+
+    var request = new XMLHttpRequest();
+    request.open("GET", "php/verif.php", false);
+    request.send(null)
+    var file = request.responseText
+
+    file = file.split(" ")
+    var result = file[0]
+    var count = file[1]
+
+    if (result==0){
+        auto();
+    }
+    else{numberToCREATION();}
+    
 	//randomtab();
 }
 
@@ -512,19 +513,6 @@ function initJeu (e){
 }
 
 
-
-//Verifie si le niveau est possible
-//Fonction fini
-function verif(e){
-      
-	if (gameo.classList.contains('youlost')){
-	
-		gameo.removeChild(texte);
-		gameo.className='';
-	}
-	youlost();
-        
-}
 
 //Convertie la grille de décors en numéro
 //Fonction fini//
@@ -621,7 +609,9 @@ function over(e){
 		texte.innerHTML = "GOOD"
 	}
 	else{
-    texte.innerHTML = "DOESN'T WORK"
+        texte.innerHTML = "DOESN'T WORK"
+        resetJeu();
+
 	}
     gameo.addEventListener('click', reset);
 	
