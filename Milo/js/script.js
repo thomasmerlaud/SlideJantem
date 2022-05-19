@@ -135,6 +135,13 @@ function reset() {
    pourcent = 0;
    return renderMaze();
 }
+function menu() {
+   window.location.href="index.html"; 
+}
+function nextlevel() {
+   next = parseInt(nbmap) + 1;
+   window.location.href="index.php?map="+(next)+""; 
+}
 
 
 function createBoard() {
@@ -182,7 +189,6 @@ function renderMaze() {
          if (itemClass != "player") {
             document.querySelector(id).className = `block ${itemClass}`
          }
-
       }
    }
    // console.log(remainder)
@@ -192,10 +198,14 @@ function renderMaze() {
    }
 
    pourcent = 100 - parseInt(remainder*100 / nbcase)
+   console.log(pourcent)
+   document.querySelector('.bar').style.height = pourcent+'%';
+   document.querySelector('.bar').textContent = "";
    if (pourcent != 0){
       document.querySelector('.bar').textContent = pourcent+'%';
    }
-   document.querySelector('.bar').style.height = pourcent+'%';
+   
+
 
    const id = `#id-${player[1]}-${player[0]}`
    if (remainder > 0) {
@@ -208,6 +218,11 @@ function renderMaze() {
       // document.querySelector('.score').textContent = `Well done ! Finish in ` + coups + ' moves !'
       document.querySelector('.score').textContent = coups;
       document.querySelector('.info').textContent = "Bravo ! Niveau suivant"
+
+
+      obj = document.getElementById("finish");
+      obj.classList.add("overlay");
+      obj.style.visibility = "visible";
    }
 
 
@@ -302,6 +317,7 @@ function changePlayerPos(oldX, oldY, x, y, direction) {
    if (x >= 0 && x < COLS && y >= 0 && y < ROWS && maze[y][x] !== WALL && maze[y][x] !== TELEPORT) {
       changePlayerPos(oldX, oldY, x, y, direction);
    }
+
    else {
       if (x >= 0 && x < COLS && y >= 0 && y < ROWS && maze[y][x] === TELEPORT) {
          switch (direction) {
