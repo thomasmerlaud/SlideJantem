@@ -191,11 +191,20 @@ function convertNumberCrea(){
         return tabN;
 		
 }
+
+//fonction pour récup les données du php
+var reeq = new XMLHttpRequest();
+reeq.onload = function() {
+    var truc = this.responseText;
+}
+reeq.open("GET", "php/countfiles.php", false);
+
+reeq.send(null);
+
+var nbFichiers = reeq.responseText-1;
+
 //Convertie le tableau en créa
 //Fonction Fini
-
-var nb;
-var nbFichiers = 0;
 
 function numberToCREATION(){
 
