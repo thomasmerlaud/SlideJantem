@@ -143,6 +143,7 @@ function main(){
 
 function verifCreator (e){
 	
+    convertNumberCrea();
     var request = new XMLHttpRequest();
     request.open("GET", "php/verif.php", false);
     request.send(null)
