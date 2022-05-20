@@ -23,6 +23,8 @@ var nbtp = 0;
 var dim = 0;
 var coups = 0;
 var nbcase = 0;
+var TPpos1 = [-1,-1];
+var TPpos2 = [-1,-1];
 
 //fonction pour récup les données dans le map.txt
 var request = new XMLHttpRequest();
@@ -80,11 +82,11 @@ for (let row = 0; row < ROWS; row++) {
       }
       if (maze[row][col] == TELEPORT) {
          if (nbtp === 0) {
-            var TPpos1 = [row, col];
+            TPpos1 = [row, col];
             nbtp++;
          }
          else {
-            var TPpos2 = [row, col];
+            TPpos2 = [row, col];
          }
       }
    }
@@ -114,7 +116,7 @@ window.onload = () => {
 
 
 function lastplay() {
-   if(LP != 1){
+   if(LP != 1 && coups != 0){
       // console.log(previousmaze)
       for (var i = 0; i < maze.length; i++)
          maze[i] = previousmaze[i].slice();
@@ -198,7 +200,7 @@ function renderMaze() {
    }
 
    pourcent = 100 - parseInt(remainder*100 / nbcase)
-   console.log(pourcent)
+   // console.log(pourcent)
    document.querySelector('.bar').style.height = pourcent+'%';
    document.querySelector('.bar').textContent = "";
    if (pourcent != 0){
