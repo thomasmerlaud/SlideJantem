@@ -187,7 +187,7 @@ reeq.open("GET", "php/countfiles.php", false);
 
 reeq.send(null);
 
-var nbFichiers = reeq.responseText-1;
+var nbFichiers = reeq.responseText-2;
 
 //Convertie le tableau en créa
 //Fonction Fini
@@ -196,7 +196,7 @@ function numberToCREATION(){
 
 		//fonction pour récup les données dans le map.json
 		var request = new XMLHttpRequest();
-		request.open("GET", "php/automaps/map"+nbFichiers+".txt", false);
+		request.open("GET", "php/map.txt", false);
 		request.send(null)
 		var file = request.responseText
 
@@ -431,24 +431,9 @@ function Save(){
 	
 	convertNumberCrea();
     nbFichiers+=1;
-	
-    if (cBon == 1){
-        gamew.className = 'win';
-    
-        texte = document.createElement('h2');
-        gamew.appendChild(texte);
-
-        texte.innerHTML = 'You must Verify before'
-
-		gamew.addEventListener('click', reset);
-    }
-    else if (cBon == 0){
-
     initJeu();
 	//randomtab()
-	
-	
-    }
+    
 }
 function auto(e){
 	console.log('Fonction auto faite');
@@ -467,9 +452,15 @@ function auto(e){
     var count = file[1]
 
     if (result==0){
+        
+        console.log("WTF");
         auto();
+        
     }
-    else{numberToCREATION();}
+    else{
+        console.log("what ca marche???");
+        numberToCREATION();
+    }
     
 	//randomtab();
 }
