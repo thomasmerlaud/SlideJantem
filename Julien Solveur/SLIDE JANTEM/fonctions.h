@@ -37,6 +37,7 @@ bool nord = false;
 void deplacement(int (*tab)[8], int direction, int posX, int posY) {
 	if (direction == 1) { // SUD
 		while (tab[posX + 1][posY] != 1) {
+			bool trouve = false;
 			if (tab[posX][posY] != 2) {
 				if (tab[posX][posY] != 2) {
 					if (sud == true) {
@@ -62,10 +63,11 @@ void deplacement(int (*tab)[8], int direction, int posX, int posY) {
 			if (tab[posX][posY] == 2) {
 				for (unsigned i = 0; i < 8; i++) {
 					for (unsigned j = 0; j < 8; j++) {
-						if (tab[i][j] == 2 && i != posX && j != posY) {
+						if (tab[i][j] == 2 && i != posX && j != posY && trouve == false) {
 							posX = i;
 							posY = j;
 							tab[posX][posY] = 2;
+							bool trouve = false;
 						}
 					}
 				}
@@ -84,6 +86,7 @@ void deplacement(int (*tab)[8], int direction, int posX, int posY) {
 	}
 	if (direction == 2) { // EST
 		while (tab[posX][posY+1] != 1) {
+			bool trouve = false;
 			if (tab[posX][posY] != 2) {
 				if (sud == true) {
 					tab[posX][posY] = 2;
@@ -107,10 +110,11 @@ void deplacement(int (*tab)[8], int direction, int posX, int posY) {
 			if (tab[posX][posY] == 2) {
 				for (unsigned i = 0; i < 8; i++) {
 					for (unsigned j = 0; j < 8; j++) {
-						if (tab[i][j] == 2 && i != posX && j != posY) {
+						if (tab[i][j] == 2 && i != posX && j != posY && trouve == false) {
 							posX = i;
 							posY = j;
 							tab[posX][posY] = 2;
+							trouve = true;
 						}
 					}
 				}
@@ -377,10 +381,9 @@ void solveurbrut(int (* tab)[8], unsigned longueur, unsigned largeur) {
 			}
 			direction = Ladirection(tab, tab[posX - 1][posY], tab[posX][posY + 1], tab[posX + 1][posY], tab[posX][posY - 1]);
 			deplacement(tab, direction, posX, posY);
-			/*affichertab(tab, 8, 8);
+			affichertab(tab, 8, 8);
 			printf("%d", direction);
 			printf("\n");
-			*/
 			compteur2 = 0;
 			for (unsigned i = 0; i < longueur; i++) {
 				for (unsigned j = 0; j < largeur; j++) {
@@ -391,7 +394,7 @@ void solveurbrut(int (* tab)[8], unsigned longueur, unsigned largeur) {
 			}
 			compt++;
 			tour++;
-		} while ((compteur2 < compteur0) && (tour < 100000));
+		} while ((compteur2 <= compteur0) && (tour < 100000));
 		if (compteur2 >= compteur0) {
 			printf("%d", 1);
 			printf(" %d", compt);
@@ -415,23 +418,47 @@ void affichertab9(int(*tab)[9], unsigned hauteur, unsigned largeur)
 void dep9(int(*tab)[9], int direction, int posX, int posY) {
 	if (direction == 1) { // SUD
 		while (tab[posX + 1][posY] != 1) {
+			bool trouve = false;
 			if (tab[posX][posY] != 2) {
-				tab[posX][posY] = 4;
+				if (tab[posX][posY] != 2) {
+					if (sud == true) {
+						tab[posX][posY] = 2;
+						sud = false;
+					}
+					else if (est == true) {
+						tab[posX][posY] = 2;
+						est = false;
+					}
+					else if (ouest == true) {
+						tab[posX][posY] = 2;
+						ouest = false;
+					}
+					else if (nord == true) {
+						tab[posX][posY] = 2;
+						nord = false;
+					}
+					else { tab[posX][posY] = 4; }
+				}
 			}
 			posX = posX + 1;
 			if (tab[posX][posY] == 2) {
 				for (unsigned i = 0; i < 9; i++) {
 					for (unsigned j = 0; j < 9; j++) {
-						if (tab[i][j] == 2 && i != posX && j != posY) {
+						if (tab[i][j] == 2 && i != posX && j != posY && trouve == false) {
 							posX = i;
 							posY = j;
 							tab[posX][posY] = 2;
+							trouve = true;
 						}
 					}
 				}
 			}
 			if (tab[posX][posY] != 2) {
 				tab[posX][posY] = 3;
+			}
+			else if (tab[posX][posY] == 2 && tab[posX + 1][posY] == 1) {
+				tab[posX][posY] = 3;
+				sud = true;
 			}
 			else {
 				tab[posX + 1][posY] = 3;
@@ -440,23 +467,47 @@ void dep9(int(*tab)[9], int direction, int posX, int posY) {
 	}
 	if (direction == 2) { // EST
 		while (tab[posX][posY + 1] != 1) {
+			bool trouve = false;
 			if (tab[posX][posY] != 2) {
-				tab[posX][posY] = 4;
+				if (tab[posX][posY] != 2) {
+					if (sud == true) {
+						tab[posX][posY] = 2;
+						sud = false;
+					}
+					else if (est == true) {
+						tab[posX][posY] = 2;
+						est = false;
+					}
+					else if (ouest == true) {
+						tab[posX][posY] = 2;
+						ouest = false;
+					}
+					else if (nord == true) {
+						tab[posX][posY] = 2;
+						nord = false;
+					}
+					else { tab[posX][posY] = 4; }
+				}
 			}
 			posY = posY + 1;
 			if (tab[posX][posY] == 2) {
 				for (unsigned i = 0; i < 9; i++) {
 					for (unsigned j = 0; j < 9; j++) {
-						if (tab[i][j] == 2 && i != posX && j != posY) {
+						if (tab[i][j] == 2 && i != posX && j != posY && trouve == false) {
 							posX = i;
 							posY = j;
 							tab[posX][posY] = 2;
+							trouve = true;
 						}
 					}
 				}
 			}
 			if (tab[posX][posY] != 2) {
 				tab[posX][posY] = 3;
+			}
+			else if (tab[posX][posY] == 2 && tab[posX + 1][posY] == 1) {
+				tab[posX][posY] = 3;
+				est = true;
 			}
 			else {
 				tab[posX][posY + 1] = 3;
@@ -467,7 +518,25 @@ void dep9(int(*tab)[9], int direction, int posX, int posY) {
 		while (tab[posX][posY - 1] != 1) {
 			bool trouve = false;
 			if (tab[posX][posY] != 2) {
-				tab[posX][posY] = 4;
+				if (tab[posX][posY] != 2) {
+					if (sud == true) {
+						tab[posX][posY] = 2;
+						sud = false;
+					}
+					else if (est == true) {
+						tab[posX][posY] = 2;
+						est = false;
+					}
+					else if (ouest == true) {
+						tab[posX][posY] = 2;
+						ouest = false;
+					}
+					else if (nord == true) {
+						tab[posX][posY] = 2;
+						nord = false;
+					}
+					else { tab[posX][posY] = 4; }
+				}
 			}
 			posY = posY - 1;
 			if (tab[posX][posY] == 2) {
@@ -485,6 +554,10 @@ void dep9(int(*tab)[9], int direction, int posX, int posY) {
 			if (tab[posX][posY] != 2) {
 				tab[posX][posY] = 3;
 			}
+			else if (tab[posX][posY] == 2 && tab[posX + 1][posY] == 1) {
+				tab[posX][posY] = 3;
+				ouest = true;
+			}
 			else {
 				tab[posX][posY - 1] = 3;
 			}
@@ -494,7 +567,25 @@ void dep9(int(*tab)[9], int direction, int posX, int posY) {
 		bool trouve = false;
 		while (tab[posX - 1][posY] != 1) {
 			if (tab[posX][posY] != 2) {
-				tab[posX][posY] = 4;
+				if (tab[posX][posY] != 2) {
+					if (sud == true) {
+						tab[posX][posY] = 2;
+						sud = false;
+					}
+					else if (est == true) {
+						tab[posX][posY] = 2;
+						est = false;
+					}
+					else if (ouest == true) {
+						tab[posX][posY] = 2;
+						ouest = false;
+					}
+					else if (nord == true) {
+						tab[posX][posY] = 2;
+						nord = false;
+					}
+					else { tab[posX][posY] = 4; }
+				}
 			}
 			posX = posX - 1;
 			if (tab[posX][posY] == 2) {
@@ -511,6 +602,10 @@ void dep9(int(*tab)[9], int direction, int posX, int posY) {
 			}
 			if (tab[posX][posY] != 2) {
 				tab[posX][posY] = 3;
+			}
+			else if (tab[posX][posY] == 2 && tab[posX + 1][posY] == 1) {
+				tab[posX][posY] = 3;
+				nord = true;
 			}
 			else {
 				tab[posX - 1][posY] = 3;
@@ -648,7 +743,7 @@ void solv9(int(*tab)[9], unsigned longueur, unsigned largeur) {
 		}
 		compt++;
 		tour++;
-	} while ((compteur2 < compteur0) && (tour < 100000));
+	} while ((compteur2 <= compteur0) && (tour < 100000));
 	if (compteur2 >= compteur0) {
 		printf("%d", 1);
 		printf(" %d", compt);
@@ -672,23 +767,47 @@ void affichertab10(int(*tab)[10], unsigned hauteur, unsigned largeur)
 void dep10(int(*tab)[10], int direction, int posX, int posY) {
 	if (direction == 1) { // SUD
 		while (tab[posX + 1][posY] != 1) {
+			bool trouve = false;
 			if (tab[posX][posY] != 2) {
-				tab[posX][posY] = 4;
+				if (tab[posX][posY] != 2) {
+					if (sud == true) {
+						tab[posX][posY] = 2;
+						sud = false;
+					}
+					else if (est == true) {
+						tab[posX][posY] = 2;
+						est = false;
+					}
+					else if (ouest == true) {
+						tab[posX][posY] = 2;
+						ouest = false;
+					}
+					else if (nord == true) {
+						tab[posX][posY] = 2;
+						nord = false;
+					}
+					else { tab[posX][posY] = 4; }
+				}
 			}
 			posX = posX + 1;
 			if (tab[posX][posY] == 2) {
 				for (unsigned i = 0; i < 10; i++) {
 					for (unsigned j = 0; j < 10; j++) {
-						if (tab[i][j] == 2 && i != posX && j != posY) {
+						if (tab[i][j] == 2 && i != posX && j != posY && trouve == false) {
 							posX = i;
 							posY = j;
 							tab[posX][posY] = 2;
+							trouve = true;
 						}
 					}
 				}
 			}
 			if (tab[posX][posY] != 2) {
 				tab[posX][posY] = 3;
+			}
+			else if (tab[posX][posY] == 2 && tab[posX + 1][posY] == 1) {
+				tab[posX][posY] = 3;
+				sud = true;
 			}
 			else {
 				tab[posX + 1][posY] = 3;
@@ -697,23 +816,47 @@ void dep10(int(*tab)[10], int direction, int posX, int posY) {
 	}
 	if (direction == 2) { // EST
 		while (tab[posX][posY + 1] != 1) {
+			bool trouve = false;
 			if (tab[posX][posY] != 2) {
-				tab[posX][posY] = 4;
+				if (tab[posX][posY] != 2) {
+					if (sud == true) {
+						tab[posX][posY] = 2;
+						sud = false;
+					}
+					else if (est == true) {
+						tab[posX][posY] = 2;
+						est = false;
+					}
+					else if (ouest == true) {
+						tab[posX][posY] = 2;
+						ouest = false;
+					}
+					else if (nord == true) {
+						tab[posX][posY] = 2;
+						nord = false;
+					}
+					else { tab[posX][posY] = 4; }
+				}
 			}
 			posY = posY + 1;
 			if (tab[posX][posY] == 2) {
 				for (unsigned i = 0; i < 10; i++) {
 					for (unsigned j = 0; j < 10; j++) {
-						if (tab[i][j] == 2 && i != posX && j != posY) {
+						if (tab[i][j] == 2 && i != posX && j != posY && trouve == false) {
 							posX = i;
 							posY = j;
 							tab[posX][posY] = 2;
+							trouve = true;
 						}
 					}
 				}
 			}
 			if (tab[posX][posY] != 2) {
 				tab[posX][posY] = 3;
+			}
+			else if (tab[posX][posY] == 2 && tab[posX + 1][posY] == 1) {
+				tab[posX][posY] = 3;
+				est = true;
 			}
 			else {
 				tab[posX][posY + 1] = 3;
@@ -724,7 +867,25 @@ void dep10(int(*tab)[10], int direction, int posX, int posY) {
 		while (tab[posX][posY - 1] != 1) {
 			bool trouve = false;
 			if (tab[posX][posY] != 2) {
-				tab[posX][posY] = 4;
+				if (tab[posX][posY] != 2) {
+					if (sud == true) {
+						tab[posX][posY] = 2;
+						sud = false;
+					}
+					else if (est == true) {
+						tab[posX][posY] = 2;
+						est = false;
+					}
+					else if (ouest == true) {
+						tab[posX][posY] = 2;
+						ouest = false;
+					}
+					else if (nord == true) {
+						tab[posX][posY] = 2;
+						nord = false;
+					}
+					else { tab[posX][posY] = 4; }
+				}
 			}
 			posY = posY - 1;
 			if (tab[posX][posY] == 2) {
@@ -742,6 +903,10 @@ void dep10(int(*tab)[10], int direction, int posX, int posY) {
 			if (tab[posX][posY] != 2) {
 				tab[posX][posY] = 3;
 			}
+			else if (tab[posX][posY] == 2 && tab[posX + 1][posY] == 1) {
+				tab[posX][posY] = 3;
+				ouest = true;
+			}
 			else {
 				tab[posX][posY - 1] = 3;
 			}
@@ -751,7 +916,25 @@ void dep10(int(*tab)[10], int direction, int posX, int posY) {
 		bool trouve = false;
 		while (tab[posX - 1][posY] != 1) {
 			if (tab[posX][posY] != 2) {
-				tab[posX][posY] = 4;
+				if (tab[posX][posY] != 2) {
+					if (sud == true) {
+						tab[posX][posY] = 2;
+						sud = false;
+					}
+					else if (est == true) {
+						tab[posX][posY] = 2;
+						est = false;
+					}
+					else if (ouest == true) {
+						tab[posX][posY] = 2;
+						ouest = false;
+					}
+					else if (nord == true) {
+						tab[posX][posY] = 2;
+						nord = false;
+					}
+					else { tab[posX][posY] = 4; }
+				}
 			}
 			posX = posX - 1;
 			if (tab[posX][posY] == 2) {
@@ -768,6 +951,10 @@ void dep10(int(*tab)[10], int direction, int posX, int posY) {
 			}
 			if (tab[posX][posY] != 2) {
 				tab[posX][posY] = 3;
+			}
+			else if (tab[posX][posY] == 2 && tab[posX + 1][posY] == 1) {
+				tab[posX][posY] = 3;
+				nord = true;
 			}
 			else {
 				tab[posX - 1][posY] = 3;
@@ -905,7 +1092,7 @@ void solv10(int(*tab)[10], unsigned longueur, unsigned largeur) {
 		}
 		compt++;
 		tour++;
-	} while ((compteur2 < compteur0) && (tour < 100000));
+	} while ((compteur2 <= compteur0) && (tour < 100000));
 	if (compteur2 >= compteur0) {
 		printf("%d", 1);
 		printf(" %d", compt);
@@ -929,23 +1116,47 @@ void affichertab11(int(*tab)[11], unsigned hauteur, unsigned largeur)
 void dep11(int(*tab)[11], int direction, int posX, int posY) {
 	if (direction == 1) { // SUD
 		while (tab[posX + 1][posY] != 1) {
+			bool trouve = false;
 			if (tab[posX][posY] != 2) {
-				tab[posX][posY] = 4;
+				if (tab[posX][posY] != 2) {
+					if (sud == true) {
+						tab[posX][posY] = 2;
+						sud = false;
+					}
+					else if (est == true) {
+						tab[posX][posY] = 2;
+						est = false;
+					}
+					else if (ouest == true) {
+						tab[posX][posY] = 2;
+						ouest = false;
+					}
+					else if (nord == true) {
+						tab[posX][posY] = 2;
+						nord = false;
+					}
+					else { tab[posX][posY] = 4; }
+				}
 			}
 			posX = posX + 1;
 			if (tab[posX][posY] == 2) {
 				for (unsigned i = 0; i < 11; i++) {
 					for (unsigned j = 0; j < 11; j++) {
-						if (tab[i][j] == 2 && i != posX && j != posY) {
+						if (tab[i][j] == 2 && i != posX && j != posY && trouve == false) {
 							posX = i;
 							posY = j;
 							tab[posX][posY] = 2;
+							trouve = true;
 						}
 					}
 				}
 			}
 			if (tab[posX][posY] != 2) {
 				tab[posX][posY] = 3;
+			}
+			else if (tab[posX][posY] == 2 && tab[posX + 1][posY] == 1) {
+				tab[posX][posY] = 3;
+				sud = true;
 			}
 			else {
 				tab[posX + 1][posY] = 3;
@@ -954,23 +1165,47 @@ void dep11(int(*tab)[11], int direction, int posX, int posY) {
 	}
 	if (direction == 2) { // EST
 		while (tab[posX][posY + 1] != 1) {
+			bool trouve = false;
 			if (tab[posX][posY] != 2) {
-				tab[posX][posY] = 4;
+				if (tab[posX][posY] != 2) {
+					if (sud == true) {
+						tab[posX][posY] = 2;
+						sud = false;
+					}
+					else if (est == true) {
+						tab[posX][posY] = 2;
+						est = false;
+					}
+					else if (ouest == true) {
+						tab[posX][posY] = 2;
+						ouest = false;
+					}
+					else if (nord == true) {
+						tab[posX][posY] = 2;
+						nord = false;
+					}
+					else { tab[posX][posY] = 4; }
+				}
 			}
 			posY = posY + 1;
 			if (tab[posX][posY] == 2) {
 				for (unsigned i = 0; i < 11; i++) {
 					for (unsigned j = 0; j < 11; j++) {
-						if (tab[i][j] == 2 && i != posX && j != posY) {
+						if (tab[i][j] == 2 && i != posX && j != posY && trouve == false) {
 							posX = i;
 							posY = j;
 							tab[posX][posY] = 2;
+							trouve = true;
 						}
 					}
 				}
 			}
 			if (tab[posX][posY] != 2) {
 				tab[posX][posY] = 3;
+			}
+			else if (tab[posX][posY] == 2 && tab[posX + 1][posY] == 1) {
+				tab[posX][posY] = 3;
+				est = true;
 			}
 			else {
 				tab[posX][posY + 1] = 3;
@@ -981,7 +1216,25 @@ void dep11(int(*tab)[11], int direction, int posX, int posY) {
 		while (tab[posX][posY - 1] != 1) {
 			bool trouve = false;
 			if (tab[posX][posY] != 2) {
-				tab[posX][posY] = 4;
+				if (tab[posX][posY] != 2) {
+					if (sud == true) {
+						tab[posX][posY] = 2;
+						sud = false;
+					}
+					else if (est == true) {
+						tab[posX][posY] = 2;
+						est = false;
+					}
+					else if (ouest == true) {
+						tab[posX][posY] = 2;
+						ouest = false;
+					}
+					else if (nord == true) {
+						tab[posX][posY] = 2;
+						nord = false;
+					}
+					else { tab[posX][posY] = 4; }
+				}
 			}
 			posY = posY - 1;
 			if (tab[posX][posY] == 2) {
@@ -999,6 +1252,10 @@ void dep11(int(*tab)[11], int direction, int posX, int posY) {
 			if (tab[posX][posY] != 2) {
 				tab[posX][posY] = 3;
 			}
+			else if (tab[posX][posY] == 2 && tab[posX + 1][posY] == 1) {
+				tab[posX][posY] = 3;
+				ouest = true;
+			}
 			else {
 				tab[posX][posY - 1] = 3;
 			}
@@ -1008,7 +1265,25 @@ void dep11(int(*tab)[11], int direction, int posX, int posY) {
 		bool trouve = false;
 		while (tab[posX - 1][posY] != 1) {
 			if (tab[posX][posY] != 2) {
-				tab[posX][posY] = 4;
+				if (tab[posX][posY] != 2) {
+					if (sud == true) {
+						tab[posX][posY] = 2;
+						sud = false;
+					}
+					else if (est == true) {
+						tab[posX][posY] = 2;
+						est = false;
+					}
+					else if (ouest == true) {
+						tab[posX][posY] = 2;
+						ouest = false;
+					}
+					else if (nord == true) {
+						tab[posX][posY] = 2;
+						nord = false;
+					}
+					else { tab[posX][posY] = 4; }
+				}
 			}
 			posX = posX - 1;
 			if (tab[posX][posY] == 2) {
@@ -1025,6 +1300,10 @@ void dep11(int(*tab)[11], int direction, int posX, int posY) {
 			}
 			if (tab[posX][posY] != 2) {
 				tab[posX][posY] = 3;
+			}
+			else if (tab[posX][posY] == 2 && tab[posX + 1][posY] == 1) {
+				tab[posX][posY] = 3;
+				nord = true;
 			}
 			else {
 				tab[posX - 1][posY] = 3;
@@ -1162,7 +1441,7 @@ void solv11(int(*tab)[11], unsigned longueur, unsigned largeur) {
 		}
 		compt++;
 		tour++;
-	} while ((compteur2 < compteur0) && (tour < 100000));
+	} while ((compteur2 <= compteur0) && (tour < 100000));
 	if (compteur2 >= compteur0) {
 		printf("%d", 1);
 		printf(" %d", compt);
@@ -1187,23 +1466,47 @@ void affichertab12(int(*tab)[12], unsigned hauteur, unsigned largeur)
 void oper(int(*tab2)[12], int direction, int posX, int posY) {
 	if (direction == 1) { // SUD
 		while (tab2[posX + 1][posY] != 1) {
+			bool trouve = false;
 			if (tab2[posX][posY] != 2) {
-				tab2[posX][posY] = 4;
+				if (tab2[posX][posY] != 2) {
+					if (sud == true) {
+						tab2[posX][posY] = 2;
+						sud = false;
+					}
+					else if (est == true) {
+						tab2[posX][posY] = 2;
+						est = false;
+					}
+					else if (ouest == true) {
+						tab2[posX][posY] = 2;
+						ouest = false;
+					}
+					else if (nord == true) {
+						tab2[posX][posY] = 2;
+						nord = false;
+					}
+					else { tab2[posX][posY] = 4; }
+				}
 			}
 			posX = posX + 1;
 			if (tab2[posX][posY] == 2) {
 				for (unsigned i = 0; i < 12; i++) {
 					for (unsigned j = 0; j < 12; j++) {
-						if (tab2[i][j] == 2 && i != posX && j != posY) {
+						if (tab2[i][j] == 2 && i != posX && j != posY && trouve == false) {
 							posX = i;
 							posY = j;
 							tab2[posX][posY] = 2;
+							trouve = true;
 						}
 					}
 				}
 			}
 			if (tab2[posX][posY] != 2) {
 				tab2[posX][posY] = 3;
+			}
+			else if (tab2[posX][posY] == 2 && tab2[posX + 1][posY] == 1) {
+				tab2[posX][posY] = 3;
+				sud = true;
 			}
 			else {
 				tab2[posX + 1][posY] = 3;
@@ -1212,23 +1515,47 @@ void oper(int(*tab2)[12], int direction, int posX, int posY) {
 	}
 	if (direction == 2) { // EST
 		while (tab2[posX][posY + 1] != 1) {
+			bool trouve = false;
 			if (tab2[posX][posY] != 2) {
-				tab2[posX][posY] = 4;
+				if (tab2[posX][posY] != 2) {
+					if (sud == true) {
+						tab2[posX][posY] = 2;
+						sud = false;
+					}
+					else if (est == true) {
+						tab2[posX][posY] = 2;
+						est = false;
+					}
+					else if (ouest == true) {
+						tab2[posX][posY] = 2;
+						ouest = false;
+					}
+					else if (nord == true) {
+						tab2[posX][posY] = 2;
+						nord = false;
+					}
+					else { tab2[posX][posY] = 4; }
+				}
 			}
 			posY = posY + 1;
 			if (tab2[posX][posY] == 2) {
 				for (unsigned i = 0; i < 12; i++) {
 					for (unsigned j = 0; j < 12; j++) {
-						if (tab2[i][j] == 2 && i != posX && j != posY) {
+						if (tab2[i][j] == 2 && i != posX && j != posY && trouve == false) {
 							posX = i;
 							posY = j;
 							tab2[posX][posY] = 2;
+							trouve = true;
 						}
 					}
 				}
 			}
 			if (tab2[posX][posY] != 2) {
 				tab2[posX][posY] = 3;
+			}
+			else if (tab2[posX][posY] == 2 && tab2[posX + 1][posY] == 1) {
+				tab2[posX][posY] = 3;
+				est = true;
 			}
 			else {
 				tab2[posX][posY + 1] = 3;
@@ -1239,7 +1566,25 @@ void oper(int(*tab2)[12], int direction, int posX, int posY) {
 		while (tab2[posX][posY - 1] != 1) {
 			bool trouve = false;
 			if (tab2[posX][posY] != 2) {
-				tab2[posX][posY] = 4;
+				if (tab2[posX][posY] != 2) {
+					if (sud == true) {
+						tab2[posX][posY] = 2;
+						sud = false;
+					}
+					else if (est == true) {
+						tab2[posX][posY] = 2;
+						est = false;
+					}
+					else if (ouest == true) {
+						tab2[posX][posY] = 2;
+						ouest = false;
+					}
+					else if (nord == true) {
+						tab2[posX][posY] = 2;
+						nord = false;
+					}
+					else { tab2[posX][posY] = 4; }
+				}
 			}
 			posY = posY - 1;
 			if (tab2[posX][posY] == 2) {
@@ -1257,6 +1602,10 @@ void oper(int(*tab2)[12], int direction, int posX, int posY) {
 			if (tab2[posX][posY] != 2) {
 				tab2[posX][posY] = 3;
 			}
+			else if (tab2[posX][posY] == 2 && tab2[posX + 1][posY] == 1) {
+				tab2[posX][posY] = 3;
+				ouest = true;
+			}
 			else {
 				tab2[posX][posY - 1] = 3;
 			}
@@ -1266,7 +1615,25 @@ void oper(int(*tab2)[12], int direction, int posX, int posY) {
 		bool trouve = false;
 		while (tab2[posX - 1][posY] != 1) {
 			if (tab2[posX][posY] != 2) {
-				tab2[posX][posY] = 4;
+				if (tab2[posX][posY] != 2) {
+					if (sud == true) {
+						tab2[posX][posY] = 2;
+						sud = false;
+					}
+					else if (est == true) {
+						tab2[posX][posY] = 2;
+						est = false;
+					}
+					else if (ouest == true) {
+						tab2[posX][posY] = 2;
+						ouest = false;
+					}
+					else if (nord == true) {
+						tab2[posX][posY] = 2;
+						nord = false;
+					}
+					else { tab2[posX][posY] = 4; }
+				}
 			}
 			posX = posX - 1;
 			if (tab2[posX][posY] == 2) {
@@ -1283,6 +1650,10 @@ void oper(int(*tab2)[12], int direction, int posX, int posY) {
 			}
 			if (tab2[posX][posY] != 2) {
 				tab2[posX][posY] = 3;
+			}
+			else if (tab2[posX][posY] == 2 && tab2[posX + 1][posY] == 1) {
+				tab2[posX][posY] = 3;
+				nord = true;
 			}
 			else {
 				tab2[posX - 1][posY] = 3;
@@ -1405,8 +1776,8 @@ void av12(int(*tab)[12], unsigned longueur, unsigned largeur) {
 			}
 		}
 		direction = dir12(tab, tab[posX - 1][posY], tab[posX][posY + 1], tab[posX + 1][posY], tab[posX][posY - 1]);
-		/*oper(tab, direction, posX, posY);
-		affichertab12(tab, 12, 12);
+		oper(tab, direction, posX, posY);
+		/*affichertab12(tab, 12, 12);
 		printf("%d", direction);
 		printf("\n");
 		*/
@@ -1420,7 +1791,7 @@ void av12(int(*tab)[12], unsigned longueur, unsigned largeur) {
 		}
 		compt++;
 		tour++;
-	} while ((compteur2 < compteur0) && (tour < 10000000));
+	} while ((compteur2 <= compteur0) && (tour < 10000000));
 	if (compteur2 >= compteur0) {
 		printf("%d", 1);
 		printf(" %d", compt);
@@ -1445,23 +1816,47 @@ void affichertab13(int(*tab)[13], unsigned hauteur, unsigned largeur)
 void dep13(int(*tab)[13], int direction, int posX, int posY) {
 	if (direction == 1) { // SUD
 		while (tab[posX + 1][posY] != 1) {
+			bool trouve = false;
 			if (tab[posX][posY] != 2) {
-				tab[posX][posY] = 4;
+				if (tab[posX][posY] != 2) {
+					if (sud == true) {
+						tab[posX][posY] = 2;
+						sud = false;
+					}
+					else if (est == true) {
+						tab[posX][posY] = 2;
+						est = false;
+					}
+					else if (ouest == true) {
+						tab[posX][posY] = 2;
+						ouest = false;
+					}
+					else if (nord == true) {
+						tab[posX][posY] = 2;
+						nord = false;
+					}
+					else { tab[posX][posY] = 4; }
+				}
 			}
 			posX = posX + 1;
 			if (tab[posX][posY] == 2) {
 				for (unsigned i = 0; i < 13; i++) {
 					for (unsigned j = 0; j < 13; j++) {
-						if (tab[i][j] == 2 && i != posX && j != posY) {
+						if (tab[i][j] == 2 && i != posX && j != posY && trouve == false) {
 							posX = i;
 							posY = j;
 							tab[posX][posY] = 2;
+							trouve = true;
 						}
 					}
 				}
 			}
 			if (tab[posX][posY] != 2) {
 				tab[posX][posY] = 3;
+			}
+			else if (tab[posX][posY] == 2 && tab[posX + 1][posY] == 1) {
+				tab[posX][posY] = 3;
+				sud = true;
 			}
 			else {
 				tab[posX + 1][posY] = 3;
@@ -1470,23 +1865,50 @@ void dep13(int(*tab)[13], int direction, int posX, int posY) {
 	}
 	if (direction == 2) { // EST
 		while (tab[posX][posY + 1] != 1) {
+			bool trouve = false;
 			if (tab[posX][posY] != 2) {
-				tab[posX][posY] = 4;
+				if (tab[posX][posY] != 2) {
+					if (sud == true) {
+						tab[posX][posY] = 2;
+						sud = false;
+					}
+					else if (est == true) {
+						tab[posX][posY] = 2;
+						est = false;
+					}
+					else if (ouest == true) {
+						tab[posX][posY] = 2;
+						ouest = false;
+					}
+					else if (nord == true) {
+						tab[posX][posY] = 2;
+						nord = false;
+					}
+					else { tab[posX][posY] = 4; }
+				}
 			}
 			posY = posY + 1;
 			if (tab[posX][posY] == 2) {
 				for (unsigned i = 0; i < 13; i++) {
 					for (unsigned j = 0; j < 13; j++) {
-						if (tab[i][j] == 2 && i != posX && j != posY) {
-							posX = i;
-							posY = j;
-							tab[posX][posY] = 2;
+						if (tab[i][j] == 2) {
+							if (i != posX && j != posY && trouve == false) {
+								posX = i;
+								posY = j;
+								tab[posX][posY] = 2;
+								trouve = true;
+								printf("%d et %d", posX, posY);
+							}
 						}
 					}
 				}
 			}
 			if (tab[posX][posY] != 2) {
 				tab[posX][posY] = 3;
+			}
+			else if (tab[posX][posY] == 2 && tab[posX + 1][posY] == 1) {
+				tab[posX][posY] = 3;
+				est = true;
 			}
 			else {
 				tab[posX][posY + 1] = 3;
@@ -1497,7 +1919,25 @@ void dep13(int(*tab)[13], int direction, int posX, int posY) {
 		while (tab[posX][posY - 1] != 1) {
 			bool trouve = false;
 			if (tab[posX][posY] != 2) {
-				tab[posX][posY] = 4;
+				if (tab[posX][posY] != 2) {
+					if (sud == true) {
+						tab[posX][posY] = 2;
+						sud = false;
+					}
+					else if (est == true) {
+						tab[posX][posY] = 2;
+						est = false;
+					}
+					else if (ouest == true) {
+						tab[posX][posY] = 2;
+						ouest = false;
+					}
+					else if (nord == true) {
+						tab[posX][posY] = 2;
+						nord = false;
+					}
+					else { tab[posX][posY] = 4; }
+				}
 			}
 			posY = posY - 1;
 			if (tab[posX][posY] == 2) {
@@ -1515,6 +1955,10 @@ void dep13(int(*tab)[13], int direction, int posX, int posY) {
 			if (tab[posX][posY] != 2) {
 				tab[posX][posY] = 3;
 			}
+			else if (tab[posX][posY] == 2 && tab[posX + 1][posY] == 1) {
+				tab[posX][posY] = 3;
+				ouest = true;
+			}
 			else {
 				tab[posX][posY - 1] = 3;
 			}
@@ -1524,7 +1968,25 @@ void dep13(int(*tab)[13], int direction, int posX, int posY) {
 		bool trouve = false;
 		while (tab[posX - 1][posY] != 1) {
 			if (tab[posX][posY] != 2) {
-				tab[posX][posY] = 4;
+				if (tab[posX][posY] != 2) {
+					if (sud == true) {
+						tab[posX][posY] = 2;
+						sud = false;
+					}
+					else if (est == true) {
+						tab[posX][posY] = 2;
+						est = false;
+					}
+					else if (ouest == true) {
+						tab[posX][posY] = 2;
+						ouest = false;
+					}
+					else if (nord == true) {
+						tab[posX][posY] = 2;
+						nord = false;
+					}
+					else { tab[posX][posY] = 4; }
+				}
 			}
 			posX = posX - 1;
 			if (tab[posX][posY] == 2) {
@@ -1541,6 +2003,10 @@ void dep13(int(*tab)[13], int direction, int posX, int posY) {
 			}
 			if (tab[posX][posY] != 2) {
 				tab[posX][posY] = 3;
+			}
+			else if (tab[posX][posY] == 2 && tab[posX + 1][posY] == 1) {
+				tab[posX][posY] = 3;
+				nord = true;
 			}
 			else {
 				tab[posX - 1][posY] = 3;
@@ -1664,10 +2130,9 @@ void solv13(int(*tab)[13], unsigned longueur, unsigned largeur) {
 		}
 		direction = Ladirection13(tab, tab[posX - 1][posY], tab[posX][posY + 1], tab[posX + 1][posY], tab[posX][posY - 1]);
 		dep13(tab, direction, posX, posY);
-		/*affichertab(tab, 8, 8);
+		/*affichertab13(tab, 13, 13);
 		printf("%d", direction);
-		printf("\n");
-		*/
+		printf("\n");*/
 		compteur2 = 0;
 		for (unsigned i = 0; i < longueur; i++) {
 			for (unsigned j = 0; j < largeur; j++) {
@@ -1678,7 +2143,7 @@ void solv13(int(*tab)[13], unsigned longueur, unsigned largeur) {
 		}
 		compt++;
 		tour++;
-	} while ((compteur2 < compteur0) && (tour < 100000));
+	} while ((compteur2 <= compteur0) && (tour < 100000));
 	if (compteur2 >= compteur0) {
 		printf("%d", 1);
 		printf(" %d", compt);
