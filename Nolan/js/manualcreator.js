@@ -152,7 +152,7 @@ function verifCreator (e){
     var result = file[0]
     var count = file[1]
 
-    if (result==0){
+    if (result==1){
         valid1= true;
     }
     else{
