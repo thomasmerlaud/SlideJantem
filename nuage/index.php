@@ -23,7 +23,7 @@
         z-index: 0;
     }
 
-    .cloud-0 {
+    /* .cloud-0 {
         position: absolute;
         z-index: 19;
         width: 100%;
@@ -59,7 +59,7 @@
         position: absolute;
         z-index: 22;
         top: 64%;
-        /* left: -250%; */
+        /* left: -250%; 
         animation: cloudleft 3s 1;
     }
     .cloud-4 {
@@ -69,7 +69,7 @@
         position: absolute;
         z-index: 23;
         top: 40%;
-        /* right: -250%; */
+        /* right: -250%; 
         animation: cloudright2 3s 1;
     }
     .cloud-5 {
@@ -89,7 +89,7 @@
         position: absolute;
         z-index: 25;
         top: 10%;
-        /* left: -250%; */
+        /* left: -250%; 
         animation: cloudleft2 3s 1;
     }
     .cloud-7 {
@@ -148,7 +148,7 @@
         100% {
             opacity: 0;
         }
-    }
+    } */
     </style>
     <script src="script.js"></script>
 </head>

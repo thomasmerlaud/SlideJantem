@@ -37,7 +37,8 @@
     </div>
 
     <div id="finish" class="">
-      <img class="img" src="img/sprite-22-1.png" alt="LevelComplete">
+      <!-- <img class="img" src="img/sprite-22-1.png" alt="LevelComplete"> -->
+      <div class="lvl">Level Completed !</div>
       <div class="menu home" onClick="menu();">Home</div>
       <div class="menu next" onClick="nextlevel();">Next</div>
     </div>
