@@ -22,6 +22,7 @@ let tp = 0
 var nbtp = 0;
 var dim = 0;
 var coups = 0;
+var nbcase = 0;
 
 //fonction pour récup les données dans le map.txt
 var request = new XMLHttpRequest();
@@ -63,7 +64,7 @@ for (var i = 0; i < map.length; i++)
 previousmaze = [];
 for (var i = 0; i < map.length; i++)
    previousmaze[i] = map[i].slice();
-console.log(maze)
+// console.log(maze)
 
 
 // modif css pour la taille du jeu
@@ -131,7 +132,15 @@ function reset() {
    player[0] = resetplayer[0];
    player[1] = resetplayer[1];
    coups = 0;
+   pourcent = 0;
    return renderMaze();
+}
+function menu() {
+   window.location.href="index.html"; 
+}
+function nextlevel() {
+   next = parseInt(nbmap) + 1;
+   window.location.href="index.php?map="+(next)+""; 
 }
 
 
@@ -168,10 +177,10 @@ function renderMaze() {
             // case EXIT_READY:
             //    itemClass = 'end'; break
             default:
-               itemClass = 'empty'
-               remainder += 1
-
+               itemClass = 'empty';
+               remainder += 1;
          }
+
          const id = `#id-${col}-${row}`
          obj = document.getElementById("id-" + col + "-" + row + "")
          // console.log(obj)
@@ -180,20 +189,40 @@ function renderMaze() {
          if (itemClass != "player") {
             document.querySelector(id).className = `block ${itemClass}`
          }
-
       }
    }
    // console.log(remainder)
 
+   if(nbcase === 0){
+      nbcase = remainder;
+   }
+
+   pourcent = 100 - parseInt(remainder*100 / nbcase)
+   console.log(pourcent)
+   document.querySelector('.bar').style.height = pourcent+'%';
+   document.querySelector('.bar').textContent = "";
+   if (pourcent != 0){
+      document.querySelector('.bar').textContent = pourcent+'%';
+   }
+   
+
+
    const id = `#id-${player[1]}-${player[0]}`
    if (remainder > 0) {
       document.querySelector(id).className = 'player'
-      document.querySelector('.score').textContent = coups + ` move(s). Remaining ` + remainder + ' cell(s) !'
+      // document.querySelector('.score').textContent = coups + ` move(s). Remaining ` + remainder + ' cell(s) !'
+      document.querySelector('.score').textContent = coups;
       document.querySelector('.info').textContent = 'Passez sur toutes les cases !'
    } else {
       // Fin du jeu
-      document.querySelector('.score').textContent = `Well done ! Finish in ` + coups + ' moves !'
+      // document.querySelector('.score').textContent = `Well done ! Finish in ` + coups + ' moves !'
+      document.querySelector('.score').textContent = coups;
       document.querySelector('.info').textContent = "Bravo ! Niveau suivant"
+
+
+      obj = document.getElementById("finish");
+      obj.classList.add("overlay");
+      obj.style.visibility = "visible";
    }
 
 
@@ -218,6 +247,7 @@ function renderMaze() {
    // }
    ready = 1;
 }
+
 
 window.onkeydown = (event) => {
    switch (event.keyCode) {
@@ -287,6 +317,7 @@ function changePlayerPos(oldX, oldY, x, y, direction) {
    if (x >= 0 && x < COLS && y >= 0 && y < ROWS && maze[y][x] !== WALL && maze[y][x] !== TELEPORT) {
       changePlayerPos(oldX, oldY, x, y, direction);
    }
+
    else {
       if (x >= 0 && x < COLS && y >= 0 && y < ROWS && maze[y][x] === TELEPORT) {
          switch (direction) {

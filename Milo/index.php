@@ -17,10 +17,11 @@
         }
       }
     ?>
-    <div class="button">  
-        <div class="push_button restart" onClick="reset();"> Restart </div>
-        <div class="push_button cancel" onClick="lastplay();"> Cancel</div>
-    </div>
+    <!-- <div class="button">   -->
+    <div class="push_button restart" onClick="reset();"> Restart </div>
+    <div class="push_button cancel" onClick="lastplay();"> Cancel</div>
+    <!-- </div> -->
+    <div class="move">Move</div>
     <div class="score"></div>
     <div class="frame">
       <div class="header">
@@ -30,7 +31,17 @@
       <div class="footer">
           <div class="info"></div>
       </div>
-  </div>
+    </div>
+    <div class="loadbar">
+        <strong class="bar" style='height:0%;'></strong>
+    </div>
+
+    <div id="finish" class="">
+      <img class="img" src="img/sprite-22-1.png" alt="LevelComplete">
+      <div class="menu home" onClick="menu();">Home</div>
+      <div class="menu next" onClick="nextlevel();">Next</div>
+    </div>
+
   <!-- <div class="help">https://codepen.io/ludmila-tretyakova/pen/yrNPMQ</div> -->
 </body>
 </html>
