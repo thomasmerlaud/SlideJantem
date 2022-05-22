@@ -254,7 +254,112 @@ function numberToCREATION(){
         return tabN;
 		
 }
+function randomtab2(e){
+    
+        initCreator();
 
+        var nbvides = 0;
+		
+        var tabN = Array(dim);
+
+        for (let x = 0; x < ligne; x++){
+            tabN[x] = Array(dim);
+        }
+
+        for (let i = 0; i < ligne; i++){
+
+            for (let j = 0; j < colonne; j++){
+                tabN[i][j] = 1;
+            }
+        }
+        //Math.floor(Math.random() * (max - min + 1)) + min;
+        var i = Math.floor( Math.random() * (dim-2)) + 1;
+        var j = Math.floor( Math.random() * (dim-2)) + 1;
+
+        console.log(i,j);
+        tabN[i][j] = 3;
+        setJeu(j,i,3);
+        tableaucrea[i][j].className = 'perso1';
+        console.log(tabN);
+
+        while (nbvides != dim*6){
+            
+            var direction = Math.floor ( Math.random() * 4 );
+            // 0 = Nord , 1 = Ouest , 2 = Sud , 3 = Est
+            var enregistrement = 4;
+            if (direction==0){
+                if (enregistrement!=2 && i-1!=0){
+                    i--;
+                    enregistrement = 0;
+                    nbvides++;
+                }
+            }
+            if (direction==1){
+                if (enregistrement!=3 && j-1!=0){
+                    j--;
+                    enregistrement = 1;
+                    nbvides++;
+                }
+            }
+            if (direction==2){
+                if (enregistrement!=0 && i+1!=ligne-1){
+                    i++;
+                    enregistrement = 2;
+                    nbvides++;
+                }
+            }
+            if (direction==3 ){
+                if (enregistrement!=1 && j+1!=colonne-1){
+                    j++;
+                    enregistrement = 3;
+                    nbvides++;
+                }
+            }
+            tabN[i][j] = 0;
+            setJeu(j,i,0);
+            tableaucrea[i][j].className = '';
+            //console.log(tabN);
+        }
+		var perso = 0;
+        var randomperso= Math.floor ( Math.random() * 10 );
+        var compteur = 0;
+        for (let i = 0; i < ligne; i++){
+            for (let j = 0; j < colonne; j++){
+
+                if ((tabN[i][j] == 0)&&(tabN[i-1][j-1] == 0)&&(tabN[i][j-1] == 0)
+                &&(tabN[i+1][j-1] == 0)&&(tabN[i-1][j] == 0)&&(tabN[i+1][j] == 0)
+                &&(tabN[i+1][j] == 0)&&(tabN[i-1][j+1] == 0)&&(tabN[i][j+1] == 0)){
+
+                    tabN[i][j] = 1;
+                    setJeu(j,i,1);
+                    tableaucrea[i][j].className = 'block';
+                    tabN[i][j+1] = 1;
+                    setJeu(j+1,i,1);
+                    tableaucrea[i][j+1].className = 'block';
+                }
+                if(tabN[i][j] == 0){
+                    if((i==0)||(j==0)||(j==colonne-1)||(i==ligne-1)){
+                        tableaucrea[i][j].className = 'block';
+                        tabN[i][j] = 1;
+                    }
+                    else{
+                        if((perso ==0)&&(randomperso== compteur)){
+                            tableaucrea[i][j].className = 'perso1';
+                            tabN[i][j] = 3;
+                            perso++;
+                        }
+                        compteur++;
+
+                    }
+                }
+                else{
+                    tableaucrea[i][j].className = 'block';
+                    tabN[i][j] = 1;
+                }
+            }
+        }
+        return tabN;
+}
 //Convertie la grille de décors en numéro
 //Fonction Fini
 function randomtab(e){
@@ -438,31 +543,32 @@ function Save(){
 function auto(e){
 	console.log('Fonction auto faite');
 	 
-	var request = new XMLHttpRequest();
-    request.open("GET", "php/auto.php?dim="+dim+"&nbFichiers="+nbFichiers, false);
-    request.send(null)
+	 var request = new XMLHttpRequest();
+        
+     request.open("GET", "php/auto.php?dim="+dim+"&nbFichiers="+nbFichiers, false);
+     request.send(null)
 
-    var request = new XMLHttpRequest();
-    request.open("GET", "php/verif.php", false);
+     var request = new XMLHttpRequest();
+     request.open("GET", "php/verif.php", false);
     request.send(null)
-    var file = request.responseText
+     var file = request.responseText
 
-    file = file.split(" ")
+     file = file.split(" ")
     var result = file[0]
-    var count = file[1]
+     var count = file[1]
 
-    if (result==0){
+     if (result==0){
         
-        console.log("WTF");
-        auto();
+         console.log("WTF");
+    auto();
         
-    }
-    else{
-        console.log("what ca marche???");
-        numberToCREATION();
-    }
+     }
+     else{
+         console.log("what ca marche???");
+         numberToCREATION();
+     }
     
-	//randomtab();
+	//randomtab2();
 }
 
 //JEu
