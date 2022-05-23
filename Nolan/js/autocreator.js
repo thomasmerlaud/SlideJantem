@@ -254,7 +254,7 @@ function numberToCREATION(){
         return tabN;
 		
 }
-function randomtab2(e){
+function randomtab(e){
     
         initCreator();
 
@@ -380,109 +380,6 @@ function randomtab2(e){
             
         return tabN;
 }
-//Convertie la grille de décors en numéro
-//Fonction Fini
-function randomtab(e){
-		
-		var perso = 0;
-		var teleporter = 0;
-		var ecartteleporter = 0;
-		
-        var tabN = Array(dim);
-
-        for (let i = 0; i < ligne; i++){
-
-            tabN[i] = Array(dim);
-
-            for (let j = 0; j < colonne; j++){
-				
-				if ((i==0)||(j==0)||(i==ligne-1)||(j==colonne-1)){
-					
-					tabN[i][j] = 1;
-					setJeu(j,i,1);
-					tableaucrea[i][j].className = 'block';
-					
-				}
-				else{
-                
-				var randomnumber = Math.floor ( Math.random() * 7 )
-				
-			
-				if (randomnumber==1){
-                    tabN[i][j] = 1;
-					setJeu(j,i,1);
-					tableaucrea[i][j].className = 'block';
-					ecartteleporter++;
-                }
-                else if ((randomnumber==2)&&(teleporter<2)&&((ecartteleporter>18)||teleporter==0)){
-                    tabN[i][j] = 2;
-					setJeu(j,i,2);
-					tableaucrea[i][j].className = 'teleporter';
-					teleporter++;
-					ecartteleporter++;
-                }
-                else if ((randomnumber==3)&&(perso==0)){
-                    tabN[i][j] = 3;
-					setJeu(j,i,3);
-					tableaucrea[i][j].className = 'perso1';
-					perso++;
-					ecartteleporter++;
-                }
-                else if (randomnumber==5){
-                    tabN[i][j] = 1;
-					setJeu(j,i,1);
-					tableaucrea[i][j].className = 'block';
-					ecartteleporter++;
-                }
-                else{
-					tabN[i][j] = 0;
-					setJeu(j,i,0);
-					tableaucrea[i][j].className = '';
-					ecartteleporter++;
-					}
-				}
-			}
-        }
-		
-		for (let i = 1; i < ligne-1; i++){
-			for (let j = 1; j < colonne-1; j++){
-				if ((tabN[i][j]==0)&&(tabN[i][j-1]==1)&&(tabN[i+1][j]==1)&&(tabN[i-1][j]==1)&&(tabN[i][j+1]==1)){
-					tabN[i][j] = 1;
-					setJeu(j,i,1);
-					tableaucrea[i][j].className = 'block';
-				}
-				if((tabN[i][j]==0)&&(tabN[i-1][j]==0)&&(tabN[i][j-1]==0)&&(tabN[i][j+1]==0)&&(tabN[i-1][j-1]==1)&&(tabN[i-1][j+1]==1)){
-					tabN[i][j] = 1;
-					setJeu(j,i,1);
-					tableaucrea[i][j].className = 'block';
-				}
-				if((tabN[i][j]==0)&&(tabN[i][j-1]==0)&&(tabN[i-1][j-1]==0)&&(tabN[i+1][j-1]==0)&&(tabN[i-1][j]==1)&&(tabN[i+1][j]==1)){
-					tabN[i][j] = 1;
-					setJeu(j,i,1);
-					tableaucrea[i][j].className = 'block';
-				}
-				if((tabN[i][j]==0)&&(tabN[i-1][j]==0)&&(tabN[i-1][j-1]==0)&&(tabN[i-1][j+1]==0)&&(tabN[i][j-1]==1)&&(tabN[i][j+1]==1)){
-					tabN[i][j] = 1;
-					setJeu(j,i,1);
-					tableaucrea[i][j].className = 'block';
-				}
-				if((tabN[i][j]==0)&&(tabN[i][j+1]==0)&&(tabN[i-1][j+1]==0)&&(tabN[i+1][j+1]==0)&&(tabN[i-1][j]==1)&&(tabN[i+1][j]==1)){
-					tabN[i][j] = 1;
-					setJeu(j,i,1);
-					tableaucrea[i][j].className = 'block';
-				}
-			}
-		}
-		
-		if((teleporter<2) || (perso == 0)){
-			console.log("wtf")
-			return randomtab();
-		}
-        return tabN;
-		
-}
-
-
 //Sert a reset
 //Fonction Fini//
 
@@ -600,7 +497,7 @@ function auto(e){
 
     console.log(perso,vide)
 
-    if (perso=0 || vide < dim*2|| tele != 2){
+    if (perso==0 || vide < dim*2|| tele != 2){
     
         console.log("WTF");
         auto();
@@ -612,9 +509,142 @@ function auto(e){
     }
 
     
-	//randomtab2();
+    //randomtab2();
 }
+function randomtab2(e){
+    
+    initCreator();
 
+    var nbvides = 0;
+    
+    var tabN = Array(dim);
+
+    for (let x = 0; x < ligne; x++){
+        tabN[x] = Array(dim);
+    }
+
+    for (let i = 0; i < ligne; i++){
+
+        for (let j = 0; j < colonne; j++){
+            tabN[i][j] = 1;
+        }
+    }
+    //Math.floor(Math.random() * (max - min + 1)) + min;
+    var i = Math.floor( Math.random() * (dim-2)) + 1;
+    var j = Math.floor( Math.random() * (dim-2)) + 1;
+
+    console.log(i,j);
+    tabN[i][j] = 3;
+    setJeu(j,i,3);
+    tableaucrea[i][j].className = 'perso1';
+    console.log(tabN);
+    
+    var nbtel = 0;
+    var addtel = Math.floor ( Math.random() * 4 );
+    while (nbvides != dim*6){
+        
+        var direction = Math.floor ( Math.random() * 4 );
+        // 0 = Nord , 1 = Ouest , 2 = Sud , 3 = Est
+        var enregistrement = 4;
+        if (direction==0){
+            if (enregistrement!=2 && i-1!=0){
+                i--;
+                enregistrement = 0;
+                nbvides++;
+            }
+        }
+        if (direction==1){
+            if (enregistrement!=3 && j-1!=0){
+                j--;
+                enregistrement = 1;
+                //nbvides++;
+            }
+        }
+        if (direction==2){
+            if (enregistrement!=0 && i+1!=ligne-1){
+                i++;
+                enregistrement = 2;
+                //nbvides++;
+            }
+        }
+        if (direction==3 ){
+            if (enregistrement!=1 && j+1!=colonne-1){
+                j++;
+                enregistrement = 3;
+                nbvides++;
+            }
+        }
+
+        if (addtel == 1){
+            addtel=0;
+            nbtel+=2;
+            tabN[i][j] = 2;
+            setJeu(j,i,2);
+            tableaucrea[i][j].className = 'teleporter';
+
+            do{
+                i = Math.floor( Math.random() * (dim-2)) + 1;
+                j = Math.floor( Math.random() * (dim-2)) + 1;
+            } while(tabN[i][j]==0 && tabN[i][j]==1)
+
+            tabN[i][j] = 2;
+            setJeu(j,i,2);
+            tableaucrea[i][j].className = 'teleporter';
+        }
+        else{
+            if (tabN[i][j] !=2 ){
+                tabN[i][j] = 0;
+                setJeu(j,i,0);
+                tableaucrea[i][j].className = '';
+            }
+        }
+    }
+    var perso = 0;
+    var randomperso= Math.floor ( Math.random() * 10 );
+    var compteur = 0;
+    for (let i = 0; i < ligne; i++){
+        for (let j = 0; j < colonne; j++){
+
+            if ((tabN[i][j] == 0)&&(tabN[i-1][j-1] == 0)&&(tabN[i][j-1] == 0)
+            &&(tabN[i+1][j-1] == 0)&&(tabN[i-1][j] == 0)&&(tabN[i+1][j] == 0)
+            &&(tabN[i+1][j] == 0)&&(tabN[i-1][j+1] == 0)&&(tabN[i][j+1] == 0)){
+
+                tabN[i][j] = 1;
+                setJeu(j,i,1);
+                tableaucrea[i][j].className = 'block';
+                tabN[i][j+1] = 1;
+                setJeu(j+1,i,1);
+                tableaucrea[i][j+1].className = 'block';
+            }
+
+            if(tabN[i][j] == 0){
+                if((i==0)||(j==0)||(j==colonne-1)||(i==ligne-1)){
+                    tableaucrea[i][j].className = 'block';
+                    tabN[i][j] = 1;
+                }
+                else{
+                    compteur++;
+                    var randomtel = Math.floor ( Math.random() *10);
+
+                    if((perso ==0)&&(randomperso== compteur)){
+                        tableaucrea[i][j].className = 'perso1';
+                        tabN[i][j] = 3;
+                        perso++;
+                    }
+                }
+            }
+            else{
+                if(tabN[i][j] != 2){
+                tableaucrea[i][j].className = 'block';
+                tabN[i][j] = 1;
+                }
+            }
+        }
+    }
+
+        
+    return tabN;
+}
 //JEu
 //Fonction fini
 function initJeu (e){
