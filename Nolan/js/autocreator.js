@@ -343,13 +343,14 @@ function randomtab2(e){
                         tabN[i][j] = 1;
                     }
                     else{
+                        compteur++;
+                        var randomtel = Math.floor ( Math.random() *10);
+
                         if((perso ==0)&&(randomperso== compteur)){
                             tableaucrea[i][j].className = 'perso1';
                             tabN[i][j] = 3;
                             perso++;
                         }
-                        compteur++;
-
                     }
                 }
                 else{
@@ -358,6 +359,25 @@ function randomtab2(e){
                 }
             }
         }
+        var tel = 0;
+        for (let i = 0; i < ligne; i++){
+            for (let j = 0; j < colonne; j++){
+
+                var randomtel = Math.floor ( Math.random() * nbvides/4 );
+                
+
+                if(tabN[i][j] == 0){
+
+                    if (randomtel == 1 && tel<2){
+                        tableaucrea[i][j].className = 'teleporter';
+                        tabN[i][j] = 2;
+                        tel++;
+                    }
+                }
+            }
+        }
+
+            
         return tabN;
 }
 //Convertie la grille de décors en numéro
@@ -541,23 +561,24 @@ function Save(){
     
 }
 function auto(e){
-	 console.log('Fonction auto faite');
+	console.log('Fonction auto faite');
 	 
-	  var request = new XMLHttpRequest();
-        
-      request.open("GET", "php/auto.php?dim="+dim+"&nbFichiers="+nbFichiers, false);
-      request.send(null)
-
-      var request = new XMLHttpRequest();
-      request.open("GET", "php/verif.php", false);
+    var request = new XMLHttpRequest();
+    
+    request.open("GET", "php/auto.php?dim="+dim+"&nbFichiers="+nbFichiers, false);
     request.send(null)
-      var file = request.responseText
 
-      file = file.split(" ")
-     var result = file[0]
+    var request = new XMLHttpRequest();
+    request.open("GET", "php/verifauto.php", false);
+    request.send(null)
+    var file = request.responseText
+
+    file = file.split(" ")
+    var result = file[0]
     var count = file[1]
 
     var perso = 0;
+    var tele = 0;
     var vide = 0;
 
     var tab = numberToCREATION();
@@ -571,20 +592,25 @@ function auto(e){
             if(tab[i][j] == 0){
                 vide++;
 			}
+            if(tab[i][j] == 2){
+                tele++;
+			}
         }
     }
 
     console.log(perso,vide)
-      if (perso=0 || vide < dim*2){
-        
+
+    if (perso=0 || vide < dim*2|| tele != 2){
+    
         console.log("WTF");
         auto();
-        
-      }
-      else{
-          console.log("what ca marche???");
-          numberToCREATION();
-      }
+
+    }
+    else{
+        console.log("what ca marche???");
+        numberToCREATION();
+    }
+
     
 	//randomtab2();
 }
