@@ -24,7 +24,7 @@
     <div id="continue">
     <img src="image/keys.gif" alt="">
     <a href="index.html" class="eightbit-btn eightbit-btn--reset">Play</a>
-</div>
+</div> 
 
     
 </body>
