@@ -5,8 +5,7 @@
     <meta charset="utf-8">
     <title>Accueil Slide Jantem</title>
     <link rel="stylesheet" href="styleAccueil.css">
-    <!-- <link rel="stylesheet" href="styleCloud.css"> -->
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
 </head>
 
 <div class="anim">
@@ -52,16 +51,34 @@
         </div>
 
 
+        <?php
+        session_start();
+        if(!isset($_SESSION["ID"])){
+            echo "<form id='login' class='login' method='post' action='play.php'>
+                    <input type='text' name='login' placeholder='Player Name'/>
+                </form>";
+        }
+        else{
+            require("../bdd/main.php");
+            $username = getUsername($_SESSION["ID"]);
+            echo "<div class='logged'>Hey $username !</div>";
+        }
 
-        <form class="login" method="" action="">
-            <input type="text" name="login" id="login" placeholder="Player Name" />
-        </form>
-
+        ?>
         <div class="button">
-            <a href="play.php" class="push_buttonP"> PLAY </a>
+            <a <?php 
+            if(!isset($_SESSION["ID"])){ 
+                echo "onClick='document.forms['login'].submit();'";
+            }
+            else{
+                echo "onclick=\"out('play.php')\"";
+            }?> 
+            class="push_buttonP"> PLAY </a>
+
+            
             <br>
-            <a href="records.php" class="push_buttonR"> RECORDS </a>
-            <a href="store.php" class="push_buttonS"> STORE </a>
+            <a class="push_buttonR" onclick="out('records.php')"> RECORDS </a>
+            <a class="push_buttonS" onclick="out('store.php')"> STORE </a>
         </div>
 
 

@@ -1,15 +1,17 @@
 // METTRE LE TEXTE A LA PLACE EN DESSOUS
 // QUAND YA UNE VIRGULE CA ATTEND QUELQUES SECONDES (2sec) je peux changer ca aussi
 var aText = new Array(
-    "Welcome to  Slide Jantem !" ,
-    "<br /> There are only 10 types of people in the world:",
-    "Those who understand binary, and those who don't"
+    "Are you ready to join the adventure ?",
+    "Let's start !",
+    "To move yourself and paint the map, use the arrow keys on your keyboard"
+  
+
 );
 
 
 
 
-var iSpeed = 90; // time delay of print out
+var iSpeed = 45; // time delay of print out
 var iIndex = 0; // start printing array at this posision
 var iArrLength = aText[0].length; // the length of the text array
 var iScrollAt = 20; // start scrolling up at this many lines
@@ -34,7 +36,7 @@ function typewriter() {
         iIndex++;
         if (iIndex != aText.length) {
             iArrLength = aText[iIndex].length;
-            setTimeout("typewriter()", 2000);
+            setTimeout("typewriter()", 1250);
         }
     } else {
         setTimeout("typewriter()", iSpeed);

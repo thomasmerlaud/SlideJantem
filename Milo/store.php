@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <title>Store</title>
     <link rel="stylesheet" href="styleStore.css">
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
 </head>
 
 <div class="content_title">
@@ -23,7 +23,7 @@
 <body class="backstore">
 
     <?php 
-        // include "nuage.php";
+        include "nuage.php";
         include "icone.php";
     ?>
     
@@ -117,5 +117,4 @@
     </div>
    
 </body>
-<script src="script.js"></script>
 </html>
