@@ -298,14 +298,14 @@ function randomtab2(e){
                 if (enregistrement!=3 && j-1!=0){
                     j--;
                     enregistrement = 1;
-                    nbvides++;
+                    //nbvides++;
                 }
             }
             if (direction==2){
                 if (enregistrement!=0 && i+1!=ligne-1){
                     i++;
                     enregistrement = 2;
-                    nbvides++;
+                    //nbvides++;
                 }
             }
             if (direction==3 ){
@@ -541,32 +541,50 @@ function Save(){
     
 }
 function auto(e){
-	console.log('Fonction auto faite');
+	 console.log('Fonction auto faite');
 	 
-	 var request = new XMLHttpRequest();
+	  var request = new XMLHttpRequest();
         
-     request.open("GET", "php/auto.php?dim="+dim+"&nbFichiers="+nbFichiers, false);
-     request.send(null)
+      request.open("GET", "php/auto.php?dim="+dim+"&nbFichiers="+nbFichiers, false);
+      request.send(null)
 
-     var request = new XMLHttpRequest();
-     request.open("GET", "php/verif.php", false);
+      var request = new XMLHttpRequest();
+      request.open("GET", "php/verif.php", false);
     request.send(null)
-     var file = request.responseText
+      var file = request.responseText
 
-     file = file.split(" ")
-    var result = file[0]
-     var count = file[1]
+      file = file.split(" ")
+     var result = file[0]
+    var count = file[1]
 
-     if (result==0){
+    var perso = 0;
+    var vide = 0;
+
+    var tab = numberToCREATION();
+    console.log(tab)
+
+    for (let i = 0; i < ligne; i++){
+        for (let j = 0; j < colonne; j++){
+			if(tab[i][j] == 3){
+                perso++;
+			}
+            if(tab[i][j] == 0){
+                vide++;
+			}
+        }
+    }
+
+    console.log(perso,vide)
+      if (perso=0 || vide < dim*2){
         
-         console.log("WTF");
-    auto();
+        console.log("WTF");
+        auto();
         
-     }
-     else{
-         console.log("what ca marche???");
-         numberToCREATION();
-     }
+      }
+      else{
+          console.log("what ca marche???");
+          numberToCREATION();
+      }
     
 	//randomtab2();
 }
