@@ -23,7 +23,7 @@
 
     <div id="continue">
     <img src="image/keys.gif" alt="">
-    <a href="accueil.php" class="eightbit-btn eightbit-btn--reset">Play</a>
+    <a href="index.html" class="eightbit-btn eightbit-btn--reset">Play</a>
 </div>
 
     
