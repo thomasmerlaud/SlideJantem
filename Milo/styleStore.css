@@ -8,7 +8,8 @@
   text-align: center;
   width:99%;
   height: 100%;
-  background-image: url('image/4.gif');
+  background: url('image/4.gif') no-repeat center center fixed;
+  background-size: cover;
 }
 
 
@@ -20,38 +21,34 @@
 .Bmaison{
   cursor: url('image/B2.ico'), pointer;
   display:inline-block;
-  background:url(image/maisonH.png); 
-  width : 50px;
-  height : 50px;
+  background-image:url(image/maisonH.png); 
+  background-size: 100% auto;
+  width : 10.2vh;
+  height : 10.4vh;
   margin-left : 80%;
-  margin-top : 5px;
-  position: relative;
+  margin-top : 0.85vh;
  }
 
-
 .content_title {
-  /* margin-top: 10px;; */
   width: 60%;
   height: 20%;
-  /* position: fixed; */
   background-color: #36495c73;
   position: absolute;
   top: 8%;
   left: 45%;
-  padding-top : 15px;
+  padding-top : 2.55vh;
   transform: translate(-50%, -50%);
-  height: 60px;
   overflow: hidden;
   font-family: 'Lato', sans-serif;
-  font-size: 35px;
-  line-height: 40px;
+  font-size: 5.95vh;
+  line-height: 6.8vh;
   color: #ecf0f1;
 }
 .content__container {
-  font-weight: 600;
+  font-weight: bold;
   overflow: hidden;
-  height: 40px;
-  padding: 0 40px;
+  height: 6.8vh;
+  padding: 0 6.8vh;
 }
 .content__container:before {
   left: 0;
@@ -63,8 +60,8 @@
   position: absolute;
   top: 0;
   color: #16a085;
-  font-size: 42px;
-  line-height: 40px;
+  font-size: 7.14vh;
+  line-height: 6.8vh;
   -webkit-animation-name: opacity;
   -webkit-animation-duration: 2s;
   -webkit-animation-iteration-count: infinite;
@@ -74,8 +71,8 @@
 }
 .content__container__text {
   display: inline;
-  margin-top: 0;
-  padding-left: 0px;
+  margin-top: 0vh;
+  padding-left: 0vh;
   text-align: left;
 }
 .content__container__list {
@@ -92,7 +89,7 @@
   animation-iteration-count: infinite;
 }
 .content__container__list__item {
-  line-height: 40px;
+  line-height: 6.8vh;
   margin: 0;
 }
 @-webkit-keyframes opacity {
@@ -210,27 +207,26 @@
 
 
 
-
 img {
-  width : 60px;
-  height : 60px;
+  width : 10.2vh;
+  height : 10.2vh;
 }
 
 img.peinture {
-  width : 50px;
-  height : 80px;
+  width : 8.5vh;
+  height : 13.6vh;
 }
 
 button{
   cursor: url('image/B2.ico'), pointer;
   color : white;
   font-family: 'Montserrat';
-  font-size: 15px;
-  margin : 10px 10px 10px 10px;
-  border-radius: 3px;
+  font-size: 2.55vh;
+  margin : 1.7vh 1.7vh 1.7vh 1.7vh;
+  border-radius: 0.51vh;
   border : none;
-  width : 100px;
-  height : 30px;
+  width : 17vh;
+  height : 5.1vh;
   pointer-events: auto;
 }
 
@@ -238,12 +234,12 @@ button{
   cursor: url('image/B2.ico'), pointer;
   color : white;
   font-family: 'Montserrat';
-  font-size: 15px;
-  margin : 0px 10px 0px 10px;
-  border-radius: 3px;
+  font-size: 2.55vh;
+  margin : 0vh 1.7vh 1.7vh 1.7vh;
+  border-radius: 0.51vh;
   border : none;
-  width : 100px;
-  height : 30px;
+  width : 17vh;
+  height : 5.1vh;
   pointer-events: auto;
 }
 
@@ -251,25 +247,25 @@ button{
   position:relative;
   display:inline-block;
   text-decoration:none;
-  border-radius:0px;
-  border:solid 1px #ffdc5c;
+  border-radius:0vhx;
+  border:solid 0.17vh #ffdc5c;
   background:#ffdc5c;
   text-align:center;
   -webkit-transition: all 0.1s;
   -moz-transition: all 0.1s;
   transition: all 0.1s;
-  -webkit-box-shadow: 0px 9px 0px #c18243;
-  -moz-box-shadow: 0px 9px 0px #c18243;
-  box-shadow: 5px 5px 0px #c18243;
-  margin: 5px;
+  -webkit-box-shadow: 0vh 1.53vh 0vh #c18243;
+  -moz-box-shadow: 0vh 1.53vh 0vh #c18243;
+  box-shadow: 0.85vh 0.85vh 0vh #c18243;
+  margin: 0.85vh;
 }
 
 .buttonB:active{
-  -webkit-box-shadow: 0px 2px 0px #c18243;
-  -moz-box-shadow: 0px 2px 0px #c18243;
-  box-shadow: 2px 2px 0px #c18243;
+  -webkit-box-shadow:0vh 1.53vh 0vh #c18243;
+  -moz-box-shadow:0vh 1.53vh 0vh #c18243;
+  box-shadow: 1.53vh 1.53vh 0vh #c18243;
   position:relative;
-  top:7px;
+  top:1vh;
   }
 
 
@@ -277,66 +273,68 @@ button{
     position:relative;
     display:inline-block;
     text-decoration:none;
-    border-radius:0px;
-    border:solid 1px #b070ff;
+    border-radius:0vh;
+    border:solid 0.17vh #b070ff;
     background:#b070ff;
     text-align:center;
     -webkit-transition: all 0.1s;
     -moz-transition: all 0.1s;
     transition: all 0.1s;
-    -webkit-box-shadow: 0px 9px 0px #705675;
-    -moz-box-shadow: 0px 9px 0px #705675;
-    box-shadow: 5px 5px 0px #705675;
-    margin: 5px;
+    -webkit-box-shadow: 0vh 1.53vh 0vh #705675;
+    -moz-box-shadow:0vh 1.53vh 0vh #705675;
+    box-shadow: 0.85vh 0.85vh 0vh #705675;
+    margin: 0.85vh;
 }
   
 .buttonS:active{
-    -webkit-box-shadow: 0px 2px 0px #705675;
-    -moz-box-shadow: 0px 2px 0px #705675;
-    box-shadow: 2px 2px 0px #705675;
+    -webkit-box-shadow: 0vh 1.53vh 0vh #705675;
+    -moz-box-shadow:0vh 1.53vh 0vh #705675;
+    box-shadow:1.53vh 1.53vh 0vh #705675;
     position:relative;
-    top:7px;
+    top:1vh;
 }
+
+
 
 .buttonSe{
   position:relative;
   display:inline-block;
   text-decoration:none;
-  border-radius:0px;
-  border:solid 1px #8a70ff;
+  border-radius:0vh;
+  border:solid 0.17vh #8a70ff;
   background:#8a70ff;
   text-align:center;
   -webkit-transition: all 0.1s;
   -moz-transition: all 0.1s;
   transition: all 0.1s;
-  -webkit-box-shadow: 0px 9px 0px #6b4bfa;
-  -moz-box-shadow: 0px 9px 0px #6b4bfa;
-  box-shadow: 5px 5px 0px #6b4bfa;
-  margin: 5px;
+  -webkit-box-shadow: 0vh 1.53vh 0vh #6b4bfa;
+  -moz-box-shadow: 0vh 1.53vh 0vh #6b4bfa;
+  box-shadow:  0.85vh 0.85vh 0vh #6b4bfa;
+  margin:  0.85vh;
 }
 
 .buttonSe:active{
-  -webkit-box-shadow: 0px 2px 0px #6b4bfa;
-  -moz-box-shadow: 0px 2px 0px #6b4bfa;
-  box-shadow: 2px 2px 0px #6b4bfa;
+  -webkit-box-shadow:0vh 1.53vh 0vh#6b4bfa;
+  -moz-box-shadow: 0vh 1.53vh 0vh #6b4bfa;
+  box-shadow:1.53vh 1.53vh 0vh #6b4bfa;
   position:relative;
-  top:7px;
+  top:1vh;
 }
 
 
 
 .back {
   background-color:  rgba(255, 255, 255, 0.548);
-  border: 5px solid rgb(97, 96, 96);
-  margin-top: 20px;
-  padding-top: 10px;
-  margin-right: 100px;
-  height: 180px;
-  margin-left : 100px; 
+  border: 0.85vh solid rgb(97, 96, 96);
+  margin-top: 3.4vh;
+  padding-top: 1.7vh;
+  margin-right: 17vh;
+  height: 31vh;
+  margin-left : 17vh; 
   
   display: grid;
-  grid-template-rows: 150px 20px;
-  grid-template-columns: 1fr 40px 40px 40px 40px 40px 1fr;
+  grid-template-rows: 25.5vh 3.4vh;
+  grid-template-columns: 1fr 6.8vh 6.8vh 6.8vh 6.8vh 6.8vh 1fr;
   align-items: center;
   justify-items: center;
 }
@@ -344,14 +342,14 @@ button{
 main.carousel {
   grid-row: 1 / 2;
   grid-column: 1 / 8;
-  width: 1000px;
-  height: 300px;
+  width: 170vh;
+  height: 51vh;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   transform-style: preserve-3d;
-  perspective: 600px;
+  perspective: 102vh;
   --items: 5;
   --middle: 3;
   --position: 1;
@@ -360,16 +358,16 @@ main.carousel {
 
 div.item {
   position: absolute;
-  width: 130px;
-  height: 120px;
+  width: 22.1vh;
+  height: 20.4vh;
 
-  padding-top : 25px;
+  padding-top : 4.25vh;
   background-color: coral;
   --r: calc(var(--position) - var(--offset));
   --abs: max(calc(var(--r) * -1), var(--r));
   transition: all 0.3s linear;
   transform: rotateY(calc(-10deg * var(--r)))
-  translateX(calc(-300px * var(--r)));
+  translateX(calc(-51vh * var(--r)));
   z-index: calc((var(--position) - var(--abs)));
 }
 
@@ -442,31 +440,33 @@ input:nth-of-type(5):checked ~ main.carousel {
 
 .back2 {
   background-color:  rgba(255, 255, 255, 0.548);
-  border: 5px solid rgb(97, 96, 96);
-  margin-top: 20px;
-  padding-top: 10px;
-  margin-right: 100px;
-  height: 180px;
-  margin-left : 100px; 
+  border: 0.85vh solid rgb(97, 96, 96);
+  margin-top: 3.4vh;
+  padding-top: 1.7vh;
+  margin-right: 17vh;
+  height: 31vh;
+  margin-left : 17vh; 
   
   display: grid;
-  grid-template-rows: 150px 20px;
-  grid-template-columns: 1fr 40px 40px 40px 40px 40px 40px 40px 1fr;
+  grid-template-rows: 25.5vh 3.4vh;
+  grid-template-columns: 1fr 6.8vh 6.8vh 6.8vh 6.8vh 6.8vh 6.8vh 6.8vh 1fr;
   align-items: center;
   justify-items: center;
 }
 
+
+
 main.carousel2 {
   grid-row: 1 / 2;
   grid-column: 1 / 10;
-  width: 1000px;
-  height: 300px;
+  width: 170vh;
+  height: 51vh;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   transform-style: preserve-3d;
-  perspective: 400px;
+  perspective: 68vh;
   --items2: 7;
   --middle2: ;
   --position2: 1;
@@ -506,16 +506,16 @@ main.carousel2 {
 
 div.item2 {
   position: absolute;
-  width: 130px;
-  height: 130px;
+  width: 22.1vh;
+  height: 22.1vh;
 
-  padding-top : 10px;
+  padding-top : 0.17vh;
   background-color: coral;
   --r2: calc(var(--position2) - var(--offset2));
   --abs2: max(calc(var(--r2) * -1), var(--r2));
   transition: all 0.3s linear;
   transform: rotateY(calc(-10deg * var(--r2)))
-  translateX(calc(-300px * var(--r2)));
+  translateX(calc(-51vh * var(--r2)));
   z-index: calc((var(--position2) - var(--abs2)));
 }
 

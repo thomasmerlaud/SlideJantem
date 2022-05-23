@@ -1,16 +1,115 @@
 <?php
-
-// function adduser(){
-    $username = 'mylow';
+function adduser($user){
+    // $username = 'mylow';
+    $request ="INSERT INTO game (username) VALUES ('$user')";
     require("connectDB.php");
-    $request ="INSERT INTO `game` (`username`) VALUES ($username);";
-    $resultat =mysqli_query($connexion,$request); //Executer la requete
-    // header('location:../ajouterNote.php');
-    if(!$resultat){
-        echo $resultat;
-    // }
+    $resultat = mysqli_query($connexion,$request); //Executer la requete
+}
+function getId($user){   // score Général
+    $request ="SELECT * FROM game WHERE username='$user'";
+    require("connectDB.php");
+    $resultat = mysqli_query($connexion,$request); //Executer la requete
+    while($row = mysqli_fetch_assoc($resultat)){
+        $ID = $row['ID'];
+        return $ID;
+    }
+}
+function getUsername($id){   // score Général
+    $request ="SELECT username FROM game WHERE ID=$id";
+    require("connectDB.php");
+    $resultat = mysqli_query($connexion,$request); //Executer la requete
+    while($row = mysqli_fetch_assoc($resultat)){
+        $user = $row['username'];
+        return $user;
+    }
+}
+function getUsers(){
+    $request = "SELECT username FROM game ORDER BY score ASC"; 
+    require("connectDB.php");
+    $resultat =mysqli_query($connexion,$request); //Executer la requete	
+    $final = array();
+    while($row = mysqli_fetch_assoc($resultat)){
+        $user = $row['username'];
+        array_push($final, $user);
+    }
+    return ($final);
 }
 
-// adduser();
+
+function somme($id){
+    $request ="SELECT * FROM game WHERE ID=$id";  //EXCEPT (ID,username)
+    require("connectDB.php");
+    $resultat = mysqli_query($connexion,$request); //Executer la requete
+    $nbmap = 1;
+    $somme = 0;
+    while($row = mysqli_fetch_assoc($resultat)){
+        for ($i=1; $i < 21; $i++) {
+            $map = "map".$i;
+            $somme += $row[$map];
+            ++$nbmap;
+        }
+    }
+    // echo $somme;
+    $request ="UPDATE game SET score = $somme WHERE ID=$id";
+    $resultat = mysqli_query($connexion,$request); //Executer la requete
+}
+function addscore($id,$idmap,$score){
+    $map = "map".$idmap;
+    $request ="UPDATE game SET $map = $score WHERE ID=$id";
+    require("connectDB.php");
+    $resultat = mysqli_query($connexion,$request); //Executer la requete
+    somme($id);
+}
+
+
+function scoreG($id){   // score Général
+    $request ="SELECT score FROM game WHERE ID=$id;";
+    require("connectDB.php");
+    $resultat = mysqli_query($connexion,$request); //Executer la requete
+    while($row = mysqli_fetch_assoc($resultat)){
+        $score = $row['score'];
+        return $score;
+    }
+}
+function scoreM($id,$idmap){   // score par Map
+    $map = "map".$idmap;
+    $request ="SELECT $map FROM game WHERE ID=$id;";
+    require("connectDB.php");
+    $resultat = mysqli_query($connexion,$request); //Executer la requete
+    while($row = mysqli_fetch_assoc($resultat)){
+        $score = $row[$map];
+        return $score;
+    }
+}
+
+
+function ranking(){
+    $request = "SELECT username,score FROM game ORDER BY score DESC"; 
+    require("connectDB.php");
+    $resultat =mysqli_query($connexion,$request); //Executer la requete	
+    $i = 1;
+    $final = array();
+    while($row = mysqli_fetch_assoc($resultat)){
+        $username = $row['username'];
+        $score = $row['score'];
+
+        $result = [$i,$username,$score];
+        array_push($final, $result);
+
+        ++$i;
+    }
+    return ($final);
+}
+
+
+// adduser("oui");
+// addscore(3,9,2000);
+// header('location:../ajouterNote.php');
+
+// echo score(3);
+// somme(4);
+// ranking();
+
+// echo getId('mylow');
 
 ?>

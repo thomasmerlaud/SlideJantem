@@ -22,5 +22,5 @@
 </body>
 
 
-<script src="typing.js"></script>
+<script src="js/typing.js"></script>
 </html>

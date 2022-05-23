@@ -2,13 +2,13 @@
 @import url("https://fonts.googleapis.com/css?family=Press+Start+2P");
 
 body {
-   
-    
+
+
     /* letter-spacing: 2px; */
     background-image: url('image/backDida2.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    
+
     background-color: rgba(53, 51, 51, 0.815);
     height : 100%;
 }
@@ -18,28 +18,30 @@ img {
     width : 440px;
     height : 300px;
 }
-  
+
 .jantem{
     display: block;
     position : absolute;
-    left: 8%;
+    left: 5%;
     top : 34.3%;
     width : 20px;
     z-index : 3;
 }
 
-  
+
 #typedtext {
     background-color: rgb(245, 229, 139);
-    left : 30%;
-    top : 15%;
+    left : 25%;
+    top : 7%;
+    bottom: 7%;
     padding : 2%;
     border: 12px solid rgb(133, 119, 42);
-    width: 600px;
-    height: 300px;
+    width: 700px;
+    height: 880px;
     position: fixed;
-    color : white;
-    font-size: 13px;
+    color : rgb(133, 119, 42);
+    font-size: 11px;
     font-family : 'Press Start 2P';
-    line-height: 23px;
-} 
+    line-height: 22px;
+    letter-spacing: -2px;
+}

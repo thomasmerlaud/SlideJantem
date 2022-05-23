@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+<script src="js/script.js"></script>
 
-<a class="Bmaison" href="accueil.php"></a>
+
+<a class="Bmaison" onclick="out('accueil.php')"></a>
     <a class="Bprofil" href="#profil"></a>
     <a class="Bsetting" href="#popup1"></a>
 
@@ -26,7 +28,7 @@
             <a class="close" href="#">&times;</a>
             <div class="content"> 
                 <div class="button">
-                    <a href="supprimer.html" class="supprimer"> Supprimer compte </a>
+                    <a onclick="out('supprimer.html')" class="supprimer"> Supprimer compte </a>
                 </div>
             </div>
         </div>
@@ -37,7 +39,7 @@
 
         
 /* icones en haut */
-/* .Bmaison{
+.Bmaison{
   cursor: url('image/B2.ico'), pointer;
   display:inline-block;
   background:url(image/maisonH.png); 
@@ -45,66 +47,74 @@
   height : 50px;
   margin-left : 80%;
   margin-top : 5px;
- } */
+ }
 
  .Bprofil{
   cursor: url('image/B2.ico'), pointer;
   display: inline-block;
-   background:url(image/profil.png); 
-  width : 60px;
-  height : 55px;
-  margin-left: 25px;
+  background-image:url(image/profil.png); 
+  background-size: 100% auto;
+  width : 10.2vh;;
+  height : 10.2vh;;
+  margin-left: 2.55vh;
+  margin-top : 0.85vh;
 }
 
  .Bsetting{
   cursor: url('image/B2.ico'), pointer;
   display: inline-block;
-   background:url(image/p2.png); 
-  width : 60px;
-  height : 60px;
-  margin-left: 15px;
-  margin-right : 5px;
+  background-image:url(image/p2.png); 
+  background-size: 100% auto;
+  width : 10.2vh;
+  height : 10.2vh;
+  margin-left: 2.55vh;
+  margin-right : 0.85vh;
+  margin-top : 0.85vh;
  }
 
 
 .popup {
-  margin: 50px auto;
-  padding: 20px;
+  margin: 8.5vh auto;
+  padding: 3.4vh;
   width: 40%;
   background-size: 100%;
   position: relative;
   transition: all 400ms ease-in-out;
-  border-radius:5px;
+  border-radius:0.85vh;
   background-color: rgb(245, 229, 139);
-  border: 12px solid rgb(133, 119, 42);
+  border: 2.04vh solid #8a6840;
   text-align:center;
+  
 }
 
 .popup h2 {
   margin-top: 0;
   color: #333;
   font-family: Tahoma, Arial, sans-serif;
+  font-size : 4vh;
 }
 .popup .close {
   position: absolute;
-  top: 20px;
-  right: 30px;
+  top: 0.85vh;
+  right: 1.7vh;
   transition: all 200ms;
-  font-size: 30px;
+  font-size: 6.8vh;
   font-weight: bold;
   text-decoration: none;
   color: #333;
+  padding : 3.4vh;
+
 }
 .popup .close:hover {
   color: #06D85F;
-  font-size : 50px;
+  font-size : 8.5vh;
 }
 .popup .content {
   max-height: 90%;
   overflow: auto;
 }
 
-@media screen and (max-width: 700px){
+@media screen and (max-width: 119vh){
   .popup{
     width: 80%;
   }
@@ -128,10 +138,10 @@
 
 #player-container #play-pause {
   cursor: url('image/B2.ico'), pointer;
-  text-indent: -999999px;
-  height:40px;
-  width: 40px;
-  padding: 12px 18px;
+  text-indent: -170000vh;
+  height:6.8vh;
+  width: 6.8vh;
+  padding: 2.04vh 3.06vh;
   background-image: url(image/logoff.png);
   background-repeat: no-repeat!important;
   background-position: center;
@@ -140,9 +150,12 @@
 
 .play {
   background-image: url(image/logoff.png);
+  background-size: 75% auto;
+
 }
 .pause {
    background-image: url(image/logon.png)!important;
+  background-size: 75% auto;
 }
 
 
@@ -162,28 +175,29 @@
     display:inline-block;
     text-decoration:none;
     margin:0 auto;
-    border-radius:0px;
+    border-radius:0vh;
     font-family:'Rubik One', sans-serif;
-    border:solid 1px #b48c5d;
+    border:solid 0.17vh #b48c5d;
     background:#b48c5d;
     text-align:center;
-    padding:8px 0px;
-    font-size: 16px;
+    padding:1.36vh 0vh;
+    font-size: 2.72vh;
     -webkit-transition: all 0.1s;
     -moz-transition: all 0.1s;
     transition: all 0.1s;
-    -webkit-box-shadow: 0px 9px 0px #8a6840;
-    -moz-box-shadow: 0px 9px 0px #8a6840;
-    box-shadow: 9px 9px 0px #8a6840;
-    margin: 10px;
+    -webkit-box-shadow: 0vh 1.53vh 0vh #8a6840;
+    -moz-box-shadow: 0vh 1.53vh 0vh #8a6840;
+    box-shadow: 1.53vh 1.53vh 0vh #8a6840;
+    margin: 1.7vh;
   }
   
   .supprimer:hover{  
-  -webkit-box-shadow: 0px 2px 0px #8a6840;
-  -moz-box-shadow: 0px 2px 0px #8a6840;
-  box-shadow: 2px 2px 0px #8a6840;
+  -webkit-box-shadow: 0vh 0.34vh 0vh #8a6840;
+  -moz-box-shadow: 0vh 0.34vh 0vh #8a6840;
+  box-shadow: 0.34vh 0.34vh 0vh #8a6840;
   position:relative;
-  top:7px;
+  top:1.19vh;
   }
+  
   
   </style>

@@ -1,15 +1,34 @@
 // METTRE LE TEXTE A LA PLACE EN DESSOUS
 // QUAND YA UNE VIRGULE CA ATTEND QUELQUES SECONDES (2sec) je peux changer ca aussi
 var aText = new Array(
-    "Welcome to  Slide Jantem !" ,
-    "<br /> There are only 10 types of people in the world:",
-    "Those who understand binary, and those who don't"
+    "Welcome to Slide Jantem !",
+    "<br>",
+    "My name is Jantem. Nice to meet you.",
+    "<br>",
+    "I'm a painter. Recently something happened. I cannot explain exactly what is wrong but I lost inspiration.",
+    "Customers ask me to create new paintings but I can’t. I’m desperate.",
+    "<br>",
+    "Have you ever heard about splatter paint art ?",
+    "<br>",
+    "It's fun process art that is created by splashing, paint onto the canvas or paper instead of brushing it on with a paintbrush.",
+    "<br>",
+    "What’s your mission ?",
+    "<br>",
+    "By playing Slide Jantem, your are willing to paint different forms and accomplish different levels.",
+    "I need fresh artists like you ! Young people ready to help me to become inspired again !",
+    "<br>",
+    "By accomplishing different levels I’m expecting you to create new forms and who knows ?",
+    "Maybe you are going to crate THE painting that we need !",
+    "<br>",
+    "Good luck !",
+  
+
 );
 
 
 
 
-var iSpeed = 90; // time delay of print out
+var iSpeed = 20; // time delay of print out
 var iIndex = 0; // start printing array at this posision
 var iArrLength = aText[0].length; // the length of the text array
 var iScrollAt = 20; // start scrolling up at this many lines
@@ -34,7 +53,7 @@ function typewriter() {
         iIndex++;
         if (iIndex != aText.length) {
             iArrLength = aText[iIndex].length;
-            setTimeout("typewriter()", 2000);
+            setTimeout("typewriter()", 100);
         }
     } else {
         setTimeout("typewriter()", iSpeed);

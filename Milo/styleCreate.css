@@ -15,3 +15,13 @@ body{
     cursor: url('image/B2.ico'), pointer;
   }
 
+  .Bmaison{
+    cursor: url('image/B2.ico'), pointer;
+    display:inline-block;
+    background-image:url(image/maisonH.png); 
+    background-size: 100% auto;
+    width : 10.2vh;
+    height : 10.4vh;
+    margin-left : 80%;
+    margin-top : 0.85vh;
+   }
