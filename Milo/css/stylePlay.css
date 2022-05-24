@@ -10,13 +10,13 @@
     width:99%;
     height: 100%;
     /* background-image: url('image/2.gif'); */
-    background: url('image/2.gif') no-repeat center center fixed;
+    background: url('../image/2.gif') no-repeat center center fixed;
     background-size: cover;
 }
 
 
 body{
-  cursor: url('image/B2.ico'), pointer;
+  cursor: url('../image/B2.ico'), pointer;
 }
 
 .parent {
@@ -37,7 +37,7 @@ body{
 
 /* icones en haut */
 .Bmaison{
-  cursor: url('image/B2.ico'), pointer;
+  cursor: url('../image/B2.ico'), pointer;
   display:inline-block;
   background-image:url(image/maisonH.png); 
   background-size: 100% auto;
@@ -50,7 +50,7 @@ body{
   /* 2 boutons */
 
   a {
-    cursor: url('image/B2.ico'), pointer;
+    cursor: url('../image/B2.ico'), pointer;
     text-decoration : none;
     color : white;
     font-family: 'Rubik One', sans-serif;
