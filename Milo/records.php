@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>Record</title>
-    <link rel="stylesheet" href="styleRecords.css">
+    <link rel="stylesheet" href="css/styleRecords.css">
     <script src="js/script.js"></script>
 </head>
 

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>Store</title>
-    <link rel="stylesheet" href="styleStore.css">
+    <link rel="stylesheet" href="css/styleStore.css">
     <script src="js/script.js"></script>
 </head>
 

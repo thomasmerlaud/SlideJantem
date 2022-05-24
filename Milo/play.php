@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>Play</title>
-    <link rel="stylesheet" href="stylePlay.css">
+    <link rel="stylesheet" href="css/stylePlay.css">
     <script src="js/script.js"></script>
 </head>
 
@@ -12,31 +12,27 @@
 
         <?php 
             include "nuage.php";
+            include "icone.php";
         ?>
 
     <div class="parent">
-    <?php
-    session_start();
-    if(!isset($_SESSION["ID"])){
-        if(isset($_POST["login"])){
-            require("../bdd/main.php");
-            $userlist = getUsers();
-            if (!(in_array($_POST["login"], $userlist))) {
-                adduser($_POST["login"]);
+        <?php
+        session_start();
+        if(!isset($_SESSION["ID"])){
+            if(isset($_POST["login"])){
+                require("../bdd/main.php");
+                $userlist = getUsers();
+                if (!(in_array($_POST["login"], $userlist))) {
+                    adduser($_POST["login"]);
+                }
+                $id = getId($_POST["login"]);
+                $_SESSION["ID"] = $id;
+                // print_r($_SESSION["ID"]);
             }
-            $id = getId($_POST["login"]);
-            $_SESSION["ID"] = $id;
-            // print_r($_SESSION["ID"]);
         }
-    }
-    ?>
+        ?>
         <div class="div1"> </div>
         <div class="div2">
-            
-            <?php
-                include "icone.php";
-            ?>
-
         </div>
         <div class="div3">
             <a class="levels" onclick="out('levels.php')">LEVELS</a>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>Create Map</title>
-    <link rel="stylesheet" href="stylecCeate.css">
+    <link rel="stylesheet" href="css/stylecCeate.css">
     <script src="js/script.js"></script>
 </head>
 <body class="fondcrate">

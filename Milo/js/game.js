@@ -142,7 +142,7 @@ function menu() {
 }
 function nextlevel() {
    next = parseInt(nbmap) + 1;
-   window.location.href="index.php?map="+(next)+""; 
+   window.location.href="game.php?map="+(next)+""; 
 }
 
 
@@ -213,19 +213,20 @@ function renderMaze() {
    if (remainder > 0) {
       document.querySelector(id).className = 'player'
       // document.querySelector('.score').textContent = coups + ` move(s). Remaining ` + remainder + ' cell(s) !'
-      document.querySelector('.score').textContent = coups;
       document.querySelector('.info').textContent = 'Passez sur toutes les cases !'
    } else {
       // Fin du jeu
       // document.querySelector('.score').textContent = `Well done ! Finish in ` + coups + ' moves !'
-      document.querySelector('.score').textContent = coups;
       document.querySelector('.info').textContent = "Bravo ! Niveau suivant"
-
-
       obj = document.getElementById("finish");
-      obj.classList.add("overlay");
+      obj.classList.add("finished");
       obj.style.visibility = "visible";
+      obj.style.opacity = 1;
+
+      console.log(coups);
+      //  100 - nb coups * 4
    }
+   document.querySelector('.score').textContent = coups;
 
 
    // if (!(bag === DIAMOND_COUNT && player[1] === COLS - 1 && player[0] === ROWS - 1)) {
