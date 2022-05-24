@@ -38,7 +38,7 @@
             <a class="levels" onclick="out('levels.php')">LEVELS</a>
         </div>
         <div class="div4">
-            <a class="create" onclick="out('create.php')">CREATE MAP</a>
+            <a class="create" onclick="out('../Nolan/creator.html')">CREATE MAP</a>
         </div>
         <div class="div5"> </div>
         <div class="div6"> </div>
