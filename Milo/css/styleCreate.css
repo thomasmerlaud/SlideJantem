@@ -8,15 +8,15 @@
     text-align: center;
     width:100%;
     height: 100%;
-    background-image: url('image/3.gif');
+    background-image: url('../image/3.gif');
 }
 
 body{
-    cursor: url('image/B2.ico'), pointer;
+    cursor: url('../image/B2.ico'), pointer;
   }
 
   .Bmaison{
-    cursor: url('image/B2.ico'), pointer;
+    cursor: url('../image/B2.ico'), pointer;
     display:inline-block;
     background-image:url(image/maisonH.png); 
     background-size: 100% auto;

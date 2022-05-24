@@ -5,7 +5,7 @@
 
 /*fond index*/
 .backindex{
-  background: url('image/1.gif') no-repeat center center fixed;
+  background: url('../image/1.gif') no-repeat center center fixed;
 background-size: cover;
 
 }
@@ -24,7 +24,7 @@ img {
 }
 
 body{
-  cursor: url('image/B2.ico'), pointer;
+  cursor: url('../image/B2.ico'), pointer;
   overflow-x: hidden;
 }
 
@@ -36,7 +36,7 @@ body{
   
   
   .supprimer{
-    cursor: url('image/B2.ico'), pointer;
+    cursor: url('../image/B2.ico'), pointer;
     position:relative;
     width:60%;
     color:#FFF;
@@ -94,7 +94,7 @@ body{
 	font-size: 3vh;
 	font-weight: 100%;
 	padding:1%;
-  cursor: url('image/B2.ico'), pointer;
+  cursor: url('../image/B2.ico'), pointer;
 }
 
 .login input[type=text]:focus{
@@ -121,7 +121,7 @@ body{
 	font-size: 3vh;
 	font-weight: 100%;
 	padding:1%;
-  cursor: url('image/B2.ico'), pointer;
+  cursor: url('../image/B2.ico'), pointer;
 }
 
 
@@ -134,7 +134,7 @@ body{
 
 
 .push_buttonP{
-  cursor: url('image/B2.ico'), pointer;
+  cursor: url('../image/B2.ico'), pointer;
   position:relative;
   width:12%;
   color:#FFF;
@@ -168,7 +168,7 @@ top:1.19vh;
 }
 
 .push_buttonS{
-  cursor: url('image/B2.ico'), pointer;
+  cursor: url('../image/B2.ico'), pointer;
   position:relative;
   width:12%;
   color:#FFF;
@@ -200,7 +200,7 @@ top:1.19vh;
 }
 
 .push_buttonR{
-  cursor: url('image/B2.ico'), pointer;
+  cursor: url('../image/B2.ico'), pointer;
   position:relative;
   width:12%;
   color:#FFF;

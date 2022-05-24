@@ -223,8 +223,19 @@ function renderMaze() {
       obj.style.visibility = "visible";
       obj.style.opacity = 1;
 
-      console.log(coups);
-      //  100 - nb coups * 4
+
+
+      scoremap = ((100 - coups) * 4);
+
+      var score = new XMLHttpRequest();
+      score.onload = function(){};
+      url = "../bdd/score.php?score="+scoremap+"&map="+nbmap;
+      score.open("GET", url, false);
+      score.send();
+      // score = score.responseText;
+
+
+
    }
    document.querySelector('.score').textContent = coups;
 

@@ -8,26 +8,15 @@
   text-align: center;
   width:99%;
   height: 100%;
-  background: url('image/4.gif') no-repeat center center fixed;
+  background: url('../image/4.gif') no-repeat center center fixed;
   background-size: cover;
 }
 
 
- /* body{
-  cursor: url('image/B2.ico'), pointer;
-}  */
+ body{
+  cursor: url('../image/B2.ico'), pointer;
+} 
 
-/* icones en haut */
-.Bmaison{
-  cursor: url('image/B2.ico'), pointer;
-  display:inline-block;
-  background-image:url(image/maisonH.png); 
-  background-size: 100% auto;
-  width : 10.2vh;
-  height : 10.4vh;
-  margin-left : 80%;
-  margin-top : 0.85vh;
- }
 
 .content_title {
   width: 60%;
@@ -218,7 +207,7 @@ img.peinture {
 }
 
 button{
-  cursor: url('image/B2.ico'), pointer;
+  cursor: url('../image/B2.ico'), pointer;
   color : white;
   font-family: 'Montserrat';
   font-size: 2.55vh;
@@ -231,7 +220,7 @@ button{
 }
 
 .item2 button{
-  cursor: url('image/B2.ico'), pointer;
+  cursor: url('../image/B2.ico'), pointer;
   color : white;
   font-family: 'Montserrat';
   font-size: 2.55vh;
