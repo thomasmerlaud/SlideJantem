@@ -28,7 +28,7 @@
             <a class="close" href="#">&times;</a>
             <div class="content"> 
                 <div class="button">
-                    <a onclick="out('supprimer.html')" class="supprimer"> Supprimer compte </a>
+                    <a onclick="out('supprimer.php')" class="supprimer">Déconnexion </a>
                 </div>
             </div>
         </div>
@@ -42,11 +42,10 @@
 .Bmaison{
   cursor: url('image/B2.ico'), pointer;
   display:inline-block;
-  background:url(image/maisonH.png); 
-  width : 50px;
-  height : 50px;
-  margin-left : 80%;
-  margin-top : 5px;
+  background: url(image/maisonH.png) no-repeat;
+  width: 59px;
+  height: 66px;
+  margin-left: 79%;
  }
 
  .Bprofil{
@@ -129,7 +128,7 @@
   transition: opacity 1.4s;
   visibility: hidden;
   opacity: 0;
-  z-index : 1;
+  z-index : 1000;
 }
 .overlay:target {
   visibility: visible;
