@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>Play</title>
-    <link rel="stylesheet" href="stylePlay.css">
+    <link rel="stylesheet" href="css/stylePlay.css">
     <script src="js/script.js"></script>
 </head>
 

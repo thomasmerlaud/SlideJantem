@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>Accueil Slide Jantem</title>
-    <link rel="stylesheet" href="styleAccueil.css">
+    <link rel="stylesheet" href="css/styleAccueil.css">
     <script src="js/script.js"></script>
 </head>
 

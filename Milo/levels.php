@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>Levels</title>
-    <link rel="stylesheet" href="styleLevels.css">
+    <link rel="stylesheet" href="css/styleLevels.css">
     <script src="js/script.js"></script>
 </head>
 
