@@ -187,7 +187,7 @@ reeq.open("GET", "php/countfiles.php", false);
 
 reeq.send(null);
 
-var nbFichiers = reeq.responseText-2;
+var nbFichiers = reeq.responseText-1;
 
 //Convertie le tableau en créa
 //Fonction Fini
@@ -458,7 +458,7 @@ function Save(){
     
 }
 function auto(e){
-	console.log('Fonction auto faite');
+	/*console.log('Fonction auto faite');
 	 
     var request = new XMLHttpRequest();
     
@@ -483,33 +483,96 @@ function auto(e){
 
     for (let i = 0; i < ligne; i++){
         for (let j = 0; j < colonne; j++){
-			if(tab[i][j] == 3){
+            if(tab[i][j] == 3){
                 perso++;
-			}
+            }
             if(tab[i][j] == 0){
                 vide++;
-			}
+            }
             if(tab[i][j] == 2){
                 tele++;
-			}
+                if(tab[i-1][j]+tab[i+1][j]+tab[i][j-1]+tab[i][j+1]>=4){
+                    falses = false;
+                }
+                else if ((tab[i-1][j-1] == 2)||(tab[i][j-1] == 2)
+                    ||(tab[i+1][j-1] == 2)||(tab[i-1][j] == 2)||(tab[i+1][j] == 2)
+                    ||(tab[i+1][j] == 2)||(tab[i-1][j+1] == 2)||(tab[i][j+1] == 2)){
+                    falses = false;
+                }
+            }
         }
     }
 
-    console.log(perso,vide)
+    
 
-    if (perso==0 || vide < dim*2|| tele != 2){
+    if (perso==0 || vide < dim*2|| tele != 2|| falses == false){ //|| tele != 2|| falses == false
     
         console.log("WTF");
         auto();
 
     }
     else{
+        console.log(perso,vide,tele,falses)
+
         console.log("what ca marche???");
         numberToCREATION();
-    }
+    }*/
 
+     
+    do{
+
+        console.log('Fonction auto faite');
+	 
+        var request = new XMLHttpRequest();
+        
+        request.open("GET", "php/auto.php?dim="+dim+"&nbFichiers="+nbFichiers, false);
+        request.send(null)
+
+        var request = new XMLHttpRequest();
+        request.open("GET", "php/verifauto.php", false);
+        request.send(null)
+        var file = request.responseText
+
+        file = file.split(" ")
+        var result = file[0]
+        var count = file[1]
+
+        var tab = numberToCREATION();
+
+        request.open("GET", "php/autoapres.php?array="+tab.join('|')+"&nbFichiers="+nbFichiers, false);
+		request.send(null)
+
+        var perso = 0;
+        var tele = 0;
+        var vide = 0;
+        var falses = true;
     
-    //randomtab2();
+
+     for (let i = 0; i < ligne; i++){
+        for (let j = 0; j < colonne; j++){
+            if(tab[i][j] == 3){
+                perso++;
+            }
+            if(tab[i][j] == 0){
+                vide++;
+            }
+            if(tab[i][j] == 2){
+                tele++;
+                if(tab[i-1][j]+tab[i+1][j]+tab[i][j-1]+tab[i][j+1]>=4){
+                    falses = false;
+                }
+                else if ((tab[i-1][j-1] == 2)||(tab[i][j-1] == 2)
+                    ||(tab[i+1][j-1] == 2)||(tab[i-1][j] == 2)||(tab[i+1][j] == 2)
+                    ||(tab[i+1][j] == 2)||(tab[i-1][j+1] == 2)||(tab[i][j+1] == 2)){
+                    falses = false;
+                }
+            }
+        }
+    }
+    if (tele == 1){falses = false;}
+    console.log(perso,vide,tele)
+
+    }while (perso==0 || vide < dim*2||falses == false)
 }
 function randomtab2(e){
     
@@ -575,7 +638,7 @@ function randomtab2(e){
             }
         }
 
-        if (addtel == 1){
+        if (addtel == 1 && nbtel!=2){
             addtel=0;
             nbtel+=2;
             tabN[i][j] = 2;
@@ -597,6 +660,7 @@ function randomtab2(e){
                 setJeu(j,i,0);
                 tableaucrea[i][j].className = '';
             }
+            addtel = Math.floor ( Math.random() * 4 );
         }
     }
     var perso = 0;
@@ -624,7 +688,6 @@ function randomtab2(e){
                 }
                 else{
                     compteur++;
-                    var randomtel = Math.floor ( Math.random() *10);
 
                     if((perso ==0)&&(randomperso== compteur)){
                         tableaucrea[i][j].className = 'perso1';
