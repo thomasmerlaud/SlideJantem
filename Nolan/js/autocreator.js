@@ -537,12 +537,16 @@ function auto(e){
         var result = file[0]
         var count = file[1]
 
+        var tab = numberToCREATION();
+
+        request.open("GET", "php/autoapres.php?array="+tab.join('|')+"&nbFichiers="+nbFichiers, false);
+		request.send(null)
+
         var perso = 0;
         var tele = 0;
         var vide = 0;
         var falses = true;
     
-        var tab = numberToCREATION();
 
      for (let i = 0; i < ligne; i++){
         for (let j = 0; j < colonne; j++){
@@ -565,9 +569,10 @@ function auto(e){
             }
         }
     }
+    if (tele == 1){falses = false;}
     console.log(perso,vide,tele)
 
-    }while (perso==0 || vide < dim*2|| tele != 2 || falses == false)
+    }while (perso==0 || vide < dim*2||falses == false)
 }
 function randomtab2(e){
     
