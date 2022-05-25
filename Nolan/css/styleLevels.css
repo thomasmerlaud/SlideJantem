@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:600&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700");
+@import url('https://fonts.googleapis.com/css?family=Rubik+One');
+
+@font-face {
+  font-family: "retro";
+  src: url("../Font/fontawesome/webfonts/Retro\ Gaming.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.container{
+  position: absolute;     
+  top: 50px;
+  font-family: "retro";
+  font-size: 6em;
+  color:  #FFFDE5;
+  text-transform: uppercase;
+  width: 100%;
+  text-align: center;
+  -webkit-box-reflect: below 1px linear-gradient(transparent,#0008);
+  line-height: 0.70em;
+  outline: none;
+  animation: animate 5s linear infinite
+}
+@keyframes animate{
+  0%{
+      color: white;
+      text-shadow: 0 0 5px #FFA500;
+  }
+}
+.backlevels{
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+    width:99%;
+    height: 100%;
+    background: url('../img/levels.gif') no-repeat center center fixed;
+    background-size: cover;
+}
+
+
+
+.tableau{
+    margin-top: 5%;
+    margin-left: 12%;
+    margin-right: 12%;
+    padding-top: 0.2vh; 
+    padding-bottom: 0.5vh;
+    border-radius: 200px;
+
+    min-height: 50vh;
+
+}
+
+:root {
+    --colorShadeA: #393939;
+    --colorShadeB: rgb(121, 186, 156);
+    --colorShadeC: #76C9FF;
+    --colorShadeE: #FFFAE7;
+}
+  
+  
+  * {
+    box-sizing: border-box;
+  }
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+    .tableau {
+        font-family: 'Montserrat', sans-serif;
+        line-height: 3;
+        display: flex;
+        flex-direction: horizontal;
+        align-items: center;
+        justify-content: center;
+    }
+
+  button {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    border: 0;
+    vertical-align: middle;
+    text-align: center;
+    text-decoration: none;
+    font-size: 4vh;
+    color: var(--colorShadeA);
+    font-weight: 700;
+    font-family: inherit;
+   
+    cursor: url('../image/B2.ico'), pointer;
+  }
+  
+  button.big-button {
+    margin: 4vh;
+    width: 14.5vh;
+    height: 10vh;
+    border: 0.5vh solid var(--colorShadeA);
+    border-radius: 2.5vh;
+    background: var(--colorShadeE);
+    transform-style: preserve-3d;
+    transition: all 175ms cubic-bezier(0, 0, 1, 1);
+    
+  }
+  button.big-button::before {
+    position: absolute;
+    content: " ";
+    width: 100%;
+    height: 95%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--colorShadeC);
+    border-radius: inherit;
+    box-shadow: 0 0 0 0.3vh var(--colorShadeB), 0 0.4em 0 0 var(--colorShadeA);
+    transform: translate3d(0, 0.75em, -1em);
+    transition: all 175ms cubic-bezier(0, 0, 1, 1);
+  }
+  
+  button.big-button:hover {
+    transform: translate(0, 0.375em);
+  }
+  
+  button.big-button:hover::before {
+    transform: translate3d(0, 0.75em, -1em);
+  }
+  
+  button.big-button:active {
+    transform: translate(0em, 0.75em);
+  }
+  
+  button.big-button:active::before {
+    transform: translate3d(0, 0, -1em);
+    box-shadow: 0 0 0 0.3vh var(--colorShadeB), 0 0.25em 0 0 var(--colorShadeB);
+  }
