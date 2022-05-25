@@ -24,6 +24,7 @@
                 $userlist = getUsers();
                 if (!(in_array($_POST["login"], $userlist))) {
                     adduser($_POST["login"]);
+                    header('Location: dida.php');
                 }
                 $id = getId($_POST["login"]);
                 $_SESSION["ID"] = $id;
