@@ -199,6 +199,7 @@ function numberToCREATION(){
 		request.open("GET", "php/map.txt", false);
 		request.send(null)
 		var file = request.responseText
+        //console.log(file)
 
 		// Scrap des données du TXT
 		// Division des résultats en SixeX SizeY et map
@@ -458,70 +459,9 @@ function Save(){
     
 }
 function auto(e){
-	/*console.log('Fonction auto faite');
-	 
-    var request = new XMLHttpRequest();
-    
-    request.open("GET", "php/auto.php?dim="+dim+"&nbFichiers="+nbFichiers, false);
-    request.send(null)
-
-    var request = new XMLHttpRequest();
-    request.open("GET", "php/verifauto.php", false);
-    request.send(null)
-    var file = request.responseText
-
-    file = file.split(" ")
-    var result = file[0]
-    var count = file[1]
-
-    var perso = 0;
-    var tele = 0;
-    var vide = 0;
-
-    var tab = numberToCREATION();
-    console.log(tab)
-
-    for (let i = 0; i < ligne; i++){
-        for (let j = 0; j < colonne; j++){
-            if(tab[i][j] == 3){
-                perso++;
-            }
-            if(tab[i][j] == 0){
-                vide++;
-            }
-            if(tab[i][j] == 2){
-                tele++;
-                if(tab[i-1][j]+tab[i+1][j]+tab[i][j-1]+tab[i][j+1]>=4){
-                    falses = false;
-                }
-                else if ((tab[i-1][j-1] == 2)||(tab[i][j-1] == 2)
-                    ||(tab[i+1][j-1] == 2)||(tab[i-1][j] == 2)||(tab[i+1][j] == 2)
-                    ||(tab[i+1][j] == 2)||(tab[i-1][j+1] == 2)||(tab[i][j+1] == 2)){
-                    falses = false;
-                }
-            }
-        }
-    }
-
-    
-
-    if (perso==0 || vide < dim*2|| tele != 2|| falses == false){ //|| tele != 2|| falses == false
-    
-        console.log("WTF");
-        auto();
-
-    }
-    else{
-        console.log(perso,vide,tele,falses)
-
-        console.log("what ca marche???");
-        numberToCREATION();
-    }*/
-
-     
     do{
         console.log('Fonction auto faite');
-	 
+
         var request = new XMLHttpRequest();
         
         request.open("GET", "php/auto.php?dim="+dim+"&nbFichiers="+nbFichiers, false);
@@ -537,9 +477,11 @@ function auto(e){
         var count = file[1]
 
         var tab = numberToCREATION();
-
+        
         request.open("GET", "php/autoapres.php?array="+tab.join('|')+"&nbFichiers="+nbFichiers, false);
 		request.send(null)
+
+        
 
         var perso = 0;
         var tele = 0;
