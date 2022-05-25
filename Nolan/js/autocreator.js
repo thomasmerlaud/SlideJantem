@@ -208,7 +208,6 @@ function numberToCREATION(){
 		const SizeX = arrayfile.splice(0, 2);
 		const SizeY = arrayfile.splice(0, 2);
 
-
 		var arr = arrayfile 
 		interval = dim
 		map = [];
@@ -217,7 +216,7 @@ function numberToCREATION(){
 		}
 		map.unshift(arr);
 		map.shift();
-		console.log(map);
+        console.log("MAP : ",map)
 
         var tabN = map;
 
@@ -250,6 +249,7 @@ function numberToCREATION(){
             }
 			//console.log(tabN[i]);
         }
+        console.log("TabN :");
 		console.log(tabN);
         return tabN;
 		
