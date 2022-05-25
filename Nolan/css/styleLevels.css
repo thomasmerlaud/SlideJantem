@@ -10,11 +10,13 @@
 }
 
 .container{
-  position: absolute;     
+  position: absolute;  
+  margin-top: 12%;   
   top: 50px;
   font-family: "retro";
   font-size: 6em;
   color:  #FFFDE5;
+  text-shadow: #000000 12px 0 10px;
   text-transform: uppercase;
   width: 100%;
   text-align: center;
@@ -26,7 +28,7 @@
 @keyframes animate{
   0%{
       color: white;
-      text-shadow: 0 0 5px #FFA500;
+      text-shadow: #000000 12px 0 10px;
   }
 }
 .backlevels{
@@ -42,7 +44,7 @@
 
 
 .tableau{
-    margin-top: 5%;
+    margin-top: 10%;
     margin-left: 12%;
     margin-right: 12%;
     padding-top: 0.2vh; 

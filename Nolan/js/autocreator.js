@@ -520,7 +520,6 @@ function auto(e){
 
      
     do{
-
         console.log('Fonction auto faite');
 	 
         var request = new XMLHttpRequest();
@@ -570,7 +569,6 @@ function auto(e){
         }
     }
     if (tele == 1){falses = false;}
-    console.log(perso,vide,tele)
 
     }while (perso==0 || vide < dim*2||falses == false)
 }
