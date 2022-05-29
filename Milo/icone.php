@@ -128,7 +128,7 @@
   transition: opacity 1.4s;
   visibility: hidden;
   opacity: 0;
-  z-index : 1000;
+  z-index : 9;
 }
 .overlay:target {
   visibility: visible;
