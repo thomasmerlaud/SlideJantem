@@ -143,6 +143,7 @@ function main(){
 
 function verifCreator (e){
 	
+    convertNumberCrea();
     var request = new XMLHttpRequest();
     request.open("GET", "php/verif.php", false);
     request.send(null)
@@ -153,10 +154,12 @@ function verifCreator (e){
     var count = file[1]
 
     if (result==0){
-        valid1= true;
+        valid1= false;
+        cBon =0;
     }
     else{
-        valid1=false;
+        valid1=true;
+        cBon =1;
     }
 		
     if (gameo.classList.contains('over')){
@@ -313,7 +316,7 @@ function resetcrea (e){
 
 function Try(){
     console.log("Fonction Try");
-    if (cBon == 1){
+    if (cBon == 0){
         gamew.className = 'win';
     
         texte = document.createElement('h2');
@@ -323,7 +326,7 @@ function Try(){
 
     gamew.addEventListener('click', reset);
     }
-    else if (cBon == 0){
+    else if (cBon == 1){
     var modecrea = document.querySelector('.modecrea');
     modecrea.classList.add('invisible');
     var modejeu = document.querySelector('.modejeu');
@@ -344,9 +347,8 @@ function Try(){
 }
 function Save(){
 	
-	convertNumberCrea();
-	nbFichiers+=1;
-    if (cBon == 1){
+	
+    if (cBon == 0){
         gamew.className = 'win';
     
         texte = document.createElement('h2');
@@ -355,10 +357,22 @@ function Save(){
         texte.innerHTML = 'You must Verify before'
 
 		gamew.addEventListener('click', reset);
+        
     }
-    else if (cBon == 0){
+    else if (cBon == 1){
+
+    gamew.className = 'win';
+
+    texte = document.createElement('h2');
+    gamew.appendChild(texte);
+
+    texte.innerHTML = 'Saved successfully'
+
+    gamew.addEventListener('click', reset);
 
     initJeu();
+    convertNumberCrea();
+	nbFichiers+=1;
 	
 	//randomtab()
 	
