@@ -512,7 +512,7 @@ function auto(e){
     }
     if (tele == 1){falses = false;}
 
-    }while (perso==0 || vide < dim*2||falses == false)
+    }while (perso==0 || vide < dim*3||falses == false)
 }
 function randomtab2(e){
     
@@ -526,12 +526,6 @@ function randomtab2(e){
         tabN[x] = Array(dim);
     }
 
-    for (let i = 0; i < ligne; i++){
-
-        for (let j = 0; j < colonne; j++){
-            tabN[i][j] = 1;
-        }
-    }
     //Math.floor(Math.random() * (max - min + 1)) + min;
     var i = Math.floor( Math.random() * (dim-2)) + 1;
     var j = Math.floor( Math.random() * (dim-2)) + 1;
@@ -549,6 +543,7 @@ function randomtab2(e){
         var direction = Math.floor ( Math.random() * 4 );
         // 0 = Nord , 1 = Ouest , 2 = Sud , 3 = Est
         var enregistrement = 4;
+        var compare = 4;
         if (direction==0){
             if (enregistrement!=2 && i-1!=0){
                 i--;
@@ -595,11 +590,36 @@ function randomtab2(e){
             tableaucrea[i][j].className = 'teleporter';
         }
         else{
-            if (tabN[i][j] !=2 ){
+            if (tabN[i][j] !=2 || tabN[i][j] !=1){
                 tabN[i][j] = 0;
                 setJeu(j,i,0);
                 tableaucrea[i][j].className = '';
+                // 0 = Nord , 1 = Ouest , 2 = Sud , 3 = Est
+                if(compare!=enregistrement){
+                    if(compare ==0){
+                        tabN[i-1][j] = 1;
+                        setJeu(j,i,1);
+                        tableaucrea[i][j].className = 'block';
+                    }
+                    else if(compare ==1){
+                        tabN[i][j-1] = 1;
+                        setJeu(j,i,1);
+                        tableaucrea[i][j].className = 'block';
+                    }
+                    else if(compare ==2){
+                        tabN[i+1][j] = 1;
+                        setJeu(j,i,1);
+                        tableaucrea[i][j].className = 'block';
+                    }
+                    else if(compare ==3){
+                        tabN[i][j+1] = 1;
+                        setJeu(j,i,1);
+                        tableaucrea[i][j].className = 'block';
+                    }
+
+                }
             }
+            compare = enregistrement;
             addtel = Math.floor ( Math.random() * 4 );
         }
     }
