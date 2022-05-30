@@ -142,7 +142,7 @@ function main(){
 
 
 function verifCreator (e){
-	
+	console.log("Verif fonction")
     convertNumberCrea();
     var request = new XMLHttpRequest();
     request.open("GET", "php/verif.php", false);
@@ -150,7 +150,9 @@ function verifCreator (e){
     var file = request.responseText
 
     file = file.split(" ")
+    console.log(file)
     var result = file[0]
+    console.log(result)
     var count = file[1]
 
     if (result==0){

@@ -1,6 +1,6 @@
 <?php
 
-exec ("solveur.exe",$output);
+exec ("solv.exe",$output);
 
 echo $output[0];
 
