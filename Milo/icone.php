@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<script src="js/script.js"></script>
-
 
 <a class="Bmaison" onclick="out('accueil.php')"></a>
     <a class="Bprofil" href="#profil"></a>
@@ -26,13 +24,36 @@
         <div class="popup">
             <h2>Profil</h2>
             <a class="close" href="#">&times;</a>
-            <div class="content"> 
-                <div class="button">
-                    <a onclick="out('supprimer.php')" class="supprimer">Déconnexion </a>
-                </div>
-            </div>
+            <?php
+            require("../bdd/connectDB.php");
+            session_start();
+            if(!isset($_SESSION["ID"])){
+              echo "<h3>You are not connected</h3>";
+              ?>
+              <div class="content"> 
+                  <div class="button">
+                      <a onclick="out('accueil.php')" class="supprimer">Login</a>
+                  </div>
+              </div>
+            <?php
+            }   
+            else{
+              require("../bdd/main.php");
+              $scoreG = scoreG($_SESSION["ID"]);
+              echo "<h3>Score : ".$scoreG."</h3>";
+              ?>
+              <div class="content"> 
+                  <div class="button">
+                      <a onclick="out('supprimer.php')" class="supprimer">Logout</a>
+                  </div>
+              </div>
+              <?php
+            } 
+            ?>
         </div>
     </div>
+    
+<script src="js/script.js"></script>
 
 
     <style>
@@ -92,6 +113,12 @@
   font-family: Tahoma, Arial, sans-serif;
   font-size : 4vh;
 }
+.popup h3 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+  font-size : 2.5vh;
+}
 .popup .close {
   position: absolute;
   top: 0.85vh;
@@ -128,7 +155,7 @@
   transition: opacity 1.4s;
   visibility: hidden;
   opacity: 0;
-  z-index : 9;
+  z-index : 19;
 }
 .overlay:target {
   visibility: visible;

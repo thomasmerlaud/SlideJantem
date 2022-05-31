@@ -17,7 +17,6 @@
 
     <div class="parent">
         <?php
-        session_start();
         if(!isset($_SESSION["ID"])){
             if(isset($_POST["login"])){
                 if(($_POST["login"]) != ""){

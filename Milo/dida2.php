@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title>Slide Jantem</title>
     <link rel="stylesheet" href="css/styleDida2.css">
+    <script src="js/script.js"></script>
 
 </head>
 
@@ -15,6 +16,9 @@
 </audio>
 <body class="backDida">
 
+    <?php 
+        include "nuage.php";
+    ?>  
     <div class="jantem">
         <img src="image/Jantem.gif" alt="">
     </div>
@@ -23,7 +27,7 @@
 
     <div id="continue">
     <img src="image/keys.gif" alt="">
-    <a href="levels.php" class="eightbit-btn eightbit-btn--reset">Play</a>
+    <a onclick="out('game.php?map=1&w=1')" class="eightbit-btn eightbit-btn--reset">Play</a>
 </div> 
 
 

@@ -34,9 +34,12 @@ var nbcase = 0;
 var TPpos1 = [-1,-1];
 var TPpos2 = [-1,-1];
 
+
+var finalmap = parseInt(nbmap)+(5*(parseInt(word)-1));
+console.log(finalmap);
 //fonction pour récup les données dans le map.txt
 var request = new XMLHttpRequest();
-request.open("GET", "map/map"+nbmap+".txt", false);
+request.open("GET", "map/map"+finalmap+".txt", false);
 // request.open("GET", "backend/map.txt", false);
 request.send(null)
 var file = request.responseText
