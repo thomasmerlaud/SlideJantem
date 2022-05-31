@@ -7,10 +7,11 @@
     <script src="js/game.js"></script>
     <script src="js/script.js"></script>
   </head>
-  <body>
-      <?php 
+  <?php 
         include "nuage.php";
-        ?>
+        $w = $_GET["w"];
+        echo '<body style="background: url(\'img/map/'.$w.'.gif\')no-repeat center center fixed; background-size: cover;">';
+  ?>
     <!-- <div class="button">   -->
     <div class="game">
       <div class="push_button restart" onClick="reset();"> Restart </div>

@@ -20,15 +20,17 @@
         session_start();
         if(!isset($_SESSION["ID"])){
             if(isset($_POST["login"])){
-                require("../bdd/main.php");
-                $userlist = getUsers();
-                if (!(in_array($_POST["login"], $userlist))) {
-                    adduser($_POST["login"]);
-                    header('Location: dida.php');
-                }
+                if(($_POST["login"]) != ""){
+                    require("../bdd/main.php");
+                    $userlist = getUsers();
+                    if (!(in_array($_POST["login"], $userlist))) {
+                        adduser($_POST["login"]);
+                        header('Location: dida.php');
+                    }
                 $id = getId($_POST["login"]);
                 $_SESSION["ID"] = $id;
                 // print_r($_SESSION["ID"]);
+                }
             }
         }
         ?>
@@ -36,7 +38,7 @@
         <div class="div2">
         </div>
         <div class="div3">
-            <a class="levels" onclick="out('levels.php')">LEVELS</a>
+            <a class="levels" onclick="out('words.php')">STORY</a>
         </div>
         <div class="div4">
             <a class="create" onclick="out('../Nolan/creator.html')">CREATE MAP</a>

@@ -1,5 +1,13 @@
 const urlp = new URLSearchParams(window.location.search);
 const nbmap = decodeURIComponent(urlp.get('map'));
+const word = decodeURIComponent(urlp.get('w'));
+// console.log(nbmap, word)
+
+let root = document.documentElement;
+root.style.setProperty('--block-wall', "url(\"../img/block/"+word+".jpg\")");
+
+
+// document.querySelector(".wall").background = "url(\"../img/block/"+word+".jpg\")"
 
 // variable globales:
 let bag = 0
@@ -142,7 +150,12 @@ function menu() {
 }
 function nextlevel() {
    next = parseInt(nbmap) + 1;
-   window.location.href="game.php?map="+(next)+""; 
+   if (next < 6){
+      window.location.href="game.php?map="+(next)+"&w="+word+"";
+   }
+   else{
+      window.location.href="words.php";
+   }
 }
 
 
