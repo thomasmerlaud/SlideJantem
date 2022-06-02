@@ -51,12 +51,11 @@
             } 
             ?>
         </div>
-    </div>
+    </div>  
     
 <script src="js/script.js"></script>
 
-
-    <style>
+<style>
 
         
 /* icones en haut */

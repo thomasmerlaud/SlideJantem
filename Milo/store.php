@@ -85,14 +85,14 @@
 <div class="content_title">
     <div class="content__container">
         <p class="content__container__text"> your skin and your paint colour </p>
-            <ul class="content__container__list">
-                <li class="content__container__list__item">Select  </li>
-                <li class="content__container__list__item">Buy  </li>
-                <li class="content__container__list__item">Select  </li>
-                <li class="content__container__list__item">Buy  </li>
-            </ul>
+        <ul class="content__container__list">
+            <li class="content__container__list__item">Select  </li>
+            <li class="content__container__list__item">Buy  </li>
+            <li class="content__container__list__item">Select  </li>
+            <li class="content__container__list__item">Buy  </li>
+        </ul>
     </div>
-  </div>
+</div>
 
 <body class="backstore">
 

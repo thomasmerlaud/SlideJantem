@@ -4,14 +4,6 @@
     <head>
         <meta charset="utf-8">
         <style>
-        .backindex{
-            background: no-repeat center center fixed; 
-            text-align: center;
-            background-size: cover;
-            background-image: url('../code/jantemcode/image/1.gif');
-            z-index: 10;
-        }
-
         .main{
             z-index: 15;
         }

@@ -1,5 +1,4 @@
 <?php
-    session_start();
     $id = ($_SESSION["ID"]);
     $score = $_GET["score"];
     $idmap = $_GET["map"];

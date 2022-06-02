@@ -245,7 +245,7 @@ function renderMaze() {
 
       var score = new XMLHttpRequest();
       score.onload = function(){};
-      url = "../bdd/score.php?score="+scoremap+"&map="+nbmap;
+      url = "../bdd/score.php?score="+scoremap+"&map="+finalmap;
       score.open("GET", url, false);
       score.send();
       // score = score.responseText;

@@ -43,7 +43,7 @@
             else{
                 echo "onclick=\"out('play.php')\"";
             }?> 
-            class="push_buttonP"> PLAY </a>
+            class="push_buttonP"> GO </a>
 
             
             <br>
