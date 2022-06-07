@@ -512,7 +512,7 @@ function auto(e){
     }
     if (tele == 1){falses = false;}
 
-    }while (perso==0 || vide < dim*2||falses == false)
+    }while (perso==0 ||falses == false)
 }
 function randomtab2(e){
     
