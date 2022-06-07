@@ -11,40 +11,30 @@ root.style.setProperty('--block-player', "url(\"../img/perso/"+playerd+".gif\") 
 root.style.setProperty('--fond', "#71dce2");
 
 
+var request = new XMLHttpRequest();
 if(custom == "null"){
    const nbmap = decodeURIComponent(urlp.get('map'));
    const word = decodeURIComponent(urlp.get('w'));   
+
    root.style.setProperty('--block-wall', "url(\"../img/block/"+word+".jpg\")");
 
-
    var finalmap = parseInt(nbmap)+(5*(parseInt(word)-1));
-   // console.log(finalmap);
-   //fonction pour récup les données dans le map.txt
-   var request = new XMLHttpRequest();
    request.open("GET", "map/map"+finalmap+".txt", false);
-   // request.open("GET", "backend/map.txt", false);
-   request.send(null)
-   var file = request.responseText
 }
 else{  
    const manu = decodeURIComponent(urlp.get('manu'));
    root.style.setProperty('--block-wall', "url(\"../img/block/1.jpg\")");
-
    
-   // var finalmap = parseInt(nbmap)+(5*(parseInt()-1));
-
-   //fonction pour récup les données dans le map.txt
-   var request = new XMLHttpRequest();
    if(manu == 1){
-      request.open("GET", "../../Nolan/php/manualmaps/map"+custom+".txt", false);
+      request.open("GET", "../Nolan/php/manualmaps/map"+custom+".txt", false);
    }
    else{
-      request.open("GET", "../../Nolan/php/automaps/map"+custom+".txt", false);
+      request.open("GET", "../Nolan/php/automaps/map"+custom+".txt", false);
    }
-   // request.open("GET", "backend/map.txt", false);
-   request.send(null)
-   var file = request.responseText
 }
+request.send(null)
+var file = request.responseText
+
 
 
 // variable globales:
