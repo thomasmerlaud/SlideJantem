@@ -175,7 +175,8 @@ body{
 }
 
 .player {
-    background: var(--block-player), url("../img/road.png");
+    /* background: var(--block-player), url("../img/road.png"); */
+    background: var(--block-player), var(--fond);
     background-size: 100%;
 
 
