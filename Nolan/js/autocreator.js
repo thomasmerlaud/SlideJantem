@@ -1,7 +1,7 @@
 
 var dim =12;
 var valid1= true;
-
+var valid2 = false;
 var div1 = document.querySelector('#uniquecreator');
 var tab1 = document.createElement('tableCrea');
 
@@ -400,7 +400,7 @@ function initCreator (e){
 
 
 function resetcrea (e){
-
+    valid2 = false;
     initCreator();
     console.log('Fonction reset faite');
     nbrail1=0;
@@ -451,7 +451,14 @@ function Try(){
     }
 }
 function Save(){
-	
+    if (valid2){
+	gameo.className = 'over';
+
+    texte = document.createElement('h2');
+    gameo.appendChild(texte);
+
+    texte.innerHTML = 'Saved successfully'
+    }
 	convertNumberCrea();
     nbFichiers+=1;
     initJeu();
@@ -459,6 +466,14 @@ function Save(){
     
 }
 function auto(e){
+
+    if (valid2){
+
+        gameo.removeChild(texte);
+	gameo.className='';
+    }
+    valid2 = true;
+
     do{
         console.log('Fonction auto faite');
 
@@ -467,21 +482,20 @@ function auto(e){
         request.open("GET", "php/auto.php?dim="+dim+"&nbFichiers="+nbFichiers, false);
         request.send(null)
 
-        var request = new XMLHttpRequest();
-        request.open("GET", "php/verifauto.php", false);
-        request.send(null)
-        var file = request.responseText
+        // var request = new XMLHttpRequest();
+        // request.open("GET", "php/verifauto.php", false);
+        // request.send(null)
+        // var file = request.responseText
 
-        file = file.split(" ")
-        var result = file[0]
-        var count = file[1]
+        // file = file.split(" ")
+        // var result = file[0]
+        // var count = file[1]
 
         var tab = numberToCREATION();
         
         request.open("GET", "php/autoapres.php?array="+tab.join('|')+"&nbFichiers="+nbFichiers, false);
 		request.send(null)
 
-        
 
         var perso = 0;
         var tele = 0;
