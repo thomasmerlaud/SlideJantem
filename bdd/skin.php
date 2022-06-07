@@ -1,4 +1,5 @@
 <?php
+    session_start();
     $id = ($_SESSION["ID"]);
     $player = $_GET["player"];
     $trail = $_GET["trail"];
