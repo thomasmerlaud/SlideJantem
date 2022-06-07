@@ -20,6 +20,7 @@ body {
 .jantem{
     display: block;
     position : absolute;
+    height: 15%;
 
     z-index : 300;
     left: 15%;
