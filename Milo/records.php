@@ -23,7 +23,9 @@
         <div class="div3"> PLAYER NAME </div>
         
         <?php
-        require("../bdd/main.php");
+        if(!isset($_SESSION["ID"])){
+            include("../bdd/main.php");
+        }
         $rank = ranking();
         $len = count($rank); 
         ?>

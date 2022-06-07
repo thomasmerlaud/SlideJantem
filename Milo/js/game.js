@@ -1,5 +1,41 @@
 const urlp = new URLSearchParams(window.location.search);
-const nbmap = decodeURIComponent(urlp.get('map'));
+const custom = decodeURIComponent(urlp.get('mapc'));
+
+
+const playerd = playerdesign;
+const traild = traildesign;
+console.log(playerd, traild);
+
+let root = document.documentElement;
+root.style.setProperty('--block-player', "url(\"../img/perso/"+playerd+".gif\") no-repeat");
+root.style.setProperty('--fond', "#71dce2");
+
+
+var request = new XMLHttpRequest();
+if(custom == "null"){
+   const nbmap = decodeURIComponent(urlp.get('map'));
+   const word = decodeURIComponent(urlp.get('w'));   
+
+   root.style.setProperty('--block-wall', "url(\"../img/block/"+word+".jpg\")");
+
+   var finalmap = parseInt(nbmap)+(5*(parseInt(word)-1));
+   request.open("GET", "map/map"+finalmap+".txt", false);
+}
+else{  
+   const manu = decodeURIComponent(urlp.get('manu'));
+   root.style.setProperty('--block-wall', "url(\"../img/block/1.jpg\")");
+   
+   if(manu == 1){
+      request.open("GET", "../Nolan/php/manualmaps/map"+custom+".txt", false);
+   }
+   else{
+      request.open("GET", "../Nolan/php/automaps/map"+custom+".txt", false);
+   }
+}
+request.send(null)
+var file = request.responseText
+
+
 
 // variable globales:
 let bag = 0
@@ -26,17 +62,8 @@ var nbcase = 0;
 var TPpos1 = [-1,-1];
 var TPpos2 = [-1,-1];
 
-//fonction pour récup les données dans le map.txt
-var request = new XMLHttpRequest();
-request.open("GET", "map/map"+nbmap+".txt", false);
-// request.open("GET", "backend/map.txt", false);
-request.send(null)
-var file = request.responseText
 
-// Scrap des données du TXT
-// Division des résultats en SixeX SizeY et map
 const arrayfile = Array.from(String(file), Number);
-
 const SizeX = arrayfile.splice(0, 2);
 const SizeY = arrayfile.splice(0, 2);
 for (i = 0; i < SizeX.length; i++) {
@@ -142,9 +169,17 @@ function menu() {
 }
 function nextlevel() {
    next = parseInt(nbmap) + 1;
-   window.location.href="game.php?map="+(next)+""; 
+   if (next < 6){
+      window.location.href="game.php?map="+(next)+"&w="+word+"";
+   }
+   else{
+      window.location.href="words.php";
+   }
 }
 
+function returnlevels() {
+   window.location.href="../Nolan/php/levels.php";
+}
 
 function createBoard() {
    for (let row = 0; row < ROWS; row++) {
@@ -229,7 +264,7 @@ function renderMaze() {
 
       var score = new XMLHttpRequest();
       score.onload = function(){};
-      url = "../bdd/score.php?score="+scoremap+"&map="+nbmap;
+      url = "../bdd/score.php?score="+scoremap+"&map="+finalmap;
       score.open("GET", url, false);
       score.send();
       // score = score.responseText;

@@ -2,6 +2,8 @@
 var dim =12;
 var valid1= true;
 
+var text = false;
+
 var div1 = document.querySelector('#uniquecreator');
 var tab1 = document.createElement('tableCrea');
 
@@ -28,7 +30,7 @@ var nbrail2=0;
 var nombrerail1 = 0;
 var nombrerail2 = 0;
 
-var cBon = 1;
+var cBon = 0;
 
 var creator = document.querySelector('#creator2');
 
@@ -119,7 +121,7 @@ function main(){
 
 		cl = 0;
 
-		cBon = 1;
+		cBon = 0;
 
 		creator = document.querySelector('#creator');
 		creator.addEventListener('click', EnregistrementCrea);
@@ -136,27 +138,39 @@ function main(){
 		gamew = document.querySelector('#test2');
 		gameo = document.querySelector('#test');
 
+        texte = document.createElement('h2');
+        gamew.appendChild(texte);
+
+        texte.innerHTML = ''
+
 }
 //Verifie si le niveau est possible
 //Fonction Fini//
 
 
 function verifCreator (e){
-	
+
+    text = true;
+	console.log("Verif fonction")
+    convertNumberCrea();
     var request = new XMLHttpRequest();
     request.open("GET", "php/verif.php", false);
     request.send(null)
     var file = request.responseText
 
     file = file.split(" ")
+    console.log(file)
     var result = file[0]
+    console.log(result)
     var count = file[1]
 
     if (result==0){
-        valid1= true;
+        valid1= false;
+        cBon =0;
     }
     else{
-        valid1=false;
+        valid1=true;
+        cBon =1;
     }
 		
     if (gameo.classList.contains('over')){
@@ -168,58 +182,6 @@ function verifCreator (e){
 
 }  
 
-/*do{
-    console.log('Fonction auto faite');
- 
-    var request = new XMLHttpRequest();
-    
-    request.open("GET", "php/auto.php?dim="+dim+"&nbFichiers="+nbFichiers, false);
-    request.send(null)
-
-    var request = new XMLHttpRequest();
-    request.open("GET", "php/verifauto.php", false);
-    request.send(null)
-    var file = request.responseText
-
-    file = file.split(" ")
-    var result = file[0]
-    var count = file[1]
-
-    var perso = 0;
-    var tele = 0;
-    var vide = 0;
-    var falses = true;
-
-    var tab = numberToCREATION();
-    console.log(tab)
-
-    for (let i = 0; i < ligne; i++){
-        for (let j = 0; j < colonne; j++){
-            if(tab[i][j] == 3){
-                perso++;
-            }
-            if(tab[i][j] == 0){
-                vide++;
-            }
-            if(tab[i][j] == 2){
-                tele++;
-                if(tab[i-1][j]+tab[i+1][j]+tab[i][j-1]+tab[i][j+1]>=4){
-                    falses = false;
-                }
-                else if ((tab[i-1][j-1] == 2)||(tab[i][j-1] == 2)
-                    ||(tab[i+1][j-1] == 2)||(tab[i-1][j] == 2)||(tab[i+1][j] == 2)
-                    ||(tab[i+1][j] == 2)||(tab[i-1][j+1] == 2)||(tab[i][j+1] == 2)){
-                    falses = false;
-                }
-            }
-        }
-    }
-    console.log(perso,vide,tele)
-
-    }while (perso==0 || vide < dim*2|| tele != 2 || falses == false)
-
-console.log(perso,vide)
-numberToCREATION();*/
 //fonction pour récup les données du php
 var reeq = new XMLHttpRequest();
 reeq.onload = function() {
@@ -298,22 +260,33 @@ function resetcrea (e){
     nbrail1=0;
     nbrail1=0;
 
-    if (gameo.classList.contains('over')){
     
+    if (text){
         gameo.removeChild(texte);
         gameo.className='';
-        
+        text = false;
     }
-    else if (gamew.classList.contains('win')){
+    else{
+        if (gameo.classList.contains('over')){
+        
+            gameo.removeChild(texte);
+            gameo.className='';
+            text = false;
+            
+        }
+        else if (gamew.classList.contains('win')){
 
-        gamew.removeChild(texte);
-        gamew.className='';
+            gamew.removeChild(texte);
+            gamew.className='';
+
+            text = false;
+        }
     }
 }
 
 function Try(){
     console.log("Fonction Try");
-    if (cBon == 1){
+    if (cBon == 0){
         gamew.className = 'win';
     
         texte = document.createElement('h2');
@@ -323,7 +296,7 @@ function Try(){
 
     gamew.addEventListener('click', reset);
     }
-    else if (cBon == 0){
+    else if (cBon == 1){
     var modecrea = document.querySelector('.modecrea');
     modecrea.classList.add('invisible');
     var modejeu = document.querySelector('.modejeu');
@@ -344,21 +317,43 @@ function Try(){
 }
 function Save(){
 	
-	convertNumberCrea();
-	nbFichiers+=1;
-    if (cBon == 1){
-        gamew.className = 'win';
+    
+    if (text){
+        gameo.removeChild(texte);
+        gameo.className='';
+        text = false;
+    }
+	
+    if (cBon == 0){
+        gameo.className = 'over';
     
         texte = document.createElement('h2');
-        gamew.appendChild(texte);
+        gameo.appendChild(texte);
 
         texte.innerHTML = 'You must Verify before'
 
-		gamew.addEventListener('click', reset);
+		gameo.addEventListener('click', reset);
+        text = true;
+
+        
     }
-    else if (cBon == 0){
+    else if (cBon == 1){
+
+    gameo.className = 'over';
+
+    texte = document.createElement('h2');
+    gameo.appendChild(texte);
+
+    texte.innerHTML = 'Saved successfully'
+    text = true;
+
+    gameo.addEventListener('click', reset);
+    gameo.removeChild(texte);
+	gameo.className='';
 
     initJeu();
+    convertNumberCrea();
+	nbFichiers+=1;
 	
 	//randomtab()
 	
@@ -416,6 +411,7 @@ function verif(e){
 	
 		gameo.removeChild(texte);
 		gameo.className='';
+        text = false;
 	}
 	youlost();
         
@@ -465,20 +461,13 @@ function resetJeu (e){
     console.log("Fonction ResetJeu");
     nbrail1 = nombrerail1;
     nbrail2 = nombrerail2;
-            
-    if (gameo.classList.contains('youlost')){
-                
-        gameo.removeChild(texte);
-        gameo.className='';
-    }
-    else if (gamew.classList.contains('youwin')){
+        
+    if (text){
+    gameo.removeChild(texte);
+    gameo.className='';
 
-        gamew.removeChild(texte);
-        gamew.className='';
+    text = false;
     }
-    
-    document.getElementById("nbrail1").innerHTML=nbrail1 + "x";
-    document.getElementById("nbrail2").innerHTML=nbrail2 + "x";
 
     initJeu();
 }
@@ -497,6 +486,8 @@ function obstacle(laCible){
 //Fonction Fini
 function setJeu(row, column, decor){
 	
+  
+
 	console.log("Fonction setJeu");
     var elt = tableaujeu[row][column];
     
@@ -645,6 +636,14 @@ function setcrea(row, column, decor){
 //Fonction Fini//
 function EnregistrementCrea(e){
 
+
+    if (text){
+        gameo.removeChild(texte);
+        gameo.className='';
+        text = false;
+        console.log("Il y a un texte");
+    }
+    
 	console.log("Fonction enregistrementcrea");
     var laCible = event.target
 

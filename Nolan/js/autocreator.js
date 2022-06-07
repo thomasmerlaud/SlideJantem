@@ -1,7 +1,7 @@
 
 var dim =12;
 var valid1= true;
-
+var valid2 = false;
 var div1 = document.querySelector('#uniquecreator');
 var tab1 = document.createElement('tableCrea');
 
@@ -183,7 +183,7 @@ var reeq = new XMLHttpRequest();
 reeq.onload = function() {
     var truc = this.responseText;
 }
-reeq.open("GET", "php/countfiles.php", false);
+reeq.open("GET", "php/countfilesauto.php", false);
 
 reeq.send(null);
 
@@ -199,6 +199,7 @@ function numberToCREATION(){
 		request.open("GET", "php/map.txt", false);
 		request.send(null)
 		var file = request.responseText
+        //console.log(file)
 
 		// Scrap des données du TXT
 		// Division des résultats en SixeX SizeY et map
@@ -399,7 +400,8 @@ function initCreator (e){
 
 
 function resetcrea (e){
-
+    valid2 = false;
+    autoo = 0;
     initCreator();
     console.log('Fonction reset faite');
     nbrail1=0;
@@ -450,96 +452,54 @@ function Try(){
     }
 }
 function Save(){
-	
+    autoo =0;
+    if (valid2){
+	gameo.className = 'over';
+
+    texte = document.createElement('h2');
+    gameo.appendChild(texte);
+
+    texte.innerHTML = 'Saved successfully'
+    }
 	convertNumberCrea();
     nbFichiers+=1;
     initJeu();
 	//randomtab()
     
 }
+var autoo = 1;
 function auto(e){
-	/*console.log('Fonction auto faite');
-	 
-    var request = new XMLHttpRequest();
-    
-    request.open("GET", "php/auto.php?dim="+dim+"&nbFichiers="+nbFichiers, false);
-    request.send(null)
 
-    var request = new XMLHttpRequest();
-    request.open("GET", "php/verifauto.php", false);
-    request.send(null)
-    var file = request.responseText
+    if (valid2 && autoo !=1){
 
-    file = file.split(" ")
-    var result = file[0]
-    var count = file[1]
-
-    var perso = 0;
-    var tele = 0;
-    var vide = 0;
-
-    var tab = numberToCREATION();
-    console.log(tab)
-
-    for (let i = 0; i < ligne; i++){
-        for (let j = 0; j < colonne; j++){
-            if(tab[i][j] == 3){
-                perso++;
-            }
-            if(tab[i][j] == 0){
-                vide++;
-            }
-            if(tab[i][j] == 2){
-                tele++;
-                if(tab[i-1][j]+tab[i+1][j]+tab[i][j-1]+tab[i][j+1]>=4){
-                    falses = false;
-                }
-                else if ((tab[i-1][j-1] == 2)||(tab[i][j-1] == 2)
-                    ||(tab[i+1][j-1] == 2)||(tab[i-1][j] == 2)||(tab[i+1][j] == 2)
-                    ||(tab[i+1][j] == 2)||(tab[i-1][j+1] == 2)||(tab[i][j+1] == 2)){
-                    falses = false;
-                }
-            }
-        }
+        gameo.removeChild(texte);
+	    gameo.className='';
     }
+    valid2 = true;
+    autoo = 1;
 
-    
-
-    if (perso==0 || vide < dim*2|| tele != 2|| falses == false){ //|| tele != 2|| falses == false
-    
-        console.log("WTF");
-        auto();
-
-    }
-    else{
-        console.log(perso,vide,tele,falses)
-
-        console.log("what ca marche???");
-        numberToCREATION();
-    }*/
-
-     
     do{
         console.log('Fonction auto faite');
-	 
+
         var request = new XMLHttpRequest();
         
         request.open("GET", "php/auto.php?dim="+dim+"&nbFichiers="+nbFichiers, false);
         request.send(null)
 
-        var request = new XMLHttpRequest();
-        request.open("GET", "php/verifauto.php", false);
-        request.send(null)
-        var file = request.responseText
+         var request = new XMLHttpRequest();
+         request.open("GET", "php/verifauto.php", false);
+         request.send(null)
+         var file = request.responseText
 
-        file = file.split(" ")
-        var result = file[0]
-        var count = file[1]
+         file = file.split(" ")
+         var result = file[0]
+         var count = file[1]
 
         var tab = numberToCREATION();
-
+        
         request.open("GET", "php/autoapres.php?array="+tab.join('|')+"&nbFichiers="+nbFichiers, false);
 		request.send(null)
+
 
         var perso = 0;
         var tele = 0;
@@ -570,7 +530,7 @@ function auto(e){
     }
     if (tele == 1){falses = false;}
 
-    }while (perso==0 || vide < dim*2||falses == false)
+    }while (perso==0 ||falses == false)
 }
 function randomtab2(e){
     
@@ -584,12 +544,6 @@ function randomtab2(e){
         tabN[x] = Array(dim);
     }
 
-    for (let i = 0; i < ligne; i++){
-
-        for (let j = 0; j < colonne; j++){
-            tabN[i][j] = 1;
-        }
-    }
     //Math.floor(Math.random() * (max - min + 1)) + min;
     var i = Math.floor( Math.random() * (dim-2)) + 1;
     var j = Math.floor( Math.random() * (dim-2)) + 1;
@@ -607,6 +561,7 @@ function randomtab2(e){
         var direction = Math.floor ( Math.random() * 4 );
         // 0 = Nord , 1 = Ouest , 2 = Sud , 3 = Est
         var enregistrement = 4;
+        var compare = 4;
         if (direction==0){
             if (enregistrement!=2 && i-1!=0){
                 i--;
@@ -653,11 +608,36 @@ function randomtab2(e){
             tableaucrea[i][j].className = 'teleporter';
         }
         else{
-            if (tabN[i][j] !=2 ){
+            if (tabN[i][j] !=2 || tabN[i][j] !=1){
                 tabN[i][j] = 0;
                 setJeu(j,i,0);
                 tableaucrea[i][j].className = '';
+                // 0 = Nord , 1 = Ouest , 2 = Sud , 3 = Est
+                if(compare!=enregistrement){
+                    if(compare ==0){
+                        tabN[i-1][j] = 1;
+                        setJeu(j,i,1);
+                        tableaucrea[i][j].className = 'block';
+                    }
+                    else if(compare ==1){
+                        tabN[i][j-1] = 1;
+                        setJeu(j,i,1);
+                        tableaucrea[i][j].className = 'block';
+                    }
+                    else if(compare ==2){
+                        tabN[i+1][j] = 1;
+                        setJeu(j,i,1);
+                        tableaucrea[i][j].className = 'block';
+                    }
+                    else if(compare ==3){
+                        tabN[i][j+1] = 1;
+                        setJeu(j,i,1);
+                        tableaucrea[i][j].className = 'block';
+                    }
+
+                }
             }
+            compare = enregistrement;
             addtel = Math.floor ( Math.random() * 4 );
         }
     }

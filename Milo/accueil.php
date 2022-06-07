@@ -23,14 +23,13 @@
 
         
         <?php
-        session_start();
         if(!isset($_SESSION["ID"])){
             echo "<form id='login' class='login' method='post' action='play.php'>
-                    <input type='text' name='login' placeholder='Player Name'/>
+                    <input type='text' name='login' placeholder='Player Name' required>
                 </form>";
         }
         else{
-            require("../bdd/main.php");
+            // require("../bdd/main.php");
             $username = getUsername($_SESSION["ID"]);
             echo "<div class='logged'>Hey $username !</div>";
         }
@@ -44,7 +43,7 @@
             else{
                 echo "onclick=\"out('play.php')\"";
             }?> 
-            class="push_buttonP"> PLAY </a>
+            class="push_buttonP"> GO </a>
 
             
             <br>

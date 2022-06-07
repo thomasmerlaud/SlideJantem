@@ -31,7 +31,7 @@ body{
 .div2 { grid-area: 1 / 2 / 2 / 3; }
 .div3 { grid-area: 2 / 1 / 3 / 2; }
 .div4 { grid-area: 2 / 2 / 3 / 3; }
-.div5 { grid-area: 3 / 1 / 4 / 2; }
+.div5 { grid-area: 3 / 1 / 4 / 3; }
 .div6 { grid-area: 3 / 2 / 4 / 3; }
   
 
@@ -113,5 +113,35 @@ body{
     box-shadow: 0vh 0.4vh 0vh #74367c;
     position:relative;
     top:2vh;
-    }
-  
+  }
+
+
+
+
+  .create2{
+    font-family: 'Rubik One', sans-serif;
+    margin: 5vh;
+    width: 40%;
+    color:#FFF;
+    display:inline-block;
+    text-decoration:none;
+    border:solid 1vh #ffdc5c;
+    background:#ffdc5c;
+    text-align:center;
+    padding:3.5vh 4.5vh;
+    -webkit-transition: all 0.1s;
+    -moz-transition: all 0.1s;
+    transition: all 0.1s;
+    -webkit-box-shadow: 0vh 1.8vh 0vh #c18243;
+    -moz-box-shadow: 0vh 1.8vh 0vh #c18243;
+    box-shadow: 1.8vh 1.8vh 0vh #c18243;
+  }
+
+
+  .create2:hover{
+    -webkit-box-shadow: 0vh 0.4vh 0vh #c18243;
+    -moz-box-shadow: 0vh 0.4vh 0vh #c18243;
+    box-shadow: 0vh 0.4vh 0vh #c18243;
+    position:relative;
+    top:2vh;
+  }

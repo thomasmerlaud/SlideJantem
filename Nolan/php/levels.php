@@ -6,20 +6,18 @@
     <link rel="stylesheet" href="../css/styleLevels.css">
     <script src="../js/script.js"></script>
 </head>
-
-
-
-<body class="backlevels">
-
     <?php 
         include "nuage.php";
         include "icone.php";
     ?>
-<div class="container">
-    <span>Creations</span>
-            
-</div>
-<div class = "tableau">
+
+
+<body class="backlevels">
+<div class="contleft">
+    <div class="container">
+        <span>Auto <br><br>Creations</span>     
+    </div>
+    <div class = "tableau">
         <div class = "levels"> 
             <?php
             function countFiles()
@@ -35,13 +33,42 @@
                 return (int) $nbFichiers-2;
             }
             $nbFichiers = countFiles();
-            for ($i = 1; $i < $nbFichiers; $i++) {
-                echo"<button onclick="."out('../../Milo/game.php?map=".$i."')"." class='big-button'>$i</button>";
+            for ($i = 0; $i < $nbFichiers; $i++) {
+                echo"<button onclick="."out('../../Milo/game.php?mapc=".$i."&manu=0')"." class='big-button'>".($i+1)."</button>";
             }
         ?>
         </div>
     </div>
+</div>
 
+
+<div class="contright">
+    <div class="container">
+        <span>Manual <br><br>Creations</span>       
+    </div>
+    <div class = "tableau">
+        <div class = "levels"> 
+            <?php
+            function countFiles2()
+            {
+                $nbFichiers = 0;
+                $repertoire = opendir("manualmaps/");
+            
+                while ($fichier = readdir($repertoire))
+                {
+                    $nbFichiers += 1;
+                }
+            
+                return (int) $nbFichiers-2;
+            }
+            $nbFichiers = countFiles2();
+            for ($i = 1; $i < $nbFichiers; $i++) {
+                echo"<button onclick="."out('../../Milo/game.php?mapc=".$i."&manu=1')"." class='big-button'>$i</button>";
+            }
+            ?>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
