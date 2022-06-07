@@ -26,7 +26,9 @@
   </head>
   <?php 
         include "nuage.php";
-        $w = $_GET["w"];
+        if(isset($_GET["w"])){
+          $w = $_GET["w"];
+        }
         echo '<body style="background: url(\'img/map/'.$w.'.gif\')no-repeat center center fixed; background-size: cover;">';
   ?>
     <!-- <div class="button">   -->

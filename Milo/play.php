@@ -40,9 +40,11 @@
             <a class="levels" onclick="out('words.php')">STORY</a>
         </div>
         <div class="div4">
-            <a class="create" onclick="out('../Nolan/creator.html')">CREATE MAP</a>
+            <a class="create" onclick="out('../Nolan/php/levels.php')">WORKSHOP</a>
         </div>
-        <div class="div5"> </div>
+        <div class="div5">
+            <a class="create2" onclick="out('../Nolan/creator.html')">CREATE MAP</a>
+        </div>
         <div class="div6"> </div>
 
     </div>

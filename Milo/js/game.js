@@ -1,22 +1,43 @@
 const urlp = new URLSearchParams(window.location.search);
-const nbmap = decodeURIComponent(urlp.get('map'));
-const word = decodeURIComponent(urlp.get('w'));
-// console.log(nbmap, word)
-
+const custom = decodeURIComponent(urlp.get('mapc'));
 
 
 const playerd = playerdesign;
 const traild = traildesign;
-
-// console.log(playerdesign,traildesign);
-
 let root = document.documentElement;
-root.style.setProperty('--block-wall', "url(\"../img/block/"+word+".jpg\")");
 root.style.setProperty('--block-player', "url(\"../img/perso/"+playerd+".gif\") no-repeat");
 root.style.setProperty('--fond', "#71dce2");
 
 
-// document.querySelector(".wall").background = "url(\"../img/block/"+word+".jpg\")"
+if(custom == "null"){
+   const nbmap = decodeURIComponent(urlp.get('map'));
+   const word = decodeURIComponent(urlp.get('w'));   
+   root.style.setProperty('--block-wall', "url(\"../img/block/"+word+".jpg\")");
+
+
+   var finalmap = parseInt(nbmap)+(5*(parseInt(word)-1));
+   // console.log(finalmap);
+   //fonction pour récup les données dans le map.txt
+   var request = new XMLHttpRequest();
+   request.open("GET", "map/map"+finalmap+".txt", false);
+   // request.open("GET", "backend/map.txt", false);
+   request.send(null)
+   var file = request.responseText
+}
+else{  
+   root.style.setProperty('--block-wall', "url(\"../img/block/1.jpg\")");
+
+   
+   // var finalmap = parseInt(nbmap)+(5*(parseInt()-1));
+
+   //fonction pour récup les données dans le map.txt
+   var request = new XMLHttpRequest();
+   request.open("GET", "../../Nolan/php/"+custom+".txt", false);
+   // request.open("GET", "backend/map.txt", false);
+   request.send(null)
+   var file = request.responseText
+}
+
 
 // variable globales:
 let bag = 0
@@ -44,19 +65,7 @@ var TPpos1 = [-1,-1];
 var TPpos2 = [-1,-1];
 
 
-var finalmap = parseInt(nbmap)+(5*(parseInt(word)-1));
-// console.log(finalmap);
-//fonction pour récup les données dans le map.txt
-var request = new XMLHttpRequest();
-request.open("GET", "map/map"+finalmap+".txt", false);
-// request.open("GET", "backend/map.txt", false);
-request.send(null)
-var file = request.responseText
-
-// Scrap des données du TXT
-// Division des résultats en SixeX SizeY et map
 const arrayfile = Array.from(String(file), Number);
-
 const SizeX = arrayfile.splice(0, 2);
 const SizeY = arrayfile.splice(0, 2);
 for (i = 0; i < SizeX.length; i++) {
