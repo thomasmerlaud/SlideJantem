@@ -3,8 +3,17 @@ const nbmap = decodeURIComponent(urlp.get('map'));
 const word = decodeURIComponent(urlp.get('w'));
 // console.log(nbmap, word)
 
+
+
+const playerd = playerdesign;
+const traild = traildesign;
+
+// console.log(playerdesign,traildesign);
+
 let root = document.documentElement;
 root.style.setProperty('--block-wall', "url(\"../img/block/"+word+".jpg\")");
+root.style.setProperty('--block-player', "url(\"../img/perso/"+playerd+".gif\") no-repeat");
+root.style.setProperty('--fond', "#71dce2");
 
 
 // document.querySelector(".wall").background = "url(\"../img/block/"+word+".jpg\")"
@@ -36,7 +45,7 @@ var TPpos2 = [-1,-1];
 
 
 var finalmap = parseInt(nbmap)+(5*(parseInt(word)-1));
-console.log(finalmap);
+// console.log(finalmap);
 //fonction pour récup les données dans le map.txt
 var request = new XMLHttpRequest();
 request.open("GET", "map/map"+finalmap+".txt", false);

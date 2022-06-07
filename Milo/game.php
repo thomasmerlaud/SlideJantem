@@ -4,6 +4,23 @@
     <meta charset="utf-8">
     <title>Slide Jantem</title>
     <link rel="stylesheet" href="css/style.css">
+
+    <?php
+    session_start();
+    if(isset($_SESSION["ID"])){
+      $id = $_SESSION["ID"];
+      require("../bdd/getskin.php");
+      getSkin($id);
+      echo '<script>var playerdesign = '.json_encode($_SESSION['player']).';</script>';
+      echo '<script>var traildesign = '.json_encode($_SESSION['trail']).';</script>';
+    }
+    else{
+      echo '<script>var playerdesign = 1;</script>';
+      echo '<script>var traildesign = 1;</script>';
+    }
+    session_abort();
+    ?>
+    
     <script src="js/game.js"></script>
     <script src="js/script.js"></script>
   </head>
