@@ -34,7 +34,7 @@
             }
             $nbFichiers = countFiles();
             for ($i = 1; $i < $nbFichiers; $i++) {
-                echo"<button onclick="."out('../../Milo/game.php?mapc=".$i."')"." class='big-button'>$i</button>";
+                echo"<button onclick="."out('../../Milo/game.php?mapc=".$i."&manu=0')"." class='big-button'>$i</button>";
             }
         ?>
         </div>
@@ -63,7 +63,7 @@
             }
             $nbFichiers = countFiles2();
             for ($i = 1; $i < $nbFichiers; $i++) {
-                echo"<button onclick="."out('../../Milo/game.php?mapc=".$i."')"." class='big-button'>$i</button>";
+                echo"<button onclick="."out('../../Milo/game.php?mapc=".$i."&manu=1')"." class='big-button'>$i</button>";
             }
             ?>
         </div>

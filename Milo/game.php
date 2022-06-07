@@ -29,6 +29,9 @@
         if(isset($_GET["w"])){
           $w = $_GET["w"];
         }
+        else{
+          $w = 1;
+        }
         echo '<body style="background: url(\'img/map/'.$w.'.gif\')no-repeat center center fixed; background-size: cover;">';
   ?>
     <!-- <div class="button">   -->
