@@ -60,7 +60,12 @@
         <div class="menu home" onClick="menu();">Home</div>
 
         <?php
-        if(isset($_GET["w"])){?>
+        if(isset($_GET["w"])){
+          if (($_GET["w"] == 4) && ($_GET["map"] == 5)){?>
+              <div class="menu next" onClick="end();">END !</div>
+          <?php
+          }
+          ?>
           <div class="menu next" onClick="nextlevel();">Next</div>
         <?php
         }

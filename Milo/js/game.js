@@ -180,6 +180,9 @@ function nextlevel() {
 function returnlevels() {
    window.location.href="../Nolan/php/levels.php";
 }
+function end() {
+   window.location.href="end.php";
+}
 
 function createBoard() {
    for (let row = 0; row < ROWS; row++) {
