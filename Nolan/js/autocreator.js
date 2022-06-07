@@ -183,7 +183,7 @@ var reeq = new XMLHttpRequest();
 reeq.onload = function() {
     var truc = this.responseText;
 }
-reeq.open("GET", "php/countfiles.php", false);
+reeq.open("GET", "php/countfilesauto.php", false);
 
 reeq.send(null);
 
@@ -401,6 +401,7 @@ function initCreator (e){
 
 function resetcrea (e){
     valid2 = false;
+    autoo = 0;
     initCreator();
     console.log('Fonction reset faite');
     nbrail1=0;
@@ -451,6 +452,7 @@ function Try(){
     }
 }
 function Save(){
+    autoo =0;
     if (valid2){
 	gameo.className = 'over';
 
@@ -465,14 +467,16 @@ function Save(){
 	//randomtab()
     
 }
+var autoo = 1;
 function auto(e){
 
-    if (valid2){
+    if (valid2 && autoo !=1){
 
         gameo.removeChild(texte);
-	gameo.className='';
+	    gameo.className='';
     }
     valid2 = true;
+    autoo = 1;
 
     do{
         console.log('Fonction auto faite');
@@ -482,14 +486,14 @@ function auto(e){
         request.open("GET", "php/auto.php?dim="+dim+"&nbFichiers="+nbFichiers, false);
         request.send(null)
 
-        // var request = new XMLHttpRequest();
-        // request.open("GET", "php/verifauto.php", false);
-        // request.send(null)
-        // var file = request.responseText
+         var request = new XMLHttpRequest();
+         request.open("GET", "php/verifauto.php", false);
+         request.send(null)
+         var file = request.responseText
 
-        // file = file.split(" ")
-        // var result = file[0]
-        // var count = file[1]
+         file = file.split(" ")
+         var result = file[0]
+         var count = file[1]
 
         var tab = numberToCREATION();
         
