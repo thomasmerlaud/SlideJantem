@@ -4,6 +4,8 @@ const custom = decodeURIComponent(urlp.get('mapc'));
 
 const playerd = playerdesign;
 const traild = traildesign;
+console.log(playerd, traild);
+
 let root = document.documentElement;
 root.style.setProperty('--block-player', "url(\"../img/perso/"+playerd+".gif\") no-repeat");
 root.style.setProperty('--fond', "#71dce2");
@@ -25,6 +27,7 @@ if(custom == "null"){
    var file = request.responseText
 }
 else{  
+   const manu = decodeURIComponent(urlp.get('manu'));
    root.style.setProperty('--block-wall', "url(\"../img/block/1.jpg\")");
 
    
@@ -32,7 +35,12 @@ else{
 
    //fonction pour récup les données dans le map.txt
    var request = new XMLHttpRequest();
-   request.open("GET", "../../Nolan/php/"+custom+".txt", false);
+   if(manu == 1){
+      request.open("GET", "../../Nolan/php/manualmaps/map"+custom+".txt", false);
+   }
+   else{
+      request.open("GET", "../../Nolan/php/automaps/map"+custom+".txt", false);
+   }
    // request.open("GET", "backend/map.txt", false);
    request.send(null)
    var file = request.responseText
