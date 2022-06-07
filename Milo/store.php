@@ -133,7 +133,7 @@
                 <img src="image/purple.png" alt="">
                 <img src="image/red.png" alt="">
                 <img src="image/yellow.png" alt="">
-                <img src="image/yellow.png" alt="">
+                <img src="image/green2.png" alt="">
             </figure>
             <nav class="navv">
                 <button class="nav prev">Prev</button>
