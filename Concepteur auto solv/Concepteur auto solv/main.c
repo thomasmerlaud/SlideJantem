@@ -35,6 +35,8 @@ int main() {
 
 	int taille = 8;
 	int compteur = 0;
+	int perso = 0;
+	int telep = 0;
 
 	if (lon == 8) {
 		int test2[8][8];
@@ -43,9 +45,22 @@ int main() {
 				c = fgetc(lire);
 				int temp = c - 48;
 				test2[i][j] = temp;
+				if (temp == 3) {
+					perso++;
+				}
+				if (temp == 2) {
+					telep++;
+				}
 			}
 		}
-		solveurbrut(test2, 8, 8);
+		if (perso == 1) {
+			if (telep == 0 || telep == 2) {
+				solveurbrut(test2, 8, 8);
+			}
+		}
+		else {
+			printf("%d", 0);
+		}
 	}
 	if (lon == 9) {
 		int test2[9][9];
@@ -54,9 +69,22 @@ int main() {
 				c = fgetc(lire);
 				int temp = c - 48;
 				test2[i][j] = temp;
+				if (temp == 3) {
+					perso++;
+				}
+				if (temp == 2) {
+					telep++;
+				}
 			}
 		}
-		solv9(test2, 9, 9);
+		if (perso == 1) {
+			if (telep == 0 || telep == 2){
+				solv9(test2, 9, 9);
+			}
+		}
+		else {
+			printf("%d", 0);
+		}
 	}
 	if (lon == 10) {
 		int test2[10][10];
@@ -65,9 +93,22 @@ int main() {
 				c = fgetc(lire);
 				int temp = c - 48;
 				test2[i][j] = temp;
+				if (temp == 3) {
+					perso++;
+				}
+				if (temp == 2) {
+					telep++;
+				}
 			}
 		}
-		solv10(test2, 10, 10);
+		if (perso == 1) {
+			if (telep == 0 || telep == 2) {
+				solv10(test2, 10, 10);
+			}
+		}
+		else {
+			printf("%d", 0);
+		}
 	}
 	if (lon == 11) {
 		int test2[11][11];
@@ -76,9 +117,22 @@ int main() {
 				c = fgetc(lire);
 				int temp = c - 48;
 				test2[i][j] = temp;
+				if (temp == 3) {
+					perso++;
+				}
+				if (temp == 2) {
+					telep++;
+				}
 			}
 		}
-		solv11(test2, 11, 11);
+		if (perso == 1 ) {
+			if (telep == 0 || telep == 2) {
+				solv11(test2, 11, 11);
+			}
+		}
+		else {
+			printf("%d", 0);
+		}
 	}
 	if (lon == 12) {
 		int test2[12][12];
@@ -87,9 +141,22 @@ int main() {
 				c = fgetc(lire);
 				int temp = c - 48;
 				test2[i][j] = temp;
+				if (temp == 3) {
+					perso++;
+				}
+				if (temp == 2) {
+					telep++;
+				}
 			}
 		}
-		av12(test2, 12, 12);
+		if (perso == 1) {
+			if (telep == 0 || telep == 2) {
+				av12(test2, 12, 12);
+			}
+		}
+		else {
+			printf("%d", 0);
+		}
 	}
 	if (lon == 13) {
 		int test2[13][13];
@@ -98,9 +165,22 @@ int main() {
 				c = fgetc(lire);
 				int temp = c - 48;
 				test2[i][j] = temp;
+				if (temp == 3) {
+					perso++;
+				}
+				if (temp == 2) {
+					telep++;
+				}
 			}
 		}
-		solv13(test2, 13, 13);
+		if (perso == 1) {
+			if (telep == 0 || telep == 2) {
+				solv13(test2, 13, 13);
+			}
+		}
+		else {
+			printf("%d", 0);
+		}
 	}
 
 

@@ -250,7 +250,7 @@ void deplacement(int(*tab)[8], int direction, int posX, int posY) {
 }
 
 // Choisir la direction dans la quel se deplacera le personnage(3)
-int Ladirection(int(*tab)[8], int nord, int est, int sud, int ouest) {
+/*int Ladirection(int(*tab)[8], int nord, int est, int sud, int ouest) {
 	int direction;
 	int choix = 0;
 	bool pNord = false;
@@ -337,8 +337,140 @@ int Ladirection(int(*tab)[8], int nord, int est, int sud, int ouest) {
 	}
 
 	return direction;
+}*/
+int Ladirection(int(*tab)[8], int nord, int est, int sud, int ouest) {
+	int direction;
+	int choix = 0;
+	bool pNord = false;
+	bool pEst = false;
+	bool pSud = false;
+	bool pOuest = false;
+	if (nord == 1) {
+		pNord = true;
+	}
+	if (est == 1) {
+		pEst = true;
+	}
+	if (sud == 1) {
+		pSud = true;
+	}
+	if (ouest == 1) {
+		pOuest = true;
+	}
+	if (pNord == true && pEst == true) {
+		if (ouest == 4 && sud != 4) {
+			direction = 1;
+		}
+		else if (sud == 4 && ouest != 4) {
+			direction = 3;
+		}
+		else {
+			choix = rand() % 2;
+			if (choix == 0) {
+				direction = 3;
+			}
+			else {
+				direction = 1;
+			}
+		}
+	}
+	else if (pNord == true && pSud == true) {
+		if (ouest == 4 && est != 4) {
+			direction = 2;
+		}
+		else if (est == 4 && ouest != 4) {
+			direction = 3;
+		}
+		else {
+			choix = rand() % 2;
+			if (choix == 0) {
+				direction = 3;
+			}
+			else {
+				direction = 2;
+			}
+		}
+	}
+	else if (pNord == true && pOuest == true) {
+		if (est == 4 && sud != 4) {
+			direction = 1;
+		}
+		else if (sud == 4 && est != 4) {
+			direction = 2;
+		}
+		else {
+			choix = rand() % 2;
+			if (choix == 0) {
+				direction = 2;
+			}
+			else {
+				direction = 1;
+			}
+		}
+	}
+	else if (pEst == true && pOuest == true) {
+		if (nord == 4 && sud != 4) {
+			direction = 1;
+		}
+		else if (sud == 4 && nord != 4) {
+			direction = 0;
+		}
+		else {
+			choix = rand() % 2;
+			direction = choix;
+		}
+	}
+	else if (pEst == true && pSud == true) {
+		if (ouest == 4 && nord != 4) {
+			direction = 0;
+		}
+		else if (nord == 4 && ouest != 4) {
+			direction = 3;
+		}
+		else {
+			choix = rand() % 2;
+			if (choix == 1) {
+				direction = 3;
+			}
+			else {
+				direction = 0;
+			}
+		}
+	}
+	else if (pSud == true && pOuest == true) {
+		if (nord == 4 && est != 4) {
+			direction = 2;
+		}
+		else if (est == 4 && nord != 4) {
+			direction = 0;
+		}
+		else {
+			choix = rand() % 2;
+			if (choix == 1) {
+				direction = 2;
+			}
+			else {
+				direction = choix;
+			}
+		}
+	}
+	if (pSud == true && pOuest == true && pNord == true) {
+		direction = 2;
+	}
+	else if (pSud == true && pOuest == true && pEst == true) {
+		direction = 0;
+	}
+	else if (pSud == true && pEst == true && pNord == true) {
+		direction = 3;
+	}
+	else if (pNord == true && pOuest == true && pEst == true) {
+		direction = 1;
+	}
+	else {
+		direction = rand() % 4;
+	}
+	return direction;
 }
-
 // Relie les différentes fonctions entre elle afin d'éxecuter le programme tant qu'une solution n'est pas trouvé
 // Elle s'arrete si aucune solution n'est trouvée
 void solveurbrut(int(*tab)[8], unsigned longueur, unsigned largeur) {
@@ -371,9 +503,9 @@ void solveurbrut(int(*tab)[8], unsigned longueur, unsigned largeur) {
 		}
 		direction = Ladirection(tab, tab[posX - 1][posY], tab[posX][posY + 1], tab[posX + 1][posY], tab[posX][posY - 1]);
 		deplacement(tab, direction, posX, posY);
-		affichertab(tab, 8, 8);
+		/*affichertab(tab, 8, 8);
 		printf("%d", direction);
-		printf("\n");
+		printf("\n");*/
 		
 		compteur2 = 0;
 		for (unsigned i = 0; i < longueur; i++) {
@@ -614,7 +746,7 @@ void dep9(int(*tab)[9], int direction, int posX, int posY) {
 	}
 }
 
-int Ladirection9(int(*tab)[9], int nord, int est, int sud, int ouest) {
+/*int Ladirection9(int(*tab)[9], int nord, int est, int sud, int ouest) {
 	int direction;
 	int choix = 0;
 	bool pNord = false;
@@ -699,6 +831,140 @@ int Ladirection9(int(*tab)[9], int nord, int est, int sud, int ouest) {
 	}
 
 	return direction;
+}*/
+
+int Ladirection9(int(*tab)[9], int nord, int est, int sud, int ouest) {
+	int direction;
+	int choix = 0;
+	bool pNord = false;
+	bool pEst = false;
+	bool pSud = false;
+	bool pOuest = false;
+	if (nord == 1) {
+		pNord = true;
+	}
+	if (est == 1) {
+		pEst = true;
+	}
+	if (sud == 1) {
+		pSud = true;
+	}
+	if (ouest == 1) {
+		pOuest = true;
+	}
+	if (pNord == true && pEst == true) {
+		if (ouest == 4 && sud != 4) {
+			direction = 1;
+		}
+		else if (sud == 4 && ouest != 4) {
+			direction = 3;
+		}
+		else {
+			choix = rand() % 2;
+			if (choix == 0) {
+				direction = 3;
+			}
+			else {
+				direction = 1;
+			}
+		}
+	}
+	else if (pNord == true && pSud == true) {
+		if (ouest == 4 && est != 4) {
+			direction = 2;
+		}
+		else if (est == 4 && ouest != 4) {
+			direction = 3;
+		}
+		else {
+			choix = rand() % 2;
+			if (choix == 0) {
+				direction = 3;
+			}
+			else {
+				direction = 2;
+			}
+		}
+	}
+	else if (pNord == true && pOuest == true) {
+		if (est == 4 && sud != 4) {
+			direction = 1;
+		}
+		else if (sud == 4 && est != 4) {
+			direction = 2;
+		}
+		else {
+			choix = rand() % 2;
+			if (choix == 0) {
+				direction = 2;
+			}
+			else {
+				direction = 1;
+			}
+		}
+	}
+	else if (pEst == true && pOuest == true) {
+		if (nord == 4 && sud != 4) {
+			direction = 1;
+		}
+		else if (sud == 4 && nord != 4) {
+			direction = 0;
+		}
+		else {
+			choix = rand() % 2;
+			direction = choix;
+		}
+	}
+	else if (pEst == true && pSud == true) {
+		if (ouest == 4 && nord != 4) {
+			direction = 0;
+		}
+		else if (nord == 4 && ouest != 4) {
+			direction = 3;
+		}
+		else {
+			choix = rand() % 2;
+			if (choix == 1) {
+				direction = 3;
+			}
+			else {
+				direction = 0;
+			}
+		}
+	}
+	else if (pSud == true && pOuest == true) {
+		if (nord == 4 && est != 4) {
+			direction = 2;
+		}
+		else if (est == 4 && nord != 4) {
+			direction = 0;
+		}
+		else {
+			choix = rand() % 2;
+			if (choix == 1) {
+				direction = 2;
+			}
+			else {
+				direction = choix;
+			}
+		}
+	}
+	if (pSud == true && pOuest == true && pNord == true) {
+		direction = 2;
+	}
+	else if (pSud == true && pOuest == true && pEst == true) {
+		direction = 0;
+	}
+	else if (pSud == true && pEst == true && pNord == true) {
+		direction = 3;
+	}
+	else if (pNord == true && pOuest == true && pEst == true) {
+		direction = 1;
+	}
+	else {
+		direction = rand() % 4;
+	}
+	return direction;
 }
 
 void solv9(int(*tab)[9], unsigned longueur, unsigned largeur) {
@@ -729,9 +995,9 @@ void solv9(int(*tab)[9], unsigned longueur, unsigned largeur) {
 		}
 		direction = Ladirection9(tab, tab[posX - 1][posY], tab[posX][posY + 1], tab[posX + 1][posY], tab[posX][posY - 1]);
 		dep9(tab, direction, posX, posY);
-		affichertab9(tab, 9, 9);
+		/*affichertab9(tab, 9, 9);
 		printf("%d", direction);
-		printf("\n");
+		printf("\n");*/
 
 		compteur2 = 0;
 		for (unsigned i = 0; i < longueur; i++) {
@@ -743,7 +1009,7 @@ void solv9(int(*tab)[9], unsigned longueur, unsigned largeur) {
 		}
 		compt++;
 		tour++;
-	} while ((compteur2 <= compteur0) && (tour < 100000));
+	} while ((compteur2 < compteur0) && (tour < 100000));
 	if (compteur2 >= compteur0) {
 		printf("%d", 1);
 		printf(" %d", compt);
@@ -972,7 +1238,7 @@ void dep10(int(*tab)[10], int direction, int posX, int posY) {
 	}
 }
 
-int Ladirection10(int(*tab)[10], int nord, int est, int sud, int ouest) {
+/*int Ladirection10(int(*tab)[10], int nord, int est, int sud, int ouest) {
 	int direction;
 	int choix = 0;
 	bool pNord = false;
@@ -1057,6 +1323,140 @@ int Ladirection10(int(*tab)[10], int nord, int est, int sud, int ouest) {
 	}
 
 	return direction;
+}*/
+
+int Ladirection10(int(*tab)[10], int nord, int est, int sud, int ouest) {
+	int direction;
+	int choix = 0;
+	bool pNord = false;
+	bool pEst = false;
+	bool pSud = false;
+	bool pOuest = false;
+	if (nord == 1) {
+		pNord = true;
+	}
+	if (est == 1) {
+		pEst = true;
+	}
+	if (sud == 1) {
+		pSud = true;
+	}
+	if (ouest == 1) {
+		pOuest = true;
+	}
+	if (pNord == true && pEst == true) {
+		if (ouest == 4 && sud != 4) {
+			direction = 1;
+		}
+		else if (sud == 4 && ouest != 4) {
+			direction = 3;
+		}
+		else {
+			choix = rand() % 2;
+			if (choix == 0) {
+				direction = 3;
+			}
+			else {
+				direction = 1;
+			}
+		}
+	}
+	else if (pNord == true && pSud == true) {
+		if (ouest == 4 && est != 4) {
+			direction = 2;
+		}
+		else if (est == 4 && ouest != 4) {
+			direction = 3;
+		}
+		else {
+			choix = rand() % 2;
+			if (choix == 0) {
+				direction = 3;
+			}
+			else {
+				direction = 2;
+			}
+		}
+	}
+	else if (pNord == true && pOuest == true) {
+		if (est == 4 && sud != 4) {
+			direction = 1;
+		}
+		else if (sud == 4 && est != 4) {
+			direction = 2;
+		}
+		else {
+			choix = rand() % 2;
+			if (choix == 0) {
+				direction = 2;
+			}
+			else {
+				direction = 1;
+			}
+		}
+	}
+	else if (pEst == true && pOuest == true) {
+		if (nord == 4 && sud != 4) {
+			direction = 1;
+		}
+		else if (sud == 4 && nord != 4) {
+			direction = 0;
+		}
+		else {
+			choix = rand() % 2;
+			direction = choix;
+		}
+	}
+	else if (pEst == true && pSud == true) {
+		if (ouest == 4 && nord != 4) {
+			direction = 0;
+		}
+		else if (nord == 4 && ouest != 4) {
+			direction = 3;
+		}
+		else {
+			choix = rand() % 2;
+			if (choix == 1) {
+				direction = 3;
+			}
+			else {
+				direction = 0;
+			}
+		}
+	}
+	else if (pSud == true && pOuest == true) {
+		if (nord == 4 && est != 4) {
+			direction = 2;
+		}
+		else if (est == 4 && nord != 4) {
+			direction = 0;
+		}
+		else {
+			choix = rand() % 2;
+			if (choix == 1) {
+				direction = 2;
+			}
+			else {
+				direction = choix;
+			}
+		}
+	}
+	if (pSud == true && pOuest == true && pNord == true) {
+		direction = 2;
+	}
+	else if (pSud == true && pOuest == true && pEst == true) {
+		direction = 0;
+	}
+	else if (pSud == true && pEst == true && pNord == true) {
+		direction = 3;
+	}
+	else if (pNord == true && pOuest == true && pEst == true) {
+		direction = 1;
+	}
+	else {
+		direction = rand() % 4;
+	}
+	return direction;
 }
 
 void solv10(int(*tab)[10], unsigned longueur, unsigned largeur) {
@@ -1101,7 +1501,7 @@ void solv10(int(*tab)[10], unsigned longueur, unsigned largeur) {
 		}
 		compt++;
 		tour++;
-	} while ((compteur2 <= compteur0) && (tour < 100000));
+	} while ((compteur2 < compteur0) && (tour < 100000));
 	if (compteur2 >= compteur0) {
 		printf("%d", 1);
 		printf(" %d", compt);
@@ -1110,6 +1510,7 @@ void solv10(int(*tab)[10], unsigned longueur, unsigned largeur) {
 		printf("%d", 0);
 	}
 }
+
 
 // Map de 11
 
@@ -1349,66 +1750,101 @@ int Ladirection11(int(*tab)[11], int nord, int est, int sud, int ouest) {
 	if (ouest == 1) {
 		pOuest = true;
 	}
-	/*
-	if (pNord == true && pEst == true && pSud == true) {
-		direction = 3;
-	}
-	if (pNord == true && pEst == true && pOuest == true) {
-		direction = 1;
-	}
-	if (pNord == true && pOuest == true && pSud == true) {
-		direction = 2;
-	}
-	if (pOuest == true && pEst == true && pSud == true) {
-		direction = 0;
-	}*/
 	if (pNord == true && pEst == true) {
-		choix = rand() % 2;
-		if (choix == 0) {
+		if (ouest == 4 && sud != 4) {
+			direction = 1;
+		}
+		else if (sud == 4 && ouest != 4) {
 			direction = 3;
 		}
 		else {
-			direction = 1;
+			choix = rand() % 2;
+			if (choix == 0) {
+				direction = 3;
+			}
+			else {
+				direction = 1;
+			}
 		}
 	}
 	else if (pNord == true && pSud == true) {
-		choix = rand() % 2;
-		if (choix == 0) {
+		if (ouest == 4 && est != 4) {
+			direction = 2;
+		}
+		else if (est == 4 && ouest != 4) {
 			direction = 3;
 		}
 		else {
-			direction = 2;
+			choix = rand() % 2;
+			if (choix == 0) {
+				direction = 3;
+			}
+			else {
+				direction = 2;
+			}
 		}
 	}
 	else if (pNord == true && pOuest == true) {
-		choix = rand() % 2;
-		if (choix == 0) {
+		if (est == 4 && sud != 4) {
+			direction = 1;
+		}
+		else if (sud == 4 && est != 4) {
 			direction = 2;
 		}
 		else {
-			direction = 1;
+			choix = rand() % 2;
+			if (choix == 0) {
+				direction = 2;
+			}
+			else {
+				direction = 1;
+			}
 		}
 	}
 	else if (pEst == true && pOuest == true) {
-		choix = rand() % 2;
-		direction = choix;
+		if (nord == 4 && sud != 4) {
+			direction = 1;
+		}
+		else if (sud == 4 && nord != 4) {
+			direction = 0;
+		}
+		else {
+			choix = rand() % 2;
+			direction = choix;
+		}
 	}
-	if (pEst == true && pSud == true) {
-		choix = rand() % 2;
-		if (choix == 1) {
+	else if (pEst == true && pSud == true) {
+		if (ouest == 4 && nord != 4) {
+			direction = 0;
+		}
+		else if (nord == 4 && ouest != 4) {
 			direction = 3;
 		}
 		else {
-			direction = 0;
+			choix = rand() % 2;
+			if (choix == 1) {
+				direction = 3;
+			}
+			else {
+				direction = 0;
+			}
 		}
 	}
 	else if (pSud == true && pOuest == true) {
-		choix = rand() % 2;
-		if (choix == 1) {
+		if (nord == 4 && est != 4) {
 			direction = 2;
 		}
+		else if (est == 4 && nord != 4) {
+			direction = 0;
+		}
 		else {
-			direction = choix;
+			choix = rand() % 2;
+			if (choix == 1) {
+				direction = 2;
+			}
+			else {
+				direction = choix;
+			}
 		}
 	}
 	else {
@@ -1416,6 +1852,7 @@ int Ladirection11(int(*tab)[11], int nord, int est, int sud, int ouest) {
 	}
 	return direction;
 }
+
 
 void solv11(int(*tab)[11], unsigned longueur, unsigned largeur) {
 
@@ -1447,8 +1884,7 @@ void solv11(int(*tab)[11], unsigned longueur, unsigned largeur) {
 		dep11(tab, direction, posX, posY);
 		/*affichertab11(tab, 11, 11);
 		printf("%d", direction);
-		printf("\n");
-		*/
+		printf("\n");*/
 		compteur2 = 0;
 		for (unsigned i = 0; i < longueur; i++) {
 			for (unsigned j = 0; j < largeur; j++) {
@@ -1459,7 +1895,7 @@ void solv11(int(*tab)[11], unsigned longueur, unsigned largeur) {
 		}
 		compt++;
 		tour++;
-	} while ((compteur2 <= compteur0) && (tour < 100000));
+	} while ((compteur2 < compteur0) && (tour < 100000));
 	if (compteur2 >= compteur0) {
 		printf("%d", 1);
 		printf(" %d", compt);
@@ -1688,7 +2124,7 @@ void oper(int(*tab2)[12], int direction, int posX, int posY) {
 	}
 }
 
-int dir12(int(*tab)[12], int nord, int est, int sud, int ouest) {
+/* int dir12temp(int(*tab)[12], int nord, int est, int sud, int ouest) {
 	int direction;
 	int choix = 0;
 	bool pNord = false;
@@ -1773,6 +2209,140 @@ int dir12(int(*tab)[12], int nord, int est, int sud, int ouest) {
 	}
 
 	return direction;
+}*/
+
+int dir12(int(*tab)[12], int nord, int est, int sud, int ouest) {
+	int direction;
+	int choix = 0;
+	bool pNord = false;
+	bool pEst = false;
+	bool pSud = false;
+	bool pOuest = false;
+	if (nord == 1) {
+		pNord = true;
+	}
+	if (est == 1) {
+		pEst = true;
+	}
+	if (sud == 1) {
+		pSud = true;
+	}
+	if (ouest == 1) {
+		pOuest = true;
+	}
+	if (pNord == true && pEst == true) {
+		if (ouest == 4 && sud != 4) {
+			direction = 1;
+		}
+		else if (sud == 4 && ouest != 4) {
+			direction = 3;
+		}
+		else {
+			choix = rand() % 2;
+			if (choix == 0) {
+				direction = 3;
+			}
+			else {
+				direction = 1;
+			}
+		}
+	}
+	else if (pNord == true && pSud == true) {
+		if (ouest == 4 && est != 4) {
+			direction = 2;
+		}
+		else if (est == 4 && ouest != 4) {
+			direction = 3;
+		}
+		else {
+			choix = rand() % 2;
+			if (choix == 0) {
+				direction = 3;
+			}
+			else {
+				direction = 2;
+			}
+		}
+	}
+	else if (pNord == true && pOuest == true) {
+		if (est == 4 && sud != 4) {
+			direction = 1;
+		}
+		else if (sud == 4 && est != 4) {
+			direction = 2;
+		}
+		else {
+			choix = rand() % 2;
+			if (choix == 0) {
+				direction = 2;
+			}
+			else {
+				direction = 1;
+			}
+		}
+	}
+	else if (pEst == true && pOuest == true) {
+		if (nord == 4 && sud != 4) {
+			direction = 1;
+		}
+		else if (sud == 4 && nord != 4) {
+			direction = 0;
+		}
+		else {
+			choix = rand() % 2;
+			direction = choix;
+		}
+	}
+	else if (pEst == true && pSud == true) {
+		if (ouest == 4 && nord != 4) {
+			direction = 0;
+		}
+		else if (nord == 4 && ouest != 4) {
+			direction = 3;
+		}
+		else {
+			choix = rand() % 2;
+			if (choix == 1) {
+				direction = 3;
+			}
+			else {
+				direction = 0;
+			}
+		}
+	}
+	else if (pSud == true && pOuest == true) {
+		if (nord == 4 && est != 4) {
+			direction = 2;
+		}
+		else if (est == 4 && nord != 4) {
+			direction = 0;
+		}
+		else {
+			choix = rand() % 2;
+			if (choix == 1) {
+				direction = 2;
+			}
+			else {
+				direction = choix;
+			}
+		}
+	}
+	if (pSud == true && pOuest == true && pNord == true) {
+		direction = 2;
+	}
+	else if (pSud == true && pOuest == true && pEst == true) {
+		direction = 0;
+	}
+	else if (pSud == true && pEst == true && pNord == true) {
+		direction = 3;
+	}
+	else if (pNord == true && pOuest == true && pEst == true) {
+		direction = 1;
+	}
+	else {
+		direction = rand() % 4;
+	}
+	return direction;
 }
 
 void av12(int(*tab)[12], unsigned longueur, unsigned largeur) {
@@ -1817,7 +2387,7 @@ void av12(int(*tab)[12], unsigned longueur, unsigned largeur) {
 		}
 		compt++;
 		tour++;
-	} while ((compteur2 <= compteur0) && (tour < 10000000));
+	} while ((compteur2 < compteur0) && (tour < 10000000));
 	if (compteur2 >= compteur0) {
 		printf("%d", 1);
 		printf(" %d", compt);
@@ -2045,7 +2615,141 @@ void dep13(int(*tab)[13], int direction, int posX, int posY) {
 		}
 	}
 }
-
+/*
+int Ladirection13(int(*tab)[13], int nord, int est, int sud, int ouest) {
+	int direction;
+	int choix = 0;
+	bool pNord = false;
+	bool pEst = false;
+	bool pSud = false;
+	bool pOuest = false;
+	if (nord == 1) {
+		pNord = true;
+	}
+	if (est == 1) {
+		pEst = true;
+	}
+	if (sud == 1) {
+		pSud = true;
+	}
+	if (ouest == 1) {
+		pOuest = true;
+	}
+	if (pNord == true && pEst == true) {
+		if (ouest == 4 && sud != 4) {
+			direction = 1;
+		}
+		else if (sud == 4 && ouest != 4) {
+			direction = 3;
+		}
+		else {
+			choix = rand() % 2;
+			if (choix == 0) {
+				direction = 3;
+			}
+			else {
+				direction = 1;
+			}
+		}
+	}
+	else if (pNord == true && pSud == true) {
+		if (ouest == 4 && est != 4) {
+			direction = 2;
+		}
+		else if (est == 4 && ouest != 4) {
+			direction = 3;
+		}
+		else {
+			choix = rand() % 2;
+			if (choix == 0) {
+				direction = 3;
+			}
+			else {
+				direction = 2;
+			}
+		}
+	}
+	else if (pNord == true && pOuest == true) {
+		if (est == 4 && sud != 4) {
+			direction = 1;
+		}
+		else if (sud == 4 && est != 4) {
+			direction = 2;
+		}
+		else {
+			choix = rand() % 2;
+			if (choix == 0) {
+				direction = 2;
+			}
+			else {
+				direction = 1;
+			}
+		}
+	}
+	else if (pEst == true && pOuest == true) {
+		if (nord == 4 && sud != 4) {
+			direction = 1;
+		}
+		else if (sud == 4 && nord != 4) {
+			direction = 0;
+		}
+		else {
+			choix = rand() % 2;
+			direction = choix;
+		}
+	}
+	else if (pEst == true && pSud == true) {
+		if (ouest == 4 && nord != 4) {
+			direction = 0;
+		}
+		else if (nord == 4 && ouest != 4) {
+			direction = 3;
+		}
+		else {
+			choix = rand() % 2;
+			if (choix == 1) {
+				direction = 3;
+			}
+			else {
+				direction = 0;
+			}
+		}
+	}
+	else if (pSud == true && pOuest == true) {
+		if (nord == 4 && est != 4) {
+			direction = 2;
+		}
+		else if (est == 4 && nord != 4) {
+			direction = 0;
+		}
+		else {
+			choix = rand() % 2;
+			if (choix == 1) {
+				direction = 2;
+			}
+			else {
+				direction = choix;
+			}
+		}
+	}
+	if (pSud == true && pOuest == true && pNord == true) {
+		direction = 2;
+	}
+	else if (pSud == true && pOuest == true && pEst == true) {
+		direction = 0;
+	}
+	else if (pSud == true && pEst == true && pNord == true) {
+		direction = 3;
+	}
+	else if (pNord == true && pOuest == true && pEst == true) {
+		direction = 1;
+	}
+	else {
+		direction = rand() % 4;
+	}
+	return direction;
+}
+*/
 int Ladirection13(int(*tab)[13], int nord, int est, int sud, int ouest) {
 	int direction;
 	int choix = 0;
@@ -2174,7 +2878,7 @@ void solv13(int(*tab)[13], unsigned longueur, unsigned largeur) {
 		}
 		compt++;
 		tour++;
-	} while ((compteur2 <= compteur0) && (tour < 100000));
+	} while ((compteur2 < compteur0) && (tour < 100000));
 	if (compteur2 >= compteur0) {
 		printf("%d", 1);
 		printf(" %d", compt);
