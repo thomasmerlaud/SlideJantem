@@ -75,8 +75,8 @@
                 </div>";
             }
             else{
-            for ($i = 1; $i < $nbFichiers; $i++) {
-                echo"<button onclick="."out('../../Milo/game.php?mapc=".$i."&manu=1')"." class='big-button'>$i</button>";
+            for ($i = 0; $i < $nbFichiers; $i++) {
+                echo"<button onclick="."out('../../Milo/game.php?mapc=".$i."&manu=1')"." class='big-button'>".($i+1)."</button>";
                 }
             }
             ?>

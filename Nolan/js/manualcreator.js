@@ -351,8 +351,9 @@ function Save(){
     gameo.removeChild(texte);
 	gameo.className='';
 
-    initJeu();
+    
     convertNumberCrea();
+    initJeu();
 	nbFichiers+=1;
 	
 	//randomtab()
