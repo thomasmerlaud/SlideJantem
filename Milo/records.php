@@ -21,7 +21,7 @@
         $scoreG = scoreG($_SESSION["ID"]);?>
         <div class = "tableauRecords">
             <div class="parent">
-                <div class="div1"> Your rank </div>
+                <div class="div1"> You </div>
                 <div class="div2"> Position </div>
                 <div class="div3"> Score </div>
 

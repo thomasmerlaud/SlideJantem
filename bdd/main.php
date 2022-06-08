@@ -24,7 +24,7 @@ function getUsername($id){   // score Général
     }
 }
 function getRanking($id){
-    $request = "SELECT count(*)+1 FROM game WHERE score > (SELECT score FROM game WHERE id = $id)"; 
+    $request = "SELECT count(*)+1 AS rank FROM game WHERE score > (SELECT score FROM game WHERE id = $id)"; 
     require("connectDB.php");
     $resultat =mysqli_query($connexion,$request); //Executer la requete	
     while($row = mysqli_fetch_assoc($resultat)){
