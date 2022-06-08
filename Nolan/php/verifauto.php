@@ -1,6 +1,6 @@
 <?php
 
-exec ("autosol2v.exe",$output);
+exec ("autosolv.exe",$output);
 
 echo $output[0];
 
