@@ -23,6 +23,16 @@ function getUsername($id){   // score Général
         return $user;
     }
 }
+function getRanking($id){
+    $request = "SELECT count(*)+1 FROM game WHERE score > (SELECT score FROM game WHERE id = $id)"; 
+    require("connectDB.php");
+    $resultat =mysqli_query($connexion,$request); //Executer la requete	
+    while($row = mysqli_fetch_assoc($resultat)){
+        $rank = $row['rank'];
+        return $rank;
+    }
+}
+
 function getUsers(){
     $request = "SELECT username FROM game ORDER BY score ASC"; 
     require("connectDB.php");
