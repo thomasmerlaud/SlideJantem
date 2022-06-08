@@ -31,15 +31,17 @@
   width: 100%;
   text-align: center;
   line-height: 0.70em;
+  
   outline: none;
 }
 
 .container2{
-  top: 50px;
-  font-family: "retro";
+  background-color: rgb(214, 201, 125);
+  padding :20px;
+  border: 2.4vh solid #b48c5d;
   font-size: 4em;
-  color:  #FFFDE5;
-  text-shadow: #000000 12px 0 10px;
+  color:  #CEFFF7;
+  text-shadow: #000000 8px 0 13px;
   text-transform: uppercase;
   width: 100%;
   text-align: center;
@@ -67,13 +69,12 @@
 
 
 .tableau{
-    margin-top: 10%;
     margin-left: 12%;
     margin-right: 12%;
     padding-top: 0.2vh; 
     padding-bottom: 0.5vh;
     border-radius: 200px;
-
+    margin-bottom : 120px;
     min-height: 50vh;
 
 }
