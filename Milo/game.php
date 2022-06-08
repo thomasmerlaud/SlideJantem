@@ -58,7 +58,24 @@
         <!-- <img class="img" src="img/sprite-22-1.png" alt="LevelComplete"> -->
         <div class="lvl">Level Completed !</div>
         <div class="menu home" onClick="menu();">Home</div>
-        <div class="menu next" onClick="nextlevel();">Next</div>
+
+        <?php
+        if(isset($_GET["w"])){
+          if (($_GET["w"] == 4) && ($_GET["map"] == 5)){?>
+              <div class="menu next" onClick="end();">END !</div>
+          <?php
+          }
+          ?>
+          <div class="menu next" onClick="nextlevel();">Next</div>
+        <?php
+        }
+        else{?>
+          <div class="menu next" onClick="returnlevels();">Levels</div>
+        <?php
+        }
+        ?>
+        
+        
       </div>
     </div>
     <div class="top">
