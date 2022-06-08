@@ -478,7 +478,7 @@ function auto(e){
     valid2 = true;
     autoo = 1;
 
-    
+    do{
         console.log('Fonction auto faite');
 
         var request = new XMLHttpRequest();
@@ -501,6 +501,36 @@ function auto(e){
 		request.send(null)
 
 
+        var perso = 0;
+        var tele = 0;
+        var vide = 0;
+        var falses = true;
+    
+
+     for (let i = 0; i < ligne; i++){
+        for (let j = 0; j < colonne; j++){
+            if(tab[i][j] == 3){
+                perso++;
+            }
+            if(tab[i][j] == 0){
+                vide++;
+            }
+            if(tab[i][j] == 2){
+                tele++;
+                if(tab[i-1][j]+tab[i+1][j]+tab[i][j-1]+tab[i][j+1]>=4){
+                    falses = false;
+                }
+                else if ((tab[i-1][j-1] == 2)||(tab[i][j-1] == 2)
+                    ||(tab[i+1][j-1] == 2)||(tab[i-1][j] == 2)||(tab[i+1][j] == 2)
+                    ||(tab[i+1][j] == 2)||(tab[i-1][j+1] == 2)||(tab[i][j+1] == 2)){
+                    falses = false;
+                }
+            }
+        }
+    }
+    if (tele == 1){falses = false;}
+
+    }while (perso==0 ||falses == false)
 }
 function randomtab2(e){
     
