@@ -4,6 +4,14 @@
     --block-wall: url("../img/block/1.jpg");
     --block-player: url("../img/Jantem.gif") no-repeat;
     --fond : #71dce2;
+    --fond1 : #17a7e6;
+    --fond2 : #bae631;
+    --fond3 : #fe8a3b;
+    --fond4 : #feb5cd;
+    --fond5 : #ccc4e8;
+    --fond6 : #ec3037;
+    --fond7 : #fecd24;
+    --fond8 : #66e962;   
 }
 
 body{

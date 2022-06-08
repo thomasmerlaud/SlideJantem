@@ -25,7 +25,6 @@
             <h2>Profil</h2>
             <a class="close" href="#">&times;</a>
             <?php
-            require("../bdd/connectDB.php");
             session_start();
             if(!isset($_SESSION["ID"])){
               echo "<h3>You are not connected</h3>";

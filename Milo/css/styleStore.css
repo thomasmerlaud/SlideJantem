@@ -278,10 +278,10 @@ button{
     margin: 0.85vh;
 }
   
-.buttonS:active{
+.buttonS:hover{
     -webkit-box-shadow: 0vh 1.53vh 0vh #705675;
     -moz-box-shadow:0vh 1.53vh 0vh #705675;
-    box-shadow:1.53vh 1.53vh 0vh #705675;
+    box-shadow:0.7vh 0.7vh 0vh #705675;
     position:relative;
     top:1vh;
 }

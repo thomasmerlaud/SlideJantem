@@ -4,17 +4,17 @@ const custom = decodeURIComponent(urlp.get('mapc'));
 
 const playerd = playerdesign;
 const traild = traildesign;
-console.log(playerd, traild);
+// console.log(playerd, traild);
 
 let root = document.documentElement;
 root.style.setProperty('--block-player', "url(\"../img/perso/"+playerd+".gif\") no-repeat");
-root.style.setProperty('--fond', "#71dce2");
+root.style.setProperty('--fond', "var(--fond"+traild+"");
 
 
 var request = new XMLHttpRequest();
 if(custom == "null"){
-   const nbmap = decodeURIComponent(urlp.get('map'));
-   const word = decodeURIComponent(urlp.get('w'));   
+   var nbmap = decodeURIComponent(urlp.get('map'));
+   var word = decodeURIComponent(urlp.get('w'));  
 
    root.style.setProperty('--block-wall', "url(\"../img/block/"+word+".jpg\")");
 
@@ -35,7 +35,7 @@ else{
 request.send(null)
 var file = request.responseText
 
-
+// console.log (word, nbmap);
 
 // variable globales:
 let bag = 0

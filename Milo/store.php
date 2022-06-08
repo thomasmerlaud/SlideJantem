@@ -23,7 +23,7 @@
         }
         .carou figure {
         margin: 0;
-        width: 400px;
+        width: 300px;
         height: 100px;
         transform-style: preserve-3d;
         transition: transform 0.5s;
@@ -33,7 +33,7 @@
         width: 100%;
         box-sizing: border-box;
         padding: 0 50px;
-        opacity: 0.9;
+        opacity: 1;
         /* background: #0000004a; */
         height: 100%;
         }
@@ -79,40 +79,52 @@
         letter-spacing: 1px;
         padding: 5px 10px;
         }
+        .lock{
+            filter: grayscale(1) blur(6px);
+        }
     </style>
 </head>
-
-<div class="content_title">
-    <div class="content__container">
-        <p class="content__container__text"> your skin and your paint colour </p>
-        <ul class="content__container__list">
-            <li class="content__container__list__item">Select  </li>
-            <li class="content__container__list__item">Buy  </li>
-            <li class="content__container__list__item">Select  </li>
-            <li class="content__container__list__item">Buy  </li>
-        </ul>
-    </div>
-</div>
 
 <body class="backstore">
 
     <?php 
         include "nuage.php";
         include "icone.php";
+
+        if(isset($_SESSION["ID"])){
+            $scoreG = scoreG($_SESSION["ID"]);
+            echo "<h2>Score : ".$scoreG."</h2>";?>
+            <script>
+                var scoreG = <?php echo $scoreG; ?>
+            </script>
+        <?php
+        } 
     ?>
-    
+
+
+    <div class="content_title">
+        <div class="content__container">
+            <p class="content__container__text"> your skin and your paint colour </p>
+            <ul class="content__container__list">
+                <li class="content__container__list__item">Select  </li>
+                <li class="content__container__list__item">Buy  </li>
+                <li class="content__container__list__item">Select  </li>
+                <li class="content__container__list__item">Buy  </li>
+            </ul>
+        </div>
+    </div>
 
     <div class = "back">
         <div id="car1" class="carou">
             <figure>
-                <img src="image/jantem.png" alt="">
-                <img src="image/jantem.png" alt="">
-                <img src="image/jantem.png" alt="">
-                <img src="image/jantem.png" alt="">
-                <img src="image/jantem.png" alt="">
-                <img src="image/jantem.png" alt="">
-                <img src="image/jantem.png" alt="">
-                <img src="image/jantem.png" alt="">
+                <img src="img/perso/1.gif" alt="">
+                <img src="img/perso/2.gif" alt="" class="<?php if(isset($_SESSION["ID"])){ if($scoreG < 625){echo "lock";}}  ?>">
+                <img src="img/perso/3.gif" alt="" class="<?php if(isset($_SESSION["ID"])){ if($scoreG < 625*2){echo "lock";}}  ?>">
+                <img src="img/perso/4.gif" alt="" class="<?php if(isset($_SESSION["ID"])){ if($scoreG < 625*3){echo "lock";}}  ?>">
+                <img src="img/perso/5.gif" alt="" class="<?php if(isset($_SESSION["ID"])){ if($scoreG < 625*4){echo "lock";}}  ?>">
+                <img src="img/perso/6.gif" alt="" class="<?php if(isset($_SESSION["ID"])){ if($scoreG < 625*5){echo "lock";}}  ?>">
+                <img src="img/perso/7.gif" alt="" class="<?php if(isset($_SESSION["ID"])){ if($scoreG < 625*6){echo "lock";}}  ?>">
+                <img src="img/perso/8.gif" alt="" class="<?php if(isset($_SESSION["ID"])){ if($scoreG < 625*7){echo "lock";}}  ?>">
             </figure>
             <nav>
                 <button class="nav prev">Prev</button>
@@ -125,15 +137,15 @@
 
     <div class = "back2">
         <div id="car2" class="carou">
-            <figure class="figuree">
+            <figure>
                 <img src="image/blue.png" alt="">
-                <img src="image/green.png" alt="">
-                <img src="image/orange.png" alt="">
-                <img src="image/pink.png" alt="">
-                <img src="image/purple.png" alt="">
-                <img src="image/red.png" alt="">
-                <img src="image/yellow.png" alt="">
-                <img src="image/green2.png" alt="">
+                <img src="image/green.png" alt="" class="<?php if(isset($_SESSION["ID"])){ if($scoreG < 625){echo "lock";}}  ?>">
+                <img src="image/orange.png" alt="" class="<?php if(isset($_SESSION["ID"])){ if($scoreG < 625*2){echo "lock";}}  ?>">
+                <img src="image/pink.png" alt="" class="<?php if(isset($_SESSION["ID"])){ if($scoreG < 625*3){echo "lock";}}  ?>">
+                <img src="image/purple.png" alt="" class="<?php if(isset($_SESSION["ID"])){ if($scoreG < 625*4){echo "lock";}}  ?>">
+                <img src="image/red.png" alt="" class="<?php if(isset($_SESSION["ID"])){ if($scoreG < 625*5){echo "lock";}}  ?>">
+                <img src="image/yellow.png" alt="" class="<?php if(isset($_SESSION["ID"])){ if($scoreG < 625*6){echo "lock";}}  ?>">
+                <img src="image/green2.png" alt="" class="<?php if(isset($_SESSION["ID"])){ if($scoreG < 625*7){echo "lock";}}  ?>">
             </figure>
             <nav class="navv">
                 <button class="nav prev">Prev</button>
@@ -144,10 +156,11 @@
 
     <?php
     if(isset($_SESSION["ID"])){
-        echo "<button onclick=\"save()\" class = \"buttonS\"> Save </button>";
+
+        echo "<button id=\"btn\" onclick=\"save()\" class = \"buttonS\"> Save </button>";
     }
     else{
-        echo "<button onclick=\"document.location.href='accueil.php'\" class = \"buttonS\"> Login </button>";
+        echo "<button id=\"btn\" onclick=\"document.location.href='accueil.php'\" class = \"buttonS\"> Login </button>";
     }?>
 </body>
 
@@ -177,6 +190,25 @@
         currImage--;
     }
     figure.style.transform = `rotateY(${currImage * -theta}rad)`;
+    
+    verif = document.getElementById('btn');
+    actu = Math.abs(currImage % 8);
+    
+    console.log(actu)
+    if (((actu)*625) > scoreG){
+        verif.style.background = "#422960a1";
+        verif.setAttribute('disabled', '');
+    }
+    else{
+        if (((actuu)*625) > scoreG){
+            verif.style.background = "#422960a1";
+            verif.setAttribute('disabled', '');
+        }
+        else{
+            verif.style.background = "#b070ff";
+            verif.removeAttribute('disabled');
+        }
+    }
     }
 </script>
 <script>
@@ -206,11 +238,30 @@
     }
 
     figuree.style.transform = `rotateY(${currImagee * -thetaa}rad)`;
+
+    verif = document.getElementById('btn');
+    actuu = Math.abs(currImagee % 8);
+    
+    console.log(actuu)
+    if (((actuu)*625) > scoreG){
+        verif.style.background = "#422960a1";
+        verif.setAttribute('disabled', '');
+    }
+    else{
+        if (((actu)*625) > scoreG){
+            verif.style.background = "#422960a1";
+            verif.setAttribute('disabled', '');
+        }
+        else{
+            verif.style.background = "#b070ff";
+            verif.removeAttribute('disabled');
+        }
+    }
     }
 </script>
 <script>
 function save(){
-  document.location.href="../bdd/skin.php?player="+currImage+"&trail="+currImagee+""; 
+  document.location.href="../bdd/skin.php?player="+(currImage+1)+"&trail="+(currImagee+1)+""; 
 }
 </script>
 
