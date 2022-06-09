@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : mar. 07 juin 2022 à 12:42
+-- Généré le : jeu. 09 juin 2022 à 09:10
 -- Version du serveur :  5.7.24
 -- Version de PHP : 8.0.1
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `jantem`
+-- Base de données : `d6xINafhrw`
 --
 
 -- --------------------------------------------------------
@@ -60,12 +60,13 @@ CREATE TABLE `game` (
 --
 
 INSERT INTO `game` (`ID`, `username`, `player`, `trail`, `score`, `map1`, `map2`, `map3`, `map4`, `map5`, `map6`, `map7`, `map8`, `map9`, `map10`, `map11`, `map12`, `map13`, `map14`, `map15`, `map16`, `map17`, `map18`, `map19`, `map20`) VALUES
-(3, 'mylow', 2, 3, 4616, 380, 368, 324, 352, 272, 316, 364, 296, 256, 308, 268, 0, 0, 0, 0, 236, 284, 276, 316, 0),
 (14, 'Nolan', 1, 1, 984, 336, 352, 296, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(17, 'oui', 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(17, 'oui', 1, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
 (18, 'sacha', 1, 1, 380, 380, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
 (19, 'Proxinou', 1, 1, 1448, 324, 368, 264, 184, 308, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(20, 'Ramzy', 1, 1, 3004, 380, 368, 316, 348, 292, 288, 368, 228, 112, 304, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+(20, 'Ramzy', 1, 1, 3004, 380, 368, 316, 348, 292, 288, 368, 228, 112, 304, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(22, 'mylow', 1, 1, 5952, 380, 368, 336, 348, 268, 304, 364, 272, 232, 308, 228, 308, 328, 284, 204, 244, 288, 296, 320, 272),
+(23, 'david', 1, 1, 5356, 380, 368, 336, 352, 284, 324, 364, 268, 0, 0, 256, 300, 272, 268, 196, 244, 260, 284, 320, 280);
 
 --
 -- Index pour les tables déchargées
@@ -85,7 +86,7 @@ ALTER TABLE `game`
 -- AUTO_INCREMENT pour la table `game`
 --
 ALTER TABLE `game`
-  MODIFY `ID` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `ID` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
