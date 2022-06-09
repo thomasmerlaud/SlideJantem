@@ -43,7 +43,7 @@
             <a class="create" onclick="out('../Nolan/php/levels.php')">WORKSHOP</a>
         </div>
         <div class="div5">
-            <a class="create2" onclick="out('../Nolan/creator.html')">CREATE MAP</a>
+            <a class="create2" onclick="out('../Nolan/creator.php')">CREATE MAP</a>
         </div>
         <div class="div6"> </div>
 

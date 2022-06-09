@@ -43,16 +43,15 @@
   height : 50%
 } */
 
-/* .container2{
+ .container2{
   color:  #FFFDE5;
   text-transform: uppercase;
   text-align: center;
   font-family: 'Luckiest Guy';
   font-size : 5vw;
   margin-top: 0%;
-  background-color: black;
   height : 50%
-} */
+} 
 @keyframes animate{
   0%{
       color: white;
