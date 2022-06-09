@@ -13,10 +13,9 @@
 
 
 <body class="backlevels">
+
 <div class="contleft">
-    <div class="container">
-        <span>Auto <br><br>Creations</span>     
-    </div>
+    <div class = "title">Auto Creations</div>     
     <div class = "tableau">
         <div class = "levels"> 
             <?php
@@ -50,9 +49,7 @@
 
 
 <div class="contright">
-    <div class="container">
-        <span>Manual <br><br>Creations</span>       
-    </div>
+    <div class = "title">Manual Creations</div>       
     <div class = "tableau">
         <div class = "levels"> 
             <?php

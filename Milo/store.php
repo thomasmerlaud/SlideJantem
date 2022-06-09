@@ -93,7 +93,7 @@
 
         if(isset($_SESSION["ID"])){
             $scoreG = scoreG($_SESSION["ID"]);
-            echo "<h2>Score : ".$scoreG."</h2>";?>
+            echo "<h2 class=\"scoreee\">Score : ".$scoreG."</h2>";?>
             <script>
                 var scoreG = <?php echo $scoreG; ?>
             </script>
@@ -102,16 +102,8 @@
     ?>
 
 
-    <div class="content_title">
-        <div class="content__container">
-            <p class="content__container__text"> your skin and your paint colour </p>
-            <ul class="content__container__list">
-                <li class="content__container__list__item">Select  </li>
-                <li class="content__container__list__item">Buy  </li>
-                <li class="content__container__list__item">Select  </li>
-                <li class="content__container__list__item">Buy  </li>
-            </ul>
-        </div>
+<div class="conteent">
+        <h2 class="text_shadows">jantem custom</h2>
     </div>
 
     <div class = "back">

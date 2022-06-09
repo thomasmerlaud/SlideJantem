@@ -1,6 +1,20 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:600&display=swap');
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700%22");
 @import url('https://fonts.googleapis.com/css?family=Rubik+One');
+@import url("https://fonts.googleapis.com/css?family=Press Start 2P");
+@import url('https://fonts.googleapis.com/css?family=Rubik+One');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:600&display=swap%27');
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700%22");
+
+
+:root {
+  --color-primary: #eedc8b;
+  --color-secondary: #e1c131;
+  --color-tertiary: #b59b24;
+  --color-quaternary: #917b19;
+  --color-quinary: #846f11;;
+
+}
 
 .backstore{
   background-repeat: repeat;
@@ -17,6 +31,16 @@
   cursor: url('../image/B2.ico'), pointer;
 } 
 
+.scoreee{
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  width: 99%;
+  color: #eedc8b;
+  font-family: 'Press Start 2P';
+  font-size: 19px;
+  margin: 5px;
+}
 
 .content_title {
   width: 60%;
@@ -567,4 +591,84 @@ input.input2:nth-of-type(7) {
 }
 input.input2:nth-of-type(7):checked ~ main.carousel2 {
   --position2: 7;
+}
+
+
+
+
+.conteent {
+
+  font-family: 'Press Start 2P';
+  font-size: 5vh;
+  align-content: center;
+  justify-content: center;
+  position: absolute;
+  margin: 0 auto;
+  width: 99%;
+  top: 5%;
+  z-index: 2;
+}
+
+.text_shadows {
+  text-shadow: 4px 4px 0 var(--color-secondary), 7px 7px 0 var(--color-tertiary), 9px 9px var(--color-quaternary), 14px 14px 0 var(--color-quinary);
+  font-family: 'Press Start 2P';
+  text-transform: uppercase;
+  font-size: 8vh;
+  text-align: center;
+  margin: 0;
+  color: var(--color-primary);
+  animation: shadows 1.5s ease-in infinite, move 1.5s ease-in infinite;
+  letter-spacing: 0.5rem;
+}
+@keyframes shadows {
+  0% {
+    text-shadow: none;
+ }
+  10% {
+    text-shadow: 3px 3px 0 var(--color-secondary);
+ }
+  20% {
+    text-shadow: 3px 3px 0 var(--color-secondary), 6px 6px 0 var(--color-tertiary);
+ }
+  30% {
+    text-shadow: 3px 3px 0 var(--color-secondary), 6px 6px 0 var(--color-tertiary), 9px 9px var(--color-quaternary);
+ }
+  40% {
+    text-shadow: 3px 3px 0 var(--color-secondary), 6px 6px 0 var(--color-tertiary), 9px 9px var(--color-quaternary), 12px 12px 0 var(--color-quinary);
+ }
+  50% {
+    text-shadow: 3px 3px 0 var(--color-secondary), 6px 6px 0 var(--color-tertiary), 9px 9px var(--color-quaternary), 12px 12px 0 var(--color-quinary);
+ }
+  60% {
+    text-shadow: 3px 3px 0 var(--color-secondary), 6px 6px 0 var(--color-tertiary), 9px 9px var(--color-quaternary), 12px 12px 0 var(--color-quinary);
+ }
+  70% {
+    text-shadow: 3px 3px 0 var(--color-secondary), 6px 6px 0 var(--color-tertiary), 9px 9px var(--color-quaternary);
+ }
+  80% {
+    text-shadow: 3px 3px 0 var(--color-secondary), 6px 6px 0 var(--color-tertiary);
+ }
+  90% {
+    text-shadow: 3px 3px 0 var(--color-secondary);
+ }
+  100% {
+    text-shadow: none;
+ }
+}
+@keyframes move {
+  0% {
+    transform: translate(0px, 0px);
+ }
+  40% {
+    transform: translate(-12px, -12px);
+ }
+  50% {
+    transform: translate(-12px, -12px);
+ }
+  60% {
+    transform: translate(-12px, -12px);
+ }
+  100% {
+    transform: translate(0px, 0px);
+ }
 }

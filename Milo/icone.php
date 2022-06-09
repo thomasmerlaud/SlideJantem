@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<a class="Bmaison" onclick="out('accueil.php')"></a>
-    <a class="Bprofil" href="#profil"></a>
-    <a class="Bsetting" href="#popup1"></a>
+    <div class="nav">
+      <a class="Bmaison" onclick="out('accueil.php')"></a>
+      <a class="Bprofil" href="#profil"></a>
+      <a class="Bsetting" href="#popup1"></a>
+    </div>
 
     <div id="popup1" class="overlay">
         <div class="popup">
@@ -56,7 +58,10 @@
 
 <style>
 
-        
+.nav{
+  z-index: 10;
+  position: relative;
+}
 /* icones en haut */
 .Bmaison{
   cursor: url('image/B2.ico'), pointer;
