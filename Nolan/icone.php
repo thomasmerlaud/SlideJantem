@@ -2,7 +2,7 @@
 <html lang="en">
 
   <div class="nav">
-      <a class="Bmaison" onclick="out('../../Milo/accueil.php')"></a>
+      <a class="Bmaison" onclick="out('../Milo/accueil.php')"></a>
       <a class="Bprofil" href="#profil"></a>
       <a class="Bsetting" href="#popup1"></a>
     </div>
@@ -12,7 +12,7 @@
             <a class="close" href="#">&times;</a>
             <div class="content">
                 <audio id="track">
-                    <source src="../../Milo/clash.mp3" type="audio/mpeg">
+                    <source src="../Milo/clash.mp3" type="audio/mpeg">
                 </audio> 
                 <div id="player-container">
                     <div id="play-pause" class="play">Play</div>
@@ -32,19 +32,19 @@
               ?>
               <div class="content"> 
                   <div class="button">
-                      <a onclick="out('../../Milo/accueil.php')" class="supprimer">Login</a>
+                      <a onclick="out('../Milo/accueil.php')" class="supprimer">Login</a>
                   </div>
               </div>
             <?php
             }   
             else{
-              require("../../bdd/main.php");
+              require("../bdd/main.php");
               $scoreG = scoreG($_SESSION["ID"]);
               echo "<h3>Score : ".$scoreG."</h3>";
               ?>
               <div class="content"> 
                   <div class="button">
-                      <a onclick="out('../../Milo/supprimer.php')" class="supprimer">Logout</a>
+                      <a onclick="out('../Milo/supprimer.php')" class="supprimer">Logout</a>
                   </div>
               </div>
               <?php
@@ -53,7 +53,7 @@
         </div>
     </div>  
     
-<script src="../../Milo/js/script.js"></script>
+<script src="../Milo/js/script.js"></script>
 
 <style>
 
@@ -65,18 +65,18 @@
 }
 /* icones en haut */
 .Bmaison{
-  cursor: url('../../Milo/image/B2.ico'), pointer;
+  cursor: url('../Milo/image/B2.ico'), pointer;
   display:inline-block;
-  background: url(../../Milo/image/maisonH.png) no-repeat;
+  background: url(../Milo/image/maisonH.png) no-repeat;
   width: 59px;
   height: 66px;
   margin-left: 64%;
  }
 
  .Bprofil{
-  cursor: url('../../Milo/image/B2.ico'), pointer;
+  cursor: url('../Milo/image/B2.ico'), pointer;
   display: inline-block;
-  background-image:url(../../Milo/image/profil.png); 
+  background-image:url(../Milo/image/profil.png); 
   background-size: 100% auto;
   width : 10.2vh;;
   height : 10.2vh;;
@@ -85,9 +85,9 @@
 }
 
  .Bsetting{
-  cursor: url('../../Milo/image/B2.ico'), pointer;
+  cursor: url('../Milo/image/B2.ico'), pointer;
   display: inline-block;
-  background-image:url(../../Milo/image/p2.png); 
+  background-image:url(../Milo/image/p2.png); 
   background-size: 100% auto;
   width : 10.2vh;
   height : 10.2vh;
@@ -167,24 +167,24 @@
 }
 
 #player-container #play-pause {
-  cursor: url('../../Milo/image/B2.ico'), pointer;
+  cursor: url('../Milo/image/B2.ico'), pointer;
   text-indent: -170000vh;
   height:6.8vh;
   width: 6.8vh;
   padding: 2.04vh 3.06vh;
-  background-image: url(../../Milo/image/logoff.png);
+  background-image: url(../Milo/image/logoff.png);
   background-repeat: no-repeat!important;
   background-position: center;
 
 }
 
 .play {
-  background-image: url(../../Milo/image/logoff.png);
+  background-image: url(../Milo/image/logoff.png);
   background-size: 75% auto;
 
 }
 .pause {
-   background-image: url(../../Milo/image/logon.png)!important;
+   background-image: url(../Milo/image/logon.png)!important;
   background-size: 75% auto;
 }
 
@@ -198,7 +198,7 @@
   
   
   .supprimer{
-    cursor: url('../../Milo/image/B2.ico'), pointer;
+    cursor: url('../Milo/image/B2.ico'), pointer;
     position:relative;
     width:60%;
     color:#FFF;
