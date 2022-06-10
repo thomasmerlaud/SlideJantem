@@ -18,6 +18,7 @@
     if(isset($_SESSION["ID"])){
         $user = getUsername($_SESSION["ID"]);
         $rank = getRanking($_SESSION["ID"]);
+        // $rank = "not yet";
         $scoreG = scoreG($_SESSION["ID"]);?>
         <div class = "tableauRecords">
             <div class="parent">

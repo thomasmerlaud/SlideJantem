@@ -23,26 +23,39 @@ function getUsername($id){   // score Général
         return $user;
     }
 }
+// function getRanking($id){
+//     $request = "SELECT count(*)+1 AS rank FROM game WHERE score > (SELECT score FROM game WHERE id = $id)"; 
+//     require("connectDB.php");
+//     $resultat =mysqli_query($connexion,$request); //Executer la requete	
+//     while($row = mysqli_fetch_assoc($resultat)){
+//         $rank = $row['rank'];
+//         return $rank;
+//     }
+// }
 function getRanking($id){
-    // $request = "SELECT count(*)+1 AS rank FROM game WHERE score > (SELECT score FROM game WHERE id = $id)"; 
-    // require("connectDB.php");
-    // $resultat =mysqli_query($connexion,$request); //Executer la requete	
-    // while($row = mysqli_fetch_assoc($resultat)){
-    //     $rank = $row['rank'];
-    //     return $rank;
-    // }
-    $request = "SELECT ID, username, score, FIND_IN_SET( score, (
-        SELECT GROUP_CONCAT( score
-        ORDER BY score DESC ) 
-        FROM game )
-        ) AS rank
-        FROM game"; 
+    $request = "SELECT ID,username,score FROM game ORDER BY score DESC"; 
     require("connectDB.php");
     $resultat =mysqli_query($connexion,$request); //Executer la requete	
+    $i = 1;
+    $final = array();
     while($row = mysqli_fetch_assoc($resultat)){
-        $rank = $row['rank'];
-        return $rank;
+        $username = $row['username'];
+        $score = $row['score'];
+        $idd = $row['ID'];
+
+        $result = [$i,$username,$score,$idd];
+        array_push($final, $result);
+
+        ++$i;
     }
+
+    $len = count($final);
+    for ($i = 0; $i < $len; $i++) {
+        if (($final[$i][3]) == $id){
+            return $final[$i][0];
+        }
+    }
+    return "error";
 }
 
 function getUsers(){

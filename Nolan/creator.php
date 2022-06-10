@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="css/stylecreator.css">
 </head>
 <body>
+<?php 
+        include "nuage.php";
+        include "icone.php";
+?>
 	<div id="creator">
 		
 		

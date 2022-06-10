@@ -162,6 +162,7 @@ function reset() {
    player[1] = resetplayer[1];
    coups = 0;
    pourcent = 0;
+   direction = 0;
    return renderMaze();
 }
 function menu() {
