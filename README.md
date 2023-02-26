@@ -1,3 +1,3 @@
-# SlideJantem
-
-COUCOU c'est notre projet de fin d'année <3
+Jeu de plateau en 2D.
+Développé en HTML/CSS/JS/PHP.
+Propose un solveur de niveaux et un créateur de niveaux développés en C++
